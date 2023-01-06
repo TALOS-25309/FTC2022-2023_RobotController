@@ -38,6 +38,7 @@ public class Wheel extends Part {
     }
 
     public void start(){
+        move_type = "1";
         this.next_step();
     }
 
@@ -56,16 +57,20 @@ public class Wheel extends Part {
     }
 
     protected void next_step(){
-        switch(this.step % 4){
-            case 0:
-                this.move(0.3, 1.0, this.forward);
-                break;
-            case 1:
-                this.move(0.2, 1.0, this.left);
-            case 2:
-                this.move(0.2, 1.0, this.backward);
-            case 3:
-                this.move(0.3, 1.0, this.right);
+        switch (move_type)
+        {
+            case "1" :
+                switch(this.step % 4){
+                    case 0:
+                        this.move(0.3, 1.0, this.forward);
+                        break;
+                    case 1:
+                        this.move(0.2, 1.0, this.left);
+                    case 2:
+                        this.move(0.2, 1.0, this.backward);
+                    case 3:
+                        this.move(0.3, 1.0, this.right);
+                }
         }
         this.step++;
     }
