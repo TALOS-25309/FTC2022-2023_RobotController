@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 public class DMotor
 {
         private DcMotor motor;
@@ -12,14 +14,16 @@ public class DMotor
         private double i_position;
         private double unit = 0.1; //나중에 수정
         private double angle;
+        private Telemetry telemetry;
 
-        public void init(HardwareMap hardwaremap, String name, int dir)
+        public void init(HardwareMap hardwaremap, String name, int dir, Telemetry telemetry)
         {
                 motor = hardwaremap.get(DcMotor.class, name);
                 motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 tpr = motor.getMotorType().getTicksPerRev();
                 finish = true;
                 this.dir = dir;
+                this.finish = false;
         }
         public void update()
         {
@@ -47,7 +51,7 @@ public class DMotor
                 finish = false;
                 i_position = get_position();
                 this.angle = angle*dir;
-                if(angle>0)
+                if(this.angle > 0)
                 {
                         motor.setPower(speed);
                 }
