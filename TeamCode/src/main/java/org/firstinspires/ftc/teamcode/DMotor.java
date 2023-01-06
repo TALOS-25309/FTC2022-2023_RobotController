@@ -7,7 +7,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class DMotor
 {
         private DcMotor motor;
-        private int dir; //1 or -1
+        private int dir;
         private double tpr;
         private double i_position;
         private double angle;
