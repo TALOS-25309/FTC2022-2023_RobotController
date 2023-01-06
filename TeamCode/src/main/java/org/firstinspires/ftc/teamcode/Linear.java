@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 public class Linear extends Part
 {
     private DMotor rope = new DMotor();
@@ -11,14 +13,14 @@ public class Linear extends Part
     private Sensor middle = new Sensor();
     private Sensor high = new Sensor();
 
-    public void init(HardwareMap hwm)
+    public void init(HardwareMap hwm, Telemetry tel)
     {
-        this.rope.init(hwm, "rope", 1);
-        this.ring.init(hwm, "ring", 1, 0);
-        this.bottom.init(hwm, "bottom", true);
-        this.low.init(hwm, "low", true);
-        this.middle.init(hwm, "middle", true);
-        this.high.init(hwm, "high", true);
+        this.rope.init(hwm, tel, "rope", 1);
+        this.ring.init(hwm, tel, "ring", 1, 0);
+        this.bottom.init(hwm, tel, "bottom", true);
+        this.low.init(hwm, tel, "low", true);
+        this.middle.init(hwm, tel, "middle", true);
+        this.high.init(hwm, tel, "high", true);
 
 
         DMotor[] dl = {this.rope};
