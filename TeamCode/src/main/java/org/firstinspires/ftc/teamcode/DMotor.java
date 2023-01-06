@@ -9,10 +9,10 @@ public class DMotor
         private DcMotor motor;
         private int dir; //1 or -1
         private double tpr;
-        private boolean finish;
         private double i_position;
         private double angle;
         private Telemetry telemetry;
+        private boolean finish;
 
         public void init(HardwareMap hardwaremap, Telemetry telemetry, String name, int dir)
         {
@@ -25,8 +25,7 @@ public class DMotor
         }
         public void update()
         {
-                if(!finish)
-                {
+                if(!this.finish()){
                         if((angle>0)&&(get_position()-(i_position+angle) > 0))
                         {
                                 motor.setPower(0.0);
@@ -46,10 +45,10 @@ public class DMotor
         }
         public void move(double speed, double angle)
         {
-                finish = false;
                 i_position = get_position();
                 this.finish = false;
                 this.angle = angle*dir;
+                this.finish = false;
                 if(this.angle > 0)
                 {
                         motor.setPower(speed);

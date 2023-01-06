@@ -29,13 +29,15 @@ public class SMotor
                 if(!finish)
                 {
                         position = position + d_angle;
-                        if((angle>0)&&((position-(i_position+angle)) >= 0))
+                        if((angle>0)&&((position + d_angle - (i_position+angle)) >= 0))
                         {
                                 position = i_position + angle;
+                                finish = true;
                         }
-                        else if((angle<0)&&((position-(i_position+angle)) <= 0))
+                        else if((angle<0)&&((position + d_angle -(i_position+angle)) <= 0))
                         {
                                 position = i_position + angle;
+                                finish = true;
                         }
                         motor.setPosition(position);
                 }
@@ -46,6 +48,11 @@ public class SMotor
                 finish = false;
                 this.angle = angle*dir;
                 i_position = position;
+
+                if(speed > 0.045)
+                {
+                        speed = 0.045;
+                }
                 if(angle > 0)
                 {
                         d_angle = speed;
