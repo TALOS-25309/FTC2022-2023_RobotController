@@ -24,10 +24,10 @@ public class Wheel extends Part {
     private DMotor back_right = new DMotor();
 
     public void init(HardwareMap hwm){
-        this.front_left.init(hwm, "wheel0", 1);
-        this.front_right.init(hwm, "wheel1", 1);
-        this.back_left.init(hwm, "wheel2", -1);
-        this.back_right.init(hwm, "wheel3", -1);
+        this.front_left.init(hwm, "motor", 1);
+        //this.front_right.init(hwm, "wheel1", 1);
+        //this.back_left.init(hwm, "wheel2", -1);
+        //this.back_right.init(hwm, "wheel3", -1);
 
         DMotor[] dl = {this.front_left, this.front_right, this.back_left, this.back_right};
         this.util = new Utility();
@@ -44,16 +44,16 @@ public class Wheel extends Part {
 
     public void move(double speed, double angle, Direction dir){
         this.front_left.move(speed, angle * dir.front_left);
-        this.front_right.move(speed, angle * dir.front_right);
-        this.back_left.move(speed, angle * dir.back_left);
-        this.back_right.move(speed, angle * dir.back_right);
+        //this.front_right.move(speed, angle * dir.front_right);
+        //this.back_left.move(speed, angle * dir.back_left);
+        //this.back_right.move(speed, angle * dir.back_right);
     }
 
     public void move(double speed, Direction dir){
         this.front_left.move(speed * dir.front_left);
-        this.front_right.move(speed * dir.front_right);
-        this.back_left.move(speed * dir.back_left);
-        this.back_right.move(speed * dir.back_right);
+        //this.front_right.move(speed * dir.front_right);
+        //this.back_left.move(speed * dir.back_left);
+        //this.back_right.move(speed * dir.back_right);
     }
 
     protected void next_step(){
