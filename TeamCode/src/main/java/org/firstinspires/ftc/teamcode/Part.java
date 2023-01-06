@@ -1,7 +1,7 @@
 package org.firstinspires.ftc.teamcode;
 
 public abstract class Part {
-    protected Utility util;
+    protected Utility util = new Utility();
     protected int step;
 
     protected abstract void next_step();

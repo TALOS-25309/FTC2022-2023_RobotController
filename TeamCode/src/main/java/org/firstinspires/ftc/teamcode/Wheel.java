@@ -20,21 +20,16 @@ public class Wheel extends Part {
     public final Direction left = new Direction(-1,1,1,-1);
     public final Direction right = new Direction(1,-1,-1,1);
 
-    private DMotor front_left;
-    private DMotor front_right;
-    private DMotor back_left;
-    private DMotor back_right;
+    private DMotor front_left = new DMotor();
+    private DMotor front_right = new DMotor();
+    private DMotor back_left = new DMotor();
+    private DMotor back_right = new DMotor();
 
     public void init(HardwareMap hwm){
-        this.front_left = new DMotor();
-        this.front_right = new DMotor();
-        this.back_left = new DMotor();
-        this.back_right = new DMotor();
-
-        this.front_left.init(hwm, "wheel0");
-        this.front_right.init(hwm, "wheel1");
-        this.back_left.init(hwm, "wheel2");
-        this.back_right.init(hwm, "wheel3");
+        this.front_left.init(hwm, "wheel0", 1);
+        this.front_right.init(hwm, "wheel1", -1);
+        this.back_left.init(hwm, "wheel2", 1);
+        this.back_right.init(hwm, "wheel3", -1);
 
         DMotor[] dl = {this.front_left, this.front_right, this.back_left, this.back_right};
         this.util = new Utility();

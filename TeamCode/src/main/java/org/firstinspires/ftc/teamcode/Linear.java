@@ -14,17 +14,15 @@ public class Linear extends Part
     {
         this.rope.init(hwm, "rope", 1);
         this.ring.init(hwm, "ring", 1, 0);
-        this.low.init(hwm, "low");
-        this.middle.init(hwm, "middle");
-        this.high.init(hwm, "high");
+        this.low.init(hwm, "low", true);
+        this.middle.init(hwm, "middle", true);
+        this.high.init(hwm, "high", true);
 
 
         DMotor[] dl = {this.rope};
         SMotor[] sl = {this.ring};
         Sensor[] snl = {this.low, this.middle, this.high};
 
-
-        this.util = new Utility();
         this.util.init(dl, sl, snl);
 
         this.step = 0;
