@@ -30,6 +30,7 @@ public class Linear extends Part
         this.util.init(dl/*, sl, snl*/);
 
         this.step = 0;
+        this.telemetry = tel;
     }
 
     public void start(){
