@@ -28,10 +28,12 @@ public class Sensor
                         if(!reverse && sensor.getState())
                         {
                                 finish = true;
+                                active = false;
                         }
-                        else if(reverse && sensor.getState())
+                        else if(reverse && !sensor.getState())
                         {
                                 finish = true;
+                                active = false;
                         }
                 }
         }

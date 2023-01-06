@@ -19,6 +19,8 @@ public class Wheel extends Part {
     public final Direction backward = new Direction(-1,-1,-1, -1);
     public final Direction left = new Direction(-1,1,1,-1);
     public final Direction right = new Direction(1,-1,-1,1);
+    public final Direction left_turn = new Direction(-1,1,-1,1);
+    public final Direction right_turn = new Direction(1,-1,1,-1);
 
     private DMotor front_left = new DMotor();
     private DMotor front_right = new DMotor();
@@ -26,59 +28,52 @@ public class Wheel extends Part {
     private DMotor back_right = new DMotor();
 
     public void init(HardwareMap hwm, Telemetry tel){
-        this.front_left.init(hwm, tel, "wheel1", 1);
-        this.front_right.init(hwm, tel, "wheel2", 1);
-        this.back_left.init(hwm, tel, "wheel3", -1);
-        this.back_right.init(hwm, tel, "wheel4", -1);
+        this.front_left.init(hwm, tel, "front_left", 1);
+        this.front_right.init(hwm, tel, "front_right", -1);
+        this.back_left.init(hwm, tel, "back_left", 1);
+        this.back_right.init(hwm, tel, "back_right", -1);
 
         DMotor[] dl = {this.front_left, this.front_right, this.back_left, this.back_right};
         this.util = new RobotUtility();
-        this.util.init(dl, null, null);
+        Sensor[] sen = {};
+        SMotor[] sm = {};
+        this.util.init(dl, sm, sen);
 
         this.step = 0;
         this.telemetry = tel;
     }
 
     public void start(){
-        move_type = "1";
-        this.next_step();
+        this.start_step("forward");
     }
 
     public void move(double speed, double angle, Direction dir){
         this.front_left.move(speed, angle * dir.front_left);
-        //this.front_right.move(speed, angle * dir.front_right);
-        //this.back_left.move(speed, angle * dir.back_left);
-        //this.back_right.move(speed, angle * dir.back_right);
+        this.front_right.move(speed, angle * dir.front_right);
+        this.back_left.move(speed, angle * dir.back_left);
+        this.back_right.move(speed, angle * dir.back_right);
     }
 
     public void move(double speed, Direction dir){
         this.front_left.move(speed * dir.front_left);
-        this.telemetry.addData("Status", "Move 실행됨");
-        //this.front_right.move(speed * dir.front_right);
-        //this.back_left.move(speed * dir.back_left);
-        //this.back_right.move(speed * dir.back_right);
+        this.front_right.move(speed * dir.front_right);
+        this.back_left.move(speed * dir.back_left);
+        this.back_right.move(speed * dir.back_right);
     }
 
     protected void next_step(){
         switch (move_type)
         {
-            case "1" :
-                switch(this.step % 4){
+            case "forward" :
+                switch(this.step%2){
                     case 0:
-                        this.move(0.3, 1.0, this.forward);
+                        move(0.3, 2, left_turn);
                         break;
                     case 1:
-                        this.move(0.2, 1.0, this.left);
-                        break;
-                    case 2:
-                        this.move(0.2, 1.0, this.backward);
-                        break;
-                    case 3:
-                        this.move(0.3, 1.0, this.right);
+                        move(0.3, 2, right_turn);
                         break;
                 }
         }
-        this.telemetry.addData("Step", this.step);
         this.step++;
     }
 }
