@@ -11,7 +11,6 @@ public class DMotor
         private double tpr;
         private boolean finish;
         private double i_position;
-        private double unit = 0.1; //나중에 수정
         private double angle;
         private Telemetry telemetry;
 

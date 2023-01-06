@@ -13,7 +13,6 @@ public class SMotor
         private double position;
         private double i_position;
         private double angle;
-        private double unit = 0.001; //나중에 수정
         private Telemetry telemetry;
 
         public void init(HardwareMap hardwaremap, Telemetry telemetry, String name, int dir, double s_position)
