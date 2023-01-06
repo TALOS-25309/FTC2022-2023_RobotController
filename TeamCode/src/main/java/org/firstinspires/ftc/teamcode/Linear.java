@@ -15,8 +15,8 @@ public class Linear extends Part
 
     public void init(HardwareMap hwm, Telemetry tel)
     {
-        this.rope.init(hwm, tel, "rope", 1);
-        this.ring.init(hwm, tel, "ring", 1, 0);
+        this.rope.init(hwm, tel, "rope", DMotor.Direction.Direct);
+        this.ring.init(hwm, tel, "ring", SMotor.Direction.Reverse, 0);
         this.bottom.init(hwm, tel, "bottom", true);
         this.low.init(hwm, tel, "low", true);
         this.middle.init(hwm, tel, "middle", true);
