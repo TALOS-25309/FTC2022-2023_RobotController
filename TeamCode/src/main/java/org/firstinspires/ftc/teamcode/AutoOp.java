@@ -11,7 +11,7 @@ public class AutoOp extends OpMode
     @Override
     public void init()
     {
-        wheel.init(hardwareMap);
+        wheel.init(hardwareMap, telemetry);
     }
 
     @Override

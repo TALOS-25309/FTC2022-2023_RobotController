@@ -2,6 +2,8 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 public class Wheel extends Part {
     public static class Direction{
         public double front_left, front_right, back_left, back_right;
@@ -23,11 +25,13 @@ public class Wheel extends Part {
     private DMotor back_left = new DMotor();
     private DMotor back_right = new DMotor();
 
-    public void init(HardwareMap hwm){
-        this.front_left.init(hwm, "motor", 1);
-        //this.front_right.init(hwm, "wheel1", 1);
-        //this.back_left.init(hwm, "wheel2", -1);
-        //this.back_right.init(hwm, "wheel3", -1);
+    private Telemetry telemetry;
+
+    public void init(HardwareMap hwm, Telemetry telemetry){
+        this.front_left.init(hwm, "motor", 1, telemetry);
+        //this.front_right.init(hwm, "wheel1", 1, telemetry);
+        //this.back_left.init(hwm, "wheel2", -1, telemetry);
+        //this.back_right.init(hwm, "wheel3", -1, telemetry);
 
         DMotor[] dl = {this.front_left, this.front_right, this.back_left, this.back_right};
         this.util = new Utility();
@@ -35,6 +39,7 @@ public class Wheel extends Part {
         //this.util.init(dl, null, null);
 
         this.step = 0;
+        this.telemetry = telemetry;
     }
 
     public void start(){
@@ -51,6 +56,7 @@ public class Wheel extends Part {
 
     public void move(double speed, Direction dir){
         this.front_left.move(speed * dir.front_left);
+        this.telemetry.addData("Status", "Move 실행됨");
         //this.front_right.move(speed * dir.front_right);
         //this.back_left.move(speed * dir.back_left);
         //this.back_right.move(speed * dir.back_right);
@@ -60,16 +66,18 @@ public class Wheel extends Part {
         switch (move_type)
         {
             case "1" :
-                switch(this.step % 4){
+                switch(this.step % 1){
                     case 0:
-                        this.move(0.3, 1.0, this.forward);
+                        this.move(0.3, 100.0, this.forward);
                         break;
+                        /*
                     case 1:
                         this.move(0.2, 1.0, this.left);
                     case 2:
                         this.move(0.2, 1.0, this.backward);
                     case 3:
                         this.move(0.3, 1.0, this.right);
+                        */
                 }
         }
         this.step++;
