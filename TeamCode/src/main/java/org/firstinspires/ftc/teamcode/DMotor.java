@@ -19,10 +19,9 @@ public class DMotor
                 motor = hardwaremap.get(DcMotor.class, name);
                 motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 tpr = motor.getMotorType().getTicksPerRev();
-                finish = true;
                 this.dir = dir;
                 this.telemetry = telemetry;
-                this.finish = false;
+                this.finish = true;
         }
         public void update()
         {
@@ -31,12 +30,12 @@ public class DMotor
                         if((angle>0)&&(get_position()-(i_position+angle) > 0))
                         {
                                 motor.setPower(0.0);
-                                finish = true;
+                                this.finish = true;
                         }
                         else if((angle<0)&&(get_position()-(i_position+angle) < 0))
                         {
                                 motor.setPower(0.0);
-                                finish =  true;
+                                this.finish = true;
                         }
                 }
         }
@@ -49,6 +48,7 @@ public class DMotor
         {
                 finish = false;
                 i_position = get_position();
+                this.finish = false;
                 this.angle = angle*dir;
                 if(this.angle > 0)
                 {
@@ -67,6 +67,6 @@ public class DMotor
 
         public boolean finish()
         {
-                return finish;
+                return this.finish;
         }
 }
