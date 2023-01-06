@@ -37,7 +37,7 @@ public class Wheel extends Part {
         //this.util.init(dl, null, null);
 
         this.step = 0;
-        this.telemetry = telemetry;
+        this.telemetry = tel;
     }
 
     public void start(){
