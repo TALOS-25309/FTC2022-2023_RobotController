@@ -34,7 +34,7 @@ public class Sensor
         }
         public void activate()
         {
-                active = true
+                active = true;
         }
         public boolean finish()
         {
