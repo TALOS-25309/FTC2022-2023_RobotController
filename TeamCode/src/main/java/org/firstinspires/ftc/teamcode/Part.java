@@ -2,7 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 public abstract class Part {
     protected Utility util = new Utility();
-    protected int step;
+    public int step;
     protected String move_type;
 
     protected abstract void next_step();

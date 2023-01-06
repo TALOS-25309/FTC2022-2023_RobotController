@@ -24,5 +24,6 @@ public class AutoOp extends OpMode
     public void loop()
     {
         wheel.update();
+        telemetry.addData("Step", wheel.step);
     }
 }
