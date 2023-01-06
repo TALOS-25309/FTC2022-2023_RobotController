@@ -7,13 +7,15 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class Test extends Part
 {
     private DMotor motor = new DMotor();
+    private DMotor smotor = new DMotor();
     private SMotor servo = new SMotor();
 
     public void init(HardwareMap hwm, Telemetry tel)
     {
         motor.init(hwm, tel, "motor", 1);
+        smotor.init(hwm, tel, "smotor", 1);
         servo.init(hwm, tel, "servo", 1, 0);
-        DMotor[] dl = {motor};
+        DMotor[] dl = {motor, smotor};
         SMotor[] sl = {servo};
         Sensor[] snl = {};
 
@@ -44,10 +46,29 @@ public class Test extends Part
                         break;
                 }
             case "2" :
-                switch (step)
+                switch (step % 2)
                 {
-
+                    case 0 :
+                        smotor.move(0.1, 0.5);
+                        break;
+                    case 1 :
+                        smotor.move(0.02, 0.1);
+                        break;
                 }
+                /*
+            case "3" :
+                switch (step%2)
+                {
+                    case 0 :
+                        servo1.move(0.003, 0.3);
+                        servo2.move(0.003, 0.3);
+                        break;
+                    case 1 :
+                        servo1.move(0.003, 0.3);
+                        servo2.move(0.003, 0.3);
+                        break;
+                }
+                 */
         }
         step++;
     }
