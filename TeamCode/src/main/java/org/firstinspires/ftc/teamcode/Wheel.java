@@ -40,29 +40,27 @@ public class Wheel extends Part {
     }
 
     public void start(){
-        move_type = "1";
-        this.next_step();
+        this.start_step("forward");
     }
 
     public void move(double speed, double angle, Direction dir){
         this.front_left.move(speed, angle * dir.front_left);
-        //this.front_right.move(speed, angle * dir.front_right);
-        //this.back_left.move(speed, angle * dir.back_left);
-        //this.back_right.move(speed, angle * dir.back_right);
+        this.front_right.move(speed, angle * dir.front_right);
+        this.back_left.move(speed, angle * dir.back_left);
+        this.back_right.move(speed, angle * dir.back_right);
     }
 
     public void move(double speed, Direction dir){
         this.front_left.move(speed * dir.front_left);
-        this.telemetry.addData("Status", "Move 실행됨");
-        //this.front_right.move(speed * dir.front_right);
-        //this.back_left.move(speed * dir.back_left);
-        //this.back_right.move(speed * dir.back_right);
+        this.front_right.move(speed * dir.front_right);
+        this.back_left.move(speed * dir.back_left);
+        this.back_right.move(speed * dir.back_right);
     }
 
     protected void next_step(){
         switch (move_type)
         {
-            case "1" :
+            case "forward" :
                 switch(this.step % 4){
                     case 0:
                         this.move(0.3, 1.0, this.forward);
