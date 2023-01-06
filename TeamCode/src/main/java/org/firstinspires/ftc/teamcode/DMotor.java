@@ -24,17 +24,18 @@ public class DMotor
                 finish = true;
                 this.dir = dir;
                 this.finish = false;
+                this.telemetry = telemetry;
         }
         public void update()
         {
                 if(!finish)
                 {
-                        if((angle>0)&&(get_position()-(i_position+angle) <= 0))
+                        if((angle>0)&&(get_position()-(i_position+angle) > 0))
                         {
                                 motor.setPower(0.0);
                                 finish = true;
                         }
-                        else if((angle<0)&&(get_position()-(i_position+angle) >= 0))
+                        else if((angle<0)&&(get_position()-(i_position+angle) < 0))
                         {
                                 motor.setPower(0.0);
                                 finish =  true;
