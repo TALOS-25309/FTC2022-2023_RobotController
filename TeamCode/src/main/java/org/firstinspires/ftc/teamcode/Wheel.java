@@ -32,7 +32,7 @@ public class Wheel extends Part {
         //this.back_right.init(hwm, "wheel3", -1, telemetry);
 
         DMotor[] dl = {this.front_left, this.front_right, this.back_left, this.back_right};
-        this.util = new Utility();
+        this.util = new RobotUtility();
         this.util.init(dl);
         //this.util.init(dl, null, null);
 
