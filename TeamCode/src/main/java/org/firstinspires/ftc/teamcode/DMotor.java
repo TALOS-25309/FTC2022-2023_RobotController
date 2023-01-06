@@ -12,6 +12,7 @@ public class DMotor
         private double i_position;
         private double angle;
         private Telemetry telemetry;
+        private boolean finish;
 
         public void init(HardwareMap hardwaremap, Telemetry telemetry, String name, int dir)
         {
@@ -20,6 +21,7 @@ public class DMotor
                 tpr = motor.getMotorType().getTicksPerRev();
                 this.dir = dir;
                 this.telemetry = telemetry;
+                this.finish = true;
         }
         public void update()
         {
@@ -27,10 +29,12 @@ public class DMotor
                         if((angle>0)&&(get_position()-(i_position+angle) > 0))
                         {
                                 motor.setPower(0.0);
+                                this.finish = true;
                         }
                         else if((angle<0)&&(get_position()-(i_position+angle) < 0))
                         {
                                 motor.setPower(0.0);
+                                this.finish = true;
                         }
                 }
         }
@@ -43,6 +47,7 @@ public class DMotor
         {
                 i_position = get_position();
                 this.angle = angle*dir;
+                this.finish = false;
                 if(this.angle > 0)
                 {
                         motor.setPower(speed);
@@ -60,6 +65,6 @@ public class DMotor
 
         public boolean finish()
         {
-                return this.motor.getPower() == 0.0;
+                return this.finish;
         }
 }
