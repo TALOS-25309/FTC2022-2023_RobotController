@@ -34,6 +34,17 @@ public class Linear extends Part
 
     protected void next_step()
     {
+        switch (move_type)
+        {
+            case "low" :
+                switch (step)
+                {
+                    case 0 :
+                        rope.move(0.1);
+                        break;
+                    case 1 :
 
+                }
+        }
     }
 }

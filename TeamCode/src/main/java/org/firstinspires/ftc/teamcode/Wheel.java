@@ -66,10 +66,13 @@ public class Wheel extends Part {
                         break;
                     case 1:
                         this.move(0.2, 1.0, this.left);
+                        break;
                     case 2:
                         this.move(0.2, 1.0, this.backward);
+                        break;
                     case 3:
                         this.move(0.3, 1.0, this.right);
+                        break;
                 }
         }
         this.step++;
