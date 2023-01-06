@@ -6,23 +6,23 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 @Autonomous(name = "Auto_Op", group = "")
 public class AutoOp extends OpMode
 {
-    private Wheel wheel = new Wheel();
+    private Test test = new Test();
 
     @Override
     public void init()
     {
-        wheel.init(hardwareMap, telemetry);
+        test.init(hardwareMap, telemetry);
     }
 
     @Override
     public void start()
     {
-        wheel.start();
+        test.start();
     }
 
     @Override
     public void loop()
     {
-        wheel.update();
+        test.update();
     }
 }
