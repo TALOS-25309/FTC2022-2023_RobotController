@@ -20,6 +20,7 @@ public class DMotor
                 tpr = motor.getMotorType().getTicksPerRev();
                 finish = true;
                 this.dir = dir;
+                this.finish = false;
         }
         public void update()
         {
@@ -47,7 +48,7 @@ public class DMotor
                 finish = false;
                 i_position = get_position();
                 this.angle = angle*dir;
-                if(angle>0)
+                if(this.angle > 0)
                 {
                         motor.setPower(speed);
                 }

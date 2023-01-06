@@ -43,10 +43,10 @@ public class Wheel extends Part {
     }
 
     public void move(double speed, double angle, Direction dir){
-        this.front_left.move(speed * dir.front_left, angle);
-        this.front_right.move(speed * dir.front_right, angle);
-        this.back_left.move(speed * dir.back_left, angle);
-        this.back_right.move(speed * dir.back_right, angle);
+        this.front_left.move(speed, angle * dir.front_left);
+        this.front_right.move(speed, angle * dir.front_right);
+        this.back_left.move(speed, angle * dir.back_left);
+        this.back_right.move(speed, angle * dir.back_right);
     }
 
     public void move(double speed, Direction dir){
