@@ -27,8 +27,8 @@ public class Wheel extends Part {
 
     public void init(HardwareMap hwm){
         this.front_left.init(hwm, "wheel0", 1);
-        this.front_right.init(hwm, "wheel1", -1);
-        this.back_left.init(hwm, "wheel2", 1);
+        this.front_right.init(hwm, "wheel1", 1);
+        this.back_left.init(hwm, "wheel2", -1);
         this.back_right.init(hwm, "wheel3", -1);
 
         DMotor[] dl = {this.front_left, this.front_right, this.back_left, this.back_right};
