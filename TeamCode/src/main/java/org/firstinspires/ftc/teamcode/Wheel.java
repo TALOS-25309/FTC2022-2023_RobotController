@@ -25,8 +25,6 @@ public class Wheel extends Part {
     private DMotor back_left = new DMotor();
     private DMotor back_right = new DMotor();
 
-    private Telemetry telemetry;
-
     public void init(HardwareMap hwm, Telemetry telemetry){
         this.front_left.init(hwm, "motor", 1, telemetry);
         //this.front_right.init(hwm, "wheel1", 1, telemetry);
@@ -66,20 +64,22 @@ public class Wheel extends Part {
         switch (move_type)
         {
             case "1" :
-                switch(this.step % 1){
+                switch(this.step % 4){
                     case 0:
-                        this.move(0.3, 100.0, this.forward);
+                        this.move(0.3, 1.0, this.forward);
                         break;
-                        /*
                     case 1:
                         this.move(0.2, 1.0, this.left);
+                        break;
                     case 2:
                         this.move(0.2, 1.0, this.backward);
+                        break;
                     case 3:
                         this.move(0.3, 1.0, this.right);
-                        */
+                        break;
                 }
         }
+        this.telemetry.addData("Step", this.step);
         this.step++;
     }
 }
