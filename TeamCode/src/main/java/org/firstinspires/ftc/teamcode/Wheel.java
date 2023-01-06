@@ -61,22 +61,8 @@ public class Wheel extends Part {
         switch (move_type)
         {
             case "forward" :
-                switch(this.step % 4){
-                    case 0:
-                        this.move(0.3, 1.0, this.forward);
-                        break;
-                    case 1:
-                        this.move(0.2, 1.0, this.left);
-                        break;
-                    case 2:
-                        this.move(0.2, 1.0, this.backward);
-                        break;
-                    case 3:
-                        this.move(0.3, 1.0, this.right);
-                        break;
-                }
+                move(0.02, forward);
         }
-        this.telemetry.addData("Step", this.step);
         this.step++;
     }
 }
