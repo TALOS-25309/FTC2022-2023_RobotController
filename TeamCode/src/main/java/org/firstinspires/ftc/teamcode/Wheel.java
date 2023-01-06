@@ -2,8 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
-//hello
-
 public class Wheel extends Part {
     public static class Direction{
         public double front_left, front_right, back_left, back_right;
