@@ -46,7 +46,6 @@ public class DMotor
         public void move(double speed, double angle)
         {
                 i_position = get_position();
-                this.finish = false;
                 this.angle = angle*dir;
                 this.finish = false;
                 if(this.angle > 0)
