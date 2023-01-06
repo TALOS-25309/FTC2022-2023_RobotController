@@ -6,6 +6,13 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class SMotor
 {
+        public enum Direction {
+                Direct(1), Reverse(-1);
+                private final int value;
+                Direction(int i) {this.value = i;}
+                int get_value() {return this.value;}
+        };
+
         private Servo motor;
         private int dir; //1 or -1
         private boolean finish;
@@ -15,12 +22,12 @@ public class SMotor
         private double angle;
         private Telemetry telemetry;
 
-        public void init(HardwareMap hardwaremap, Telemetry telemetry, String name, int dir, double s_position)
+        public void init(HardwareMap hardwaremap, Telemetry telemetry, String name, Direction direction, double initial_position)
         {
                 motor = hardwaremap.get(Servo.class, name);
                 finish = true;
-                this.dir = dir;
-                position = s_position*dir;
+                this.dir = direction.get_value();
+                position = initial_position * dir;
                 motor.setPosition(position);
                 this.telemetry = telemetry;
         }
