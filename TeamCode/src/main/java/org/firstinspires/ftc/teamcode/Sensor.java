@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DigitalChannel;
 import com.qualcomm.robotcore.hardware.HardwareMap;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Sensor
 {
@@ -9,14 +10,16 @@ public class Sensor
         public boolean finish;
         private boolean reverse;
         private boolean active;
+        private Telemetry telemetry;
 
-        public void init(HardwareMap hardwaremap, String name, boolean reverse)
+        public void init(HardwareMap hardwaremap, Telemetry telemetry, String name, boolean reverse)
         {
                 sensor = hardwaremap.get(DigitalChannel.class, name);
                 sensor.setMode(DigitalChannel.Mode.INPUT);
                 this.reverse = reverse;
                 active = false;
                 finish = false;
+                this.telemetry = telemetry;
         }
         public void update()
         {

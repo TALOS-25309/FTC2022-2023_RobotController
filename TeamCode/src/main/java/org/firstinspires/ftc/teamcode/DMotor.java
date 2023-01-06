@@ -2,7 +2,6 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
-
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class DMotor
@@ -16,15 +15,15 @@ public class DMotor
         private double angle;
         private Telemetry telemetry;
 
-        public void init(HardwareMap hardwaremap, String name, int dir, Telemetry telemetry)
+        public void init(HardwareMap hardwaremap, Telemetry telemetry, String name, int dir)
         {
                 motor = hardwaremap.get(DcMotor.class, name);
                 motor.setMode(DcMotor.RunMode.RUN_USING_ENCODER);
                 tpr = motor.getMotorType().getTicksPerRev();
                 finish = true;
                 this.dir = dir;
-                this.finish = false;
                 this.telemetry = telemetry;
+                this.finish = false;
         }
         public void update()
         {
