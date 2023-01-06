@@ -1,6 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
-public class Utility {
+public class RobotUtility {
     private DMotor[] dm_list;
     //private SMotor[] sm_list;
     //private Sensor[] sen_list;
