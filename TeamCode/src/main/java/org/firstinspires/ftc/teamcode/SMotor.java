@@ -18,6 +18,7 @@ public class SMotor
         private boolean finish;
         private double position;
         private long finish_time = 0;
+        private double i_pos;
         Telemetry telemetry;
 
         public void init(HardwareMap hardwaremap, Telemetry telemetry, String name, Direction direction, double initial_position)
@@ -33,6 +34,7 @@ public class SMotor
 
         public void update()
         {
+
         }
 
         public void move(double position, long delay){
@@ -41,6 +43,10 @@ public class SMotor
                 else if(pos > 1) pos = 1;
                 this.motor.setPosition(pos);
                 this.finish_time = System.currentTimeMillis() + delay;
+        }
+
+        public void move(double position, long delay, double speed){
+
         }
 
         public boolean finish()
