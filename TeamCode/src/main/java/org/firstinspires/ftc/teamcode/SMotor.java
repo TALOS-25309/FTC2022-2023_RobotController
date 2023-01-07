@@ -25,13 +25,13 @@ public class SMotor
         {
                 motor = hardwaremap.get(Servo.class, name);
                 this.dir = direction.get_value();
-                if(dir > 0)
+                if(direction == Direction.Reverse)
                 {
-                        motor.setPosition(initial_position * dir);
+                        motor.setPosition(initial_position);
                 }
                 else
                 {
-                        motor.setPosition(1 - initial_position * dir);
+                        motor.setPosition(1 - initial_position);
                 }
                 this.telemetry = telemetry;
                 this.finish_time = System.currentTimeMillis();
