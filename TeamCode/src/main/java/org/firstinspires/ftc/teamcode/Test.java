@@ -6,17 +6,14 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 public class Test extends Part
 {
-    private DMotor motor = new DMotor();
-    private DMotor smotor = new DMotor();
-    private SMotor servo = new SMotor();
+    private SMotor s1 = new SMotor(), s2 = new SMotor();
 
     public void init(HardwareMap hwm, Telemetry tel)
     {
-        motor.init(hwm, tel, "motor", DMotor.Direction.Direct);
-        smotor.init(hwm, tel, "smotor", DMotor.Direction.Reverse);
-        servo.init(hwm, tel, "servo", SMotor.Direction.Direct, 0);
-        DMotor[] dl = {motor, smotor};
-        SMotor[] sl = {servo};
+        s1.init(hwm, tel, "servo1", SMotor.Direction.Direct, 0);
+        s2.init(hwm, tel, "servo2", SMotor.Direction.Direct, 0);
+        DMotor[] dl = {};
+        SMotor[] sl = {s1, s2};
         Sensor[] snl = {};
 
         this.telemetry = tel;
@@ -26,50 +23,28 @@ public class Test extends Part
     }
     public void start()
     {
-        start_step("1");
+        start_step("Test");
     }
     protected void next_step()
     {
         switch (move_type)
         {
-            case "1" :
+            case "Test" :
                 switch (step % 3)
                 {
-                    case 0 :
-                        motor.move(0.1, 0.5);
+                    case 0:
+                        this.s1.move(0.005, 0.3);
                         break;
-                    case 1 :
-                        servo.move(0.01, 1);
+                    case 1:
+                        //this.s2.move(0.005, 0.3);
                         break;
-                    case 2 :
-                        servo.move(0.01, -1);
-                        break;
-                }
-            case "2" :
-                switch (step % 2)
-                {
-                    case 0 :
-                        smotor.move(0.1, 0.5);
-                        break;
-                    case 1 :
-                        smotor.move(0.02, 0.1);
+                    case 2:
+                        this.s1.move(0.005, -0.3);
+                        //this.s2.move(0.005, -0.3);
                         break;
                 }
-                /*
-            case "3" :
-                switch (step%2)
-                {
-                    case 0 :
-                        servo1.move(0.003, 0.3);
-                        servo2.move(0.003, 0.3);
-                        break;
-                    case 1 :
-                        servo1.move(0.003, 0.3);
-                        servo2.move(0.003, 0.3);
-                        break;
-                }
-                 */
         }
+        this.telemetry.addData("Step", step);
         step++;
     }
 }
