@@ -56,13 +56,13 @@ public class SMotor
                 }
         }
 
-        public void move(double position, long delay)
+        public void move(double position, double delay)
         {
                 double pos = this.motor.getPosition() + position * this.dir;
                 if(pos < 0) pos = 0;
                 else if(pos > 1) pos = 1;
                 this.motor.setPosition(pos);
-                this.finish_time = System.currentTimeMillis() + delay;
+                this.finish_time = System.currentTimeMillis() + (long)delay;
                 this.finish = true;
         }
 

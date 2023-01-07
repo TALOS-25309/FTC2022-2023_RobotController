@@ -10,7 +10,6 @@ public class Linear extends Part
     private SMotor ring = new SMotor();
     private Sensor bottom = new Sensor();
     private Sensor low = new Sensor();
-    private Sensor middle = new Sensor();
     private Sensor high = new Sensor();
 
     public void init(HardwareMap hwm, Telemetry tel)
@@ -19,13 +18,12 @@ public class Linear extends Part
         this.ring.init(hwm, tel, "ring", SMotor.Direction.Reverse, 0);
         this.bottom.init(hwm, tel, "bottom", true);
         this.low.init(hwm, tel, "low", true);
-        this.middle.init(hwm, tel, "middle", true);
         this.high.init(hwm, tel, "high", true);
 
 
         DMotor[] dl = {this.rope};
         SMotor[] sl = {this.ring};
-        Sensor[] snl = {this.bottom, this.low, this.middle, this.high};
+        Sensor[] snl = {this.bottom, this.low, this.high};
 
         this.util.init(dl, sl, snl);
 
@@ -33,7 +31,8 @@ public class Linear extends Part
         this.telemetry = tel;
     }
 
-    public void start(){
+    public void start()
+    {
 
     }
 
@@ -50,10 +49,10 @@ public class Linear extends Part
                         break;
                     case 1 :
                         rope.move(0.0);
-                        ring.move(0.1, 3000);
+                        ring.move(0.9, 1, 0.7);
                         break;
                     case 2 :
-                        ring.move(0.1, 3000);
+                        ring.move(-0.9, 0.5);
                         break;
                     case 3 :
                         rope.move(-0.1);
@@ -62,6 +61,18 @@ public class Linear extends Part
                     case 4 :
                         rope.move(0.0);
                         break;
+                }
+                break;
+            case "high" :
+                switch (step)
+                {
+                    case 0 :
+                        rope.move(0.1);
+                        high.activate();
+                        break;
+                    case 2 :
+                        rope.move(0.0);
+                        ring.move()
                 }
         }
         step++;
