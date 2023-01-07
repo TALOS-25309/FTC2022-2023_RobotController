@@ -10,7 +10,7 @@ public class Test extends Part
 
     public void init(HardwareMap hwm, Telemetry tel)
     {
-        s1.init(hwm, tel, "servo1", SMotor.Direction.Direct, 0);
+        s1.init(hwm, tel, "servo1", SMotor.Direction.Reverse, 0);
         s2.init(hwm, tel, "servo2", SMotor.Direction.Direct, 0);
         DMotor[] dl = {};
         SMotor[] sl = {s1, s2};
@@ -33,14 +33,12 @@ public class Test extends Part
                 switch (step % 3)
                 {
                     case 0:
-                        this.s1.move(0.005, 2000);
+                        this.s1.move(1.0, 1, 1.0);
                         break;
                     case 1:
-                        //this.s2.move(0.005, 0.3);
                         break;
                     case 2:
-                        this.s1.move(0.005, 2000);
-                        //this.s2.move(0.005, -0.3);
+                        this.s1.move(-1.0, 1, 0.5);
                         break;
                 }
         }
