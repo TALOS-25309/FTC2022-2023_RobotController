@@ -81,7 +81,6 @@ public class Wheel extends Part {
                     case 2:
                         delay(1);
                         break;
-                        
                 }
         }
         this.step++;
