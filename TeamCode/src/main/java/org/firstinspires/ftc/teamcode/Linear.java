@@ -40,40 +40,56 @@ public class Linear extends Part
     {
         switch (move_type)
         {
-            case "low" :
+            case "go_low" :
                 switch (step)
                 {
-                    case 0 :
+                    case 0:
                         rope.move(0.1);
                         low.activate();
                         break;
-                    case 1 :
-                        rope.move(0.0);
-                        ring.move(0.9, 1, 0.7);
-                        break;
-                    case 2 :
-                        ring.move(-0.9, 0.5);
-                        break;
-                    case 3 :
-                        rope.move(-0.1);
-                        bottom.activate();
-                        break;
-                    case 4 :
+                    case 1:
                         rope.move(0.0);
                         break;
                 }
                 break;
-            case "high" :
+
+            case "go_high" :
                 switch (step)
                 {
                     case 0 :
                         rope.move(0.1);
                         high.activate();
                         break;
-                    case 2 :
+                    case 1 :
                         rope.move(0.0);
-                        ring.move()
+                        break;
                 }
+                break;
+
+            case "stack_cup" :
+                switch (step)
+                {
+                    case 0 :
+                        ring.move(0.9, 0.6, 0.3);
+                        break;
+                    case 1 :
+                        ring.move(-0.9, 0.3);
+                        break;
+                }
+                break;
+
+            case "down" :
+                switch (step)
+                {
+                    case 0 :
+                        rope.move(-0.1);
+                        bottom.activate();
+                        break;
+                    case 1 :
+                        rope.move(0.0);
+                        break;
+                }
+                break;
         }
         step++;
     }
