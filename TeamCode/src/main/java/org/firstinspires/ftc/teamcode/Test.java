@@ -33,13 +33,13 @@ public class Test extends Part
                 switch (step % 3)
                 {
                     case 0:
-                        this.s1.move(0.005, 0.3);
+                        this.s1.move(0.005, 2000);
                         break;
                     case 1:
                         //this.s2.move(0.005, 0.3);
                         break;
                     case 2:
-                        this.s1.move(0.005, -0.3);
+                        this.s1.move(0.005, 2000);
                         //this.s2.move(0.005, -0.3);
                         break;
                 }
