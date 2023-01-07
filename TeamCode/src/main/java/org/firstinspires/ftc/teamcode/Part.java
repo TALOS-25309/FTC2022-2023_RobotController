@@ -17,7 +17,7 @@ public abstract class Part {
 
     public void update(){
         util.update();
-        this.telemetry.addData("finish", util.finish());
+        //this.telemetry.addData("finish", util.finish());
         if(util.finish()){
             this.next_step();
         }
