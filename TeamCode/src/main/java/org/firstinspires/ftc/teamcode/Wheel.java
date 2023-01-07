@@ -79,6 +79,7 @@ public class Wheel extends Part {
                         move(0.3, 2, Direction.TurnRight);
                         break;
                     case 2:
+                        move(0.1, 10, Direction.Forward);
                         delay(1);
                         break;
                 }
