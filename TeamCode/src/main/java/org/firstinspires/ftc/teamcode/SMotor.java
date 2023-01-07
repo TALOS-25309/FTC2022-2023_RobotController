@@ -20,7 +20,7 @@ public class SMotor
                 motor = hardwaremap.get(Servo.class, name);
                 finish = true;
                 this.dir = dir;
-                position = s_position*dir;
+                position = s_position*dir % 1;
                 motor.setPosition(position);
                 this.telemetry = telemetry;
         }
