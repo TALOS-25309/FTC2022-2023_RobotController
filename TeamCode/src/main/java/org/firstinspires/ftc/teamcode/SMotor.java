@@ -16,11 +16,9 @@ public class SMotor
         private Servo motor;
         private int dir; //1 or -1
         private boolean finish;
-        private double d_angle;
         private double position;
-        private double i_position;
-        private double angle;
-        private Telemetry telemetry;
+        private long finish_time = 0;
+        Telemetry telemetry;
 
         public void init(HardwareMap hardwaremap, Telemetry telemetry, String name, Direction direction, double initial_position)
         {
@@ -30,47 +28,23 @@ public class SMotor
                 position = initial_position * dir % 1;
                 motor.setPosition(position);
                 this.telemetry = telemetry;
+                this.finish_time = System.currentTimeMillis();
         }
+
         public void update()
         {
-                if(!finish)
-                {
-                        position = position + d_angle;
-                        if((angle>0)&&((position + d_angle - (i_position+angle)) >= 0))
-                        {
-                                position = i_position + angle;
-                                finish = true;
-                        }
-                        else if((angle<0)&&((position + d_angle -(i_position+angle)) <= 0))
-                        {
-                                position = i_position + angle;
-                                finish = true;
-                        }
-                        motor.setPosition(position);
-                }
         }
 
-        public void move(double speed, double angle)
-        {
-                finish = false;
-                this.angle = angle*dir;
-                i_position = position;
-
-                if(speed > 0.045)
-                {
-                        speed = 0.045;
-                }
-                if(angle > 0)
-                {
-                        d_angle = speed;
-                }
-                else
-                {
-                        d_angle = -speed;
-                }
+        public void move(double position, long delay){
+                double pos = this.position + position * this.dir;
+                if(pos < 0) pos = 0;
+                else if(pos > 1) pos = 1;
+                this.motor.setPosition(pos);
+                this.finish_time = System.currentTimeMillis() + delay;
         }
+
         public boolean finish()
         {
-                return finish;
+                return System.currentTimeMillis() >= this.finish_time;
         }
 }

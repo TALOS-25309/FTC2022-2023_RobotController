@@ -50,10 +50,10 @@ public class Linear extends Part
                         break;
                     case 1 :
                         rope.move(0.0);
-                        ring.move(0.1, 0.4);
+                        ring.move(0.1, 3000);
                         break;
                     case 2 :
-                        ring.move(0.1, -0.4);
+                        ring.move(0.1, 3000);
                         break;
                     case 3 :
                         rope.move(-0.1);
