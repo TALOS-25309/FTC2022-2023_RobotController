@@ -66,7 +66,7 @@ public class SMotor
                 this.finish = true;
         }
 
-        public void move(double position, long delay, double speed)
+        public void move(double position, double delay, double speed)
         {
                 double pos = this.motor.getPosition() + position * this.dir;
                 speed /= 1000;
@@ -77,7 +77,7 @@ public class SMotor
                 else if(pos > 1) pos = 1;
                 this.finish = false;
                 this.target = pos;
-                this.finish_time = System.currentTimeMillis() + delay;
+                this.finish_time = System.currentTimeMillis() + (long)delay;
                 this.speed = speed;
                 this.prev_time = System.currentTimeMillis();
         }
