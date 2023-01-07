@@ -78,6 +78,10 @@ public class Wheel extends Part {
                     case 1:
                         move(0.3, 2, Direction.TurnRight);
                         break;
+                    case 2:
+                        delay(1);
+                        break;
+                        
                 }
         }
         this.step++;
