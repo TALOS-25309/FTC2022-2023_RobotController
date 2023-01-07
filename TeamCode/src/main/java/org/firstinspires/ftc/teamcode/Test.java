@@ -12,9 +12,9 @@ public class Test extends Part
 
     public void init(HardwareMap hwm, Telemetry tel)
     {
-        motor.init(hwm, tel, "motor", 1);
-        smotor.init(hwm, tel, "smotor", 1);
-        servo.init(hwm, tel, "servo", 1, 0);
+        motor.init(hwm, tel, "motor", DMotor.Direction.Direct);
+        smotor.init(hwm, tel, "smotor", DMotor.Direction.Reverse);
+        servo.init(hwm, tel, "servo", SMotor.Direction.Direct, 0);
         DMotor[] dl = {motor, smotor};
         SMotor[] sl = {servo};
         Sensor[] snl = {};
