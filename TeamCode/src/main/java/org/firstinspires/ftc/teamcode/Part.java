@@ -8,6 +8,11 @@ public abstract class Part {
     protected String move_type;
     protected Telemetry telemetry;
 
+    protected void change_move_type(String move_type){
+        this.move_type = move_type;
+        this.step = -1;
+    }
+
     protected void delay(double delay){
         long time = (long)(delay * 1000);
         try{

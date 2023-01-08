@@ -18,7 +18,7 @@ public class Sensor
                 sensor.setMode(DigitalChannel.Mode.INPUT);
                 this.reverse = reverse;
                 active = false;
-                finish = false;
+                finish = true;
                 this.telemetry = telemetry;
         }
         public void update()
@@ -40,6 +40,11 @@ public class Sensor
         public void activate()
         {
                 active = true;
+                finish = false;
+        }
+
+        public void set_reverse(boolean reverse){
+                this.reverse = reverse;
         }
         public boolean finish()
         {

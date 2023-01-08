@@ -9,21 +9,23 @@ public class Linear extends Part
     private DMotor rope = new DMotor();
     private SMotor ring = new SMotor();
     private Sensor bottom = new Sensor();
-    private Sensor low = new Sensor();
-    private Sensor high = new Sensor();
+    private Sensor low_point = new Sensor();
+    private Sensor high_point = new Sensor();
+    private int direction;
 
     public void init(HardwareMap hwm, Telemetry tel)
     {
         this.rope.init(hwm, tel, "rope", DMotor.Direction.Direct);
         this.ring.init(hwm, tel, "ring", SMotor.Direction.Reverse, 0);
         this.bottom.init(hwm, tel, "bottom", true);
-        this.low.init(hwm, tel, "low", true);
-        this.high.init(hwm, tel, "high", true);
+        this.low_point.init(hwm, tel, "low", true);
+        this.high_point.init(hwm, tel, "high", true);
 
+        direction = -1;
 
         DMotor[] dl = {this.rope};
         SMotor[] sl = {this.ring};
-        Sensor[] snl = {this.bottom, this.low, this.high};
+        Sensor[] snl = {this.bottom, this.low_point, this.high_point};
 
         this.util.init(dl, sl, snl);
 
@@ -33,7 +35,6 @@ public class Linear extends Part
 
     public void start()
     {
-
     }
 
     protected void next_step()
@@ -44,11 +45,13 @@ public class Linear extends Part
                 switch (step)
                 {
                     case 0:
-                        rope.move(0.1);
-                        low.activate();
+                        this.direction  = -this.direction;
+                        rope.move(0.1 * this.direction);
+                        low_point.activate();
                         break;
                     case 1:
                         rope.move(0.0);
+                        this.change_move_type("stack_cup");
                         break;
                 }
                 break;
@@ -57,11 +60,13 @@ public class Linear extends Part
                 switch (step)
                 {
                     case 0 :
-                        rope.move(0.1);
-                        high.activate();
+                        this.direction = -this.direction;
+                        rope.move(0.1 * this.direction);
+                        high_point.activate();
                         break;
                     case 1 :
                         rope.move(0.0);
+                        this.change_move_type("stack_cup");
                         break;
                 }
                 break;
@@ -70,10 +75,24 @@ public class Linear extends Part
                 switch (step)
                 {
                     case 0 :
-                        ring.move(0.9, 0.6, 0.3);
+                        ring.move(1, 1.0);
+                        //rope.move(0.00041);
                         break;
-                    case 1 :
-                        ring.move(-0.9, 0.3);
+                    case 1:
+                        //rope.move(0);
+                        this.change_move_type("down");
+                }
+                break;
+
+            case "simple_stack_cup" :
+                switch (step)
+                {
+                    case 0 :
+                        ring.move(1, 1.0);
+                        break;
+                    case 1:
+                        ring.move(-1,1.0);
+                        this.change_move_type("redefine");
                         break;
                 }
                 break;
@@ -82,15 +101,45 @@ public class Linear extends Part
                 switch (step)
                 {
                     case 0 :
-                        rope.move(-0.1);
+                        rope.move(-0.08 * this.direction);
+                        ring.move(-1, 0.5);
                         bottom.activate();
                         break;
                     case 1 :
-                        rope.move(0.0);
+                        this.change_move_type("reset");
                         break;
                 }
                 break;
+
+            case "reset":
+                switch(step){
+                    case 0:
+                        bottom.set_reverse(false);
+                        bottom.activate();
+                        break;
+                    case 1:
+                        rope.move(0.0);
+                        bottom.set_reverse(true);
+                        this.change_move_type("redefine");
+                        break;
+                }
+                break;
+
+            case "redefine":
+                switch (step){
+                    case 0:
+                        String mode[] = {"go_high", "go_low", "simple_stack_cup"};
+                        this.change_move_type(mode[(int)(Math.random() * 100000) % 3]);
+                        this.delay(1);
+                        break;
+                }
         }
         step++;
+    }
+
+    public void move(String move_type){
+        this.step = 0;
+        this.move_type = move_type;
+        this.next_step();
     }
 }
