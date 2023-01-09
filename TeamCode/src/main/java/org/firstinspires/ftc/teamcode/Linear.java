@@ -32,6 +32,7 @@ public class Linear extends Part
 
         this.step = 0;
         this.telemetry = tel;
+        this.move_finish = true;
     }
 
     public void start()
@@ -53,6 +54,7 @@ public class Linear extends Part
                     case 1:
                         rope.move(0.0);
                         this.change_move_type("stack_cup");
+                        move_finish = true;
                         break;
                 }
                 break;
@@ -68,6 +70,7 @@ public class Linear extends Part
                     case 1 :
                         rope.move(0.0);
                         this.change_move_type("stack_cup");
+                        move_finish = true;
                         break;
                 }
                 break;
@@ -82,6 +85,8 @@ public class Linear extends Part
                     case 1:
                         //rope.move(0);
                         this.change_move_type("down");
+                        move_finish = true;
+                        break;
                 }
                 break;
 
@@ -94,6 +99,7 @@ public class Linear extends Part
                     case 1:
                         ring.move(-1,1.0);
                         this.change_move_type("redefine");
+                        move_finish = true;
                         break;
                 }
                 break;
@@ -108,6 +114,7 @@ public class Linear extends Part
                         break;
                     case 1 :
                         this.change_move_type("reset");
+                        move_finish = true;
                         break;
                 }
                 break;
@@ -122,6 +129,7 @@ public class Linear extends Part
                         rope.move(0.0);
                         bottom.set_reverse(true);
                         //this.change_move_type("redefine");
+                        move_finish = true;
                         break;
                 }
                 break;
@@ -132,6 +140,7 @@ public class Linear extends Part
                         String mode[] = {"go_high", "go_low", "simple_stack_cup"};
                         this.change_move_type(mode[(int)(Math.random() * 100000) % 3]);
                         this.delay(1);
+                        move_finish = true;
                         break;
                 }
         }
