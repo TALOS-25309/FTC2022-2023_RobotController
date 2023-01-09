@@ -7,8 +7,10 @@ import com.qualcomm.robotcore.hardware.HardwareMap;
 @TeleOp(name = "Tele_Op", group = "")
 public class TeleOpMode extends OpMode {
 
-    private Linear linear_part = new Linear();
+
     private Wheel wheel_part = new Wheel();
+    private Linear linear_part = new Linear();
+    private Pincer pincer_par = new Pincer();
 
     @Override
     public void init()
