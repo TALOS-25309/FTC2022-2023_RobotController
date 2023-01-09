@@ -42,6 +42,11 @@ public class TeleOpMode extends OpMode {
             wheel_part.move(0.0,  Wheel.Direction.Forward);
         }
 
-
+        if(gamepad1.y) {
+            wheel_part.start_step("go_high");
+        }
+        else if(gamepad1.x){
+            wheel_part.start_step("go_low");
+        }
     }
 }

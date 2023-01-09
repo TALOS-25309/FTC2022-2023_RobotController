@@ -106,9 +106,12 @@ public class Linear extends Part
                         ring.move(-1, 0.5);
                         bottom.activate();
                         break;
+                    /*
                     case 1 :
                         this.change_move_type("reset");
                         break;
+                        
+                     */
                 }
                 break;
 
