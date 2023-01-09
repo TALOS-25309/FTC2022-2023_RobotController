@@ -52,7 +52,7 @@ public class Linear extends Part
                         break;
                     case 1:
                         rope.move(0.0);
-                        this.change_move_type("stack_cup");
+                        this.change_move_type("stack_cup", 1);
                         break;
                 }
                 break;
@@ -67,7 +67,7 @@ public class Linear extends Part
                         break;
                     case 1 :
                         rope.move(0.0);
-                        this.change_move_type("stack_cup");
+                        this.change_move_type("stack_cup", 1);
                         break;
                 }
                 break;
@@ -81,7 +81,7 @@ public class Linear extends Part
                         break;
                     case 1:
                         //rope.move(0);
-                        this.change_move_type("down");
+                        this.change_move_type("down", 1);
                 }
                 break;
 
@@ -93,7 +93,7 @@ public class Linear extends Part
                         break;
                     case 1:
                         ring.move(-1,1.0);
-                        this.change_move_type("redefine");
+                        this.change_move_type("redefine", 1);
                         break;
                 }
                 break;
@@ -107,7 +107,7 @@ public class Linear extends Part
                         bottom.activate();
                         break;
                     case 1 :
-                        this.change_move_type("reset");
+                        this.change_move_type("reset", 1);
                         break;
                 }
                 break;
@@ -130,11 +130,11 @@ public class Linear extends Part
                 switch (step){
                     case 0:
                         String mode[] = {"go_high", "go_low", "simple_stack_cup"};
-                        this.change_move_type(mode[(int)(Math.random() * 100000) % 3]);
+                        this.change_move_type(mode[(int)(Math.random() * 100000) % 3], 1);
                         this.delay(1);
                         break;
                 }
         }
-        step++;
+        this.step++;
     }
 }

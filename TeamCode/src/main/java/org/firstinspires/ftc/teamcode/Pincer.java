@@ -28,6 +28,7 @@ public class Pincer extends Part
         this.util.init(dl, sl, snl, clr);
 
         this.step = 0;
+        this.move_finish = true;
         this.telemetry = tel;
     }
 
@@ -55,6 +56,7 @@ public class Pincer extends Part
                         axis.move(0.0);
                         pincer1.move(-0.3, 0.1);
                         pincer2.move(-0.3, 0.1);
+                        move_finish = true;
                         break;
                 }
                 break;
@@ -68,9 +70,11 @@ public class Pincer extends Part
                         break;
                     case 1 :
                         axis.move(0.0);
+                        move_finish = true;
                         break;
                 }
                 break;
         }
+        this.step++;
     }
 }
