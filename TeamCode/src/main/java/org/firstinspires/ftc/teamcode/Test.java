@@ -26,10 +26,11 @@ public class Test extends Part
 
         util.init(dl, sl, snl, clr);
         this.step = 0;
+        move_finish = true;
     }
     public void start()
     {
-        start_step("color", 1);
+        start_step("color");
     }
     protected void next_step()
     {
@@ -43,6 +44,7 @@ public class Test extends Part
                         break;
                     case 1:
                         telemetry.addData("Parking Place", color.get_parking_position());
+                        move_finish = true;
                         break;
                 }
         }

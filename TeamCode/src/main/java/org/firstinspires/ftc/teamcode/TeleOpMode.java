@@ -60,7 +60,7 @@ public class TeleOpMode extends OpMode {
             wheel_part.move(0.0,  Wheel.Direction.Forward);
         }
 
-        if(linear_part.util.finish())
+        if(linear_part.move_finish)
         {
             if(gamepad1.y) {
                 linear_part.start_step("simple_stack_cup");
@@ -73,7 +73,7 @@ public class TeleOpMode extends OpMode {
             }
         }
 
-        if(pincer_part.util.finish()) {
+        if(pincer_part.move_finish) {
             if (gamepad1.b) {
                 if (!pincer_up) {
                     pincer_part.start_step("pick_up");

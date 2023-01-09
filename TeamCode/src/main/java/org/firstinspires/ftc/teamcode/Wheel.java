@@ -48,10 +48,11 @@ public class Wheel extends Part {
 
         this.step = 0;
         this.telemetry = tel;
+        this.move_finish = true;
     }
 
     public void start(){
-        this.start_step("forward");
+
     }
 
     public void move(double speed, double angle, Direction dir){
@@ -71,10 +72,7 @@ public class Wheel extends Part {
     protected void next_step(){
         switch (move_type)
         {
-            case "forward" :
-                switch(this.step%2){
 
-                }
         }
         this.step++;
     }

@@ -6,11 +6,13 @@ public abstract class Part {
     protected RobotUtility util = new RobotUtility();
     protected int step;
     protected String move_type;
+    protected boolean move_finish;
     protected Telemetry telemetry;
 
     protected void change_move_type(String move_type){
         this.move_type = move_type;
         this.step = -1;
+        move_finish = false;
     }
 
     protected void delay(double delay){
@@ -25,6 +27,7 @@ public abstract class Part {
     public void start_step(String move_type){
         this.move_type = move_type;
         this.step = 0;
+        move_finish = false;
         this.next_step();
     }
     protected abstract void next_step();
