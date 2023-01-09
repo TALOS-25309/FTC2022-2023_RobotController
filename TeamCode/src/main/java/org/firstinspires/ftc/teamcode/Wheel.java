@@ -73,16 +73,7 @@ public class Wheel extends Part {
         {
             case "forward" :
                 switch(this.step%2){
-                    case 0:
-                        move(0.3, 2, Direction.TurnLeft);
-                        break;
-                    case 1:
-                        move(0.3, 2, Direction.TurnRight);
-                        break;
-                    case 2:
-                        move(0.1, 10, Direction.Forward);
-                        delay(1);
-                        break;
+
                 }
         }
         this.step++;

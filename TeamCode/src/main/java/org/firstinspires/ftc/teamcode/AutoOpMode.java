@@ -18,7 +18,7 @@ public class AutoOpMode extends OpMode
     public void start()
     {
         //linear_part.start();
-        linear_part.move("stack_cup");
+        linear_part.start_step("stack_cup");
     }
 
     @Override

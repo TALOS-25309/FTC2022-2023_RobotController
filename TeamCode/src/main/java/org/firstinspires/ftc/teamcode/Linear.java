@@ -137,10 +137,4 @@ public class Linear extends Part
         }
         step++;
     }
-
-    public void move(String move_type){
-        this.step = 0;
-        this.move_type = move_type;
-        this.next_step();
-    }
 }
