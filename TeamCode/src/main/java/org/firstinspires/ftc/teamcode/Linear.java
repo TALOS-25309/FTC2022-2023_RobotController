@@ -106,12 +106,9 @@ public class Linear extends Part
                         ring.move(-1, 0.5);
                         bottom.activate();
                         break;
-                    /*
                     case 1 :
                         this.change_move_type("reset");
                         break;
-                        
-                     */
                 }
                 break;
 
@@ -124,7 +121,7 @@ public class Linear extends Part
                     case 1:
                         rope.move(0.0);
                         bottom.set_reverse(true);
-                        this.change_move_type("redefine");
+                        //this.change_move_type("redefine");
                         break;
                 }
                 break;
