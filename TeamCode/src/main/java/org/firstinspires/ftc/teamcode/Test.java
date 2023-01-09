@@ -29,7 +29,7 @@ public class Test extends Part
     }
     public void start()
     {
-        start_step("color");
+        start_step("color", 1);
     }
     protected void next_step()
     {
