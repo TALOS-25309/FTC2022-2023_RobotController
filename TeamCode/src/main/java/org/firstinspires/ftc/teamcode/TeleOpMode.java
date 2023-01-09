@@ -73,16 +73,17 @@ public class TeleOpMode extends OpMode {
             }
         }
 
-        if(pincer_part.util.finish())
-        {
-            if(gamepad1.b) {
-                if(!pincer_up) {
+        if(pincer_part.util.finish()) {
+            if (gamepad1.b) {
+                if (!pincer_up) {
                     pincer_part.start_step("pick_up");
-                }
-                else {
+                } else {
                     pincer_part.start_step("release");
                 }
             }
         }
+
+        wheel_part.update();
+        linear_part.update();
     }
 }
