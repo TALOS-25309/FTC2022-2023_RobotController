@@ -43,7 +43,8 @@ public class Wheel extends Part {
         this.util = new RobotUtility();
         Sensor[] sen = {};
         SMotor[] sm = {};
-        this.util.init(dl, sm, sen);
+        Color[] clr = {};
+        this.util.init(dl, sm, sen, clr);
 
         this.step = 0;
         this.telemetry = tel;

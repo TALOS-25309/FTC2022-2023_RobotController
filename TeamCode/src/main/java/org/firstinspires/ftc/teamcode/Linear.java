@@ -26,8 +26,9 @@ public class Linear extends Part
         DMotor[] dl = {this.rope};
         SMotor[] sl = {this.ring};
         Sensor[] snl = {this.bottom, this.low_point, this.high_point};
+        Color[] clr = {};
 
-        this.util.init(dl, sl, snl);
+        this.util.init(dl, sl, snl, clr);
 
         this.step = 0;
         this.telemetry = tel;
