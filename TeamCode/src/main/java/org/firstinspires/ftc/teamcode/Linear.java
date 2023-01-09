@@ -49,7 +49,7 @@ public class Linear extends Part
                 {
                     case 0:
                         this.direction  = -this.direction;
-                        rope.move(0.1 * this.direction);
+                        rope.move(0.5 * this.direction);
                         low_point.activate();
                         break;
                     case 1:
@@ -64,7 +64,7 @@ public class Linear extends Part
                 {
                     case 0 :
                         this.direction = -this.direction;
-                        rope.move(0.1 * this.direction);
+                        rope.move(0.5 * this.direction);
                         high_point.activate();
                         break;
                     case 1 :
@@ -106,7 +106,7 @@ public class Linear extends Part
                 switch (step)
                 {
                     case 0 :
-                        rope.move(-0.08 * this.direction);
+                        rope.move(-0.3 * this.direction);
                         ring.move(-1, 0.5);
                         bottom.activate();
                         break;

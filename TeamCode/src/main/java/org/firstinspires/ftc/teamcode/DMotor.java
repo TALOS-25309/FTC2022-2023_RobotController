@@ -14,7 +14,7 @@ public class DMotor
         };
 
         private DcMotor motor;
-        private int dir;
+        private double dir;
         private double tpr;
         private double i_position;
         private double angle;

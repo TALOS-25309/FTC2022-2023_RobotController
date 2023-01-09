@@ -14,7 +14,7 @@ public class SMotor
         };
 
         private Servo motor;
-        private int dir; //1 or -1
+        private double dir; //1 or -1
         private double target;
         private long finish_time = 0;
         private long prev_time = 0;

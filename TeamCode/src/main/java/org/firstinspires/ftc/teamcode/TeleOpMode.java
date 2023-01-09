@@ -18,7 +18,7 @@ public class TeleOpMode extends OpMode {
     {
         //wheel_part.init(hardwareMap, telemetry);
         linear_part.init(hardwareMap, telemetry);
-        //pincer_part.init(hardwareMap, telemetry);
+        pincer_part.init(hardwareMap, telemetry);
 
         pincer_up = false;
     }
@@ -28,7 +28,7 @@ public class TeleOpMode extends OpMode {
     {
         //wheel_part.start();
         linear_part.start();
-        //pincer_part.start();
+        pincer_part.start();
     }
 
     @Override
@@ -36,7 +36,7 @@ public class TeleOpMode extends OpMode {
     {
         //wheel_part.update();
         linear_part.update();
-        //pincer_part.update();
+        pincer_part.update();
         /*
         if(gamepad1.dpad_up) {
             wheel_part.move(0.5, Wheel.Direction.Forward);
@@ -60,21 +60,18 @@ public class TeleOpMode extends OpMode {
             wheel_part.move(0.0,  Wheel.Direction.Forward);
         }
         */
-        if(linear_part.move_finish)
-        {
-            if(gamepad1.y) {
+        if(linear_part.move_finish) {
+            if (gamepad1.y) {
                 linear_part.start_step("simple_stack_cup");
-            }
-            else if(gamepad1.x) {
+            } else if (gamepad1.x) {
                 linear_part.start_step("go_low");
-            }
-            else if(gamepad1.b){
+            } else if (gamepad1.b) {
                 linear_part.start_step("go_high");
             }
         }
-        /*
+
         if(pincer_part.move_finish) {
-            if (gamepad1.b) {
+            if (gamepad1.a) {
                 if (!pincer_up) {
                     pincer_part.start_step("pick_up");
                 } else {
@@ -82,7 +79,6 @@ public class TeleOpMode extends OpMode {
                 }
             }
         }
-        */
         //wheel_part.update();
         linear_part.update();
     }
