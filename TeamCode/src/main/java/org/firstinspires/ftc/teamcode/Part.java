@@ -7,15 +7,10 @@ public abstract class Part {
     protected int step;
     protected String move_type;
     protected Telemetry telemetry;
-    protected boolean move_finish;
-    protected int m_step;
 
-    protected void change_move_type(String move_type, int m_step){
+    protected void change_move_type(String move_type){
         this.move_type = move_type;
         this.step = -1;
-        this.m_step = m_step;
-        this.move_finish = false;
-
     }
 
     protected void delay(double delay){
@@ -27,23 +22,16 @@ public abstract class Part {
         }
     }
 
-    public void start_step(String move_type, int m_step){
+    public void start_step(String move_type){
         this.move_type = move_type;
         this.step = 0;
-        this.m_step = m_step;
-        this.move_finish = false;
         this.next_step();
     }
-
     protected abstract void next_step();
 
     public void update(){
         util.update();
         if(util.finish()){
-            if(m_step < this.step)
-            {
-                move_finish = true;
-            }
             this.next_step();
         }
     }
