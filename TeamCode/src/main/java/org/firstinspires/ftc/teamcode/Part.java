@@ -40,15 +40,11 @@ public abstract class Part {
     public void update(){
         util.update();
         if(util.finish()){
-            if(m_step >= this.step)
-            {
-                this.next_step();
-            }
-            else
+            if(m_step < this.step)
             {
                 move_finish = true;
-                this.next_step();
             }
+            this.next_step();
         }
     }
 }
