@@ -43,13 +43,16 @@ public class TeleOpMode extends OpMode {
         }
 
         if(gamepad1.y) {
-            wheel_part.start_step("simple_stack_cup");
+            linear_part.start_step("simple_stack_cup");
         }
         else if(gamepad1.x) {
-            wheel_part.start_step("go_low");
+            linear_part.start_step("go_low");
         }
         else if(gamepad1.b){
-            wheel_part.start_step("go_high");
+            linear_part.start_step("go_high");
         }
+
+        wheel_part.update();
+        linear_part.update();
     }
 }
