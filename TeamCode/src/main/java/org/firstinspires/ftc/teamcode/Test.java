@@ -10,21 +10,25 @@ public class Test extends Part
     Sensor magnet = new Sensor();
     DMotor motor = new DMotor();
     Color color = new Color();
+    Distance distance = new Distance();
 
     public void init(HardwareMap hwm, Telemetry tel)
     {
         //touch.init(hwm, tel, "touch", true);
         //motor.init(hwm, tel, "motor", DMotor.Direction.Reverse);
         //magnet.init(hwm, tel, "magnet", true);
-        color.init(hwm, tel, "color");
+        //color.init(hwm, tel, "color");
+        distance.init(hwm, tel, "distance");
+
         DMotor[] dl = {};
         SMotor[] sl = {};
         Sensor[] snl = {};
-        Color[] clr = {color};
+        Color[] clr = {/*color*/};
+        Distance[] dsl = {distance};
 
         this.telemetry = tel;
 
-        util.init(dl, sl, snl, clr);
+        util.init(dl, sl, snl, clr, dsl);
         this.step = 0;
         move_finish = true;
     }
@@ -47,6 +51,9 @@ public class Test extends Part
                         move_finish = true;
                         break;
                 }
+                break;
+            case "test" :
+                telemetry.addData("distance", distance.get_distance(CM));
         }
         this.telemetry.addData("Step", step);
         step++;

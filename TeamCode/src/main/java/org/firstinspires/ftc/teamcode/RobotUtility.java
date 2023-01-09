@@ -8,12 +8,14 @@ public class RobotUtility {
     private SMotor[] sm_list;
     private Sensor[] sen_list;
     private Color[] clr_list;
+    private Distance[] dis_list;
 
-    public void init(DMotor[] dm_list, SMotor[] sm_list, Sensor[] sen_list, Color[] clr_list){
+    public void init(DMotor[] dm_list, SMotor[] sm_list, Sensor[] sen_list, Color[] clr_list, Distance[] dis_list){
         this.dm_list = dm_list;
         this.sm_list = sm_list;
         this.sen_list = sen_list;
         this.clr_list = clr_list;
+        this.dis_list = dis_list;
     }
 
     public void update(){
@@ -28,6 +30,9 @@ public class RobotUtility {
         }
         for(int i=0; i<this.clr_list.length; i++){
             clr_list[i].update();
+        }
+        for(int i=0; i<this.dis_list.length; i++){
+            dis_list[i].update();
         }
     }
 
@@ -49,6 +54,11 @@ public class RobotUtility {
         }
         for(int i=0; i<this.clr_list.length; i++){
             if(!clr_list[i].finish()){
+                return false;
+            }
+        }
+        for(int i=0; i<this.clr_list.length; i++){
+            if(!dis_list[i].finish()){
                 return false;
             }
         }
