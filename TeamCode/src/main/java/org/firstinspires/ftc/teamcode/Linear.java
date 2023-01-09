@@ -27,8 +27,9 @@ public class Linear extends Part
         SMotor[] sl = {this.ring};
         Sensor[] snl = {this.bottom, this.low_point, this.high_point};
         Color[] clr = {};
+        Distance[] dst = {};
 
-        this.util.init(dl, sl, snl, clr);
+        this.util.init(dl, sl, snl, clr, dst);
 
         this.step = 0;
         this.telemetry = tel;
@@ -54,7 +55,6 @@ public class Linear extends Part
                     case 1:
                         rope.move(0.0);
                         this.change_move_type("stack_cup");
-                        move_finish = true;
                         break;
                 }
                 break;
@@ -70,7 +70,6 @@ public class Linear extends Part
                     case 1 :
                         rope.move(0.0);
                         this.change_move_type("stack_cup");
-                        move_finish = true;
                         break;
                 }
                 break;
@@ -85,7 +84,6 @@ public class Linear extends Part
                     case 1:
                         //rope.move(0);
                         this.change_move_type("down");
-                        move_finish = true;
                         break;
                 }
                 break;
@@ -98,7 +96,7 @@ public class Linear extends Part
                         break;
                     case 1:
                         ring.move(-1,1.0);
-                        this.change_move_type("redefine");
+                        //this.change_move_type("redefine");
                         move_finish = true;
                         break;
                 }
@@ -114,7 +112,6 @@ public class Linear extends Part
                         break;
                     case 1 :
                         this.change_move_type("reset");
-                        move_finish = true;
                         break;
                 }
                 break;

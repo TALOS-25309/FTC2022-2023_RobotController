@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 public class Test extends Part
 {
@@ -15,16 +16,16 @@ public class Test extends Part
     public void init(HardwareMap hwm, Telemetry tel)
     {
         //touch.init(hwm, tel, "touch", true);
-        //motor.init(hwm, tel, "motor", DMotor.Direction.Reverse);
+        motor.init(hwm, tel, "motor", DMotor.Direction.Direct);
         //magnet.init(hwm, tel, "magnet", true);
         //color.init(hwm, tel, "color");
-        distance.init(hwm, tel, "distance");
+        //distance.init(hwm, tel, "distance");
 
-        DMotor[] dl = {};
+        DMotor[] dl = {motor};
         SMotor[] sl = {};
         Sensor[] snl = {};
         Color[] clr = {/*color*/};
-        Distance[] dsl = {distance};
+        Distance[] dsl = {};
 
         this.telemetry = tel;
 
@@ -53,7 +54,7 @@ public class Test extends Part
                 }
                 break;
             case "test" :
-                telemetry.addData("distance", distance.get_distance(CM));
+                motor.move(1.0);
         }
         this.telemetry.addData("Step", step);
         step++;

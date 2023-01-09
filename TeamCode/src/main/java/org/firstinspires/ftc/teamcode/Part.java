@@ -5,8 +5,8 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public abstract class Part {
     protected RobotUtility util = new RobotUtility();
     protected int step;
-    protected String move_type;
-    protected boolean move_finish;
+    protected String move_type = "";
+    protected boolean move_finish = true;
     protected Telemetry telemetry;
 
     protected void change_move_type(String move_type){

@@ -44,7 +44,8 @@ public class Wheel extends Part {
         Sensor[] sen = {};
         SMotor[] sm = {};
         Color[] clr = {};
-        this.util.init(dl, sm, sen, clr);
+        Distance[] dsl = {};
+        this.util.init(dl, sm, sen, clr, dsl);
 
         this.step = 0;
         this.telemetry = tel;

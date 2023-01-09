@@ -16,9 +16,9 @@ public class TeleOpMode extends OpMode {
     @Override
     public void init()
     {
-        wheel_part.init(hardwareMap, telemetry);
+        //wheel_part.init(hardwareMap, telemetry);
         linear_part.init(hardwareMap, telemetry);
-        pincer_part.init(hardwareMap, telemetry);
+        //pincer_part.init(hardwareMap, telemetry);
 
         pincer_up = false;
     }
@@ -26,18 +26,18 @@ public class TeleOpMode extends OpMode {
     @Override
     public void start()
     {
-        wheel_part.start();
+        //wheel_part.start();
         linear_part.start();
-        pincer_part.start();
+        //pincer_part.start();
     }
 
     @Override
     public void loop()
     {
-        wheel_part.update();
+        //wheel_part.update();
         linear_part.update();
-        pincer_part.update();
-
+        //pincer_part.update();
+        /*
         if(gamepad1.dpad_up) {
             wheel_part.move(0.5, Wheel.Direction.Forward);
         }
@@ -59,7 +59,7 @@ public class TeleOpMode extends OpMode {
         else {
             wheel_part.move(0.0,  Wheel.Direction.Forward);
         }
-
+        */
         if(linear_part.move_finish)
         {
             if(gamepad1.y) {
@@ -72,7 +72,7 @@ public class TeleOpMode extends OpMode {
                 linear_part.start_step("go_high");
             }
         }
-
+        /*
         if(pincer_part.move_finish) {
             if (gamepad1.b) {
                 if (!pincer_up) {
@@ -82,8 +82,8 @@ public class TeleOpMode extends OpMode {
                 }
             }
         }
-
-        wheel_part.update();
+        */
+        //wheel_part.update();
         linear_part.update();
     }
 }
