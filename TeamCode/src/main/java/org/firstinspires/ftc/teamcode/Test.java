@@ -7,22 +7,19 @@ import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 public class Test extends Part
 {
-    Sensor touch = new Sensor();
-    Sensor magnet = new Sensor();
-    DMotor motor = new DMotor();
-    Color color = new Color();
-    Distance distance = new Distance();
+    private SMotor pincer1 = new SMotor();
 
     public void init(HardwareMap hwm, Telemetry tel)
     {
         //touch.init(hwm, tel, "touch", true);
-        motor.init(hwm, tel, "motor", DMotor.Direction.Direct);
+        //motor.init(hwm, tel, "motor", DMotor.Direction.Direct);
         //magnet.init(hwm, tel, "magnet", true);
         //color.init(hwm, tel, "color");
         //distance.init(hwm, tel, "distance");
+        pincer1.init(hwm, tel, "pincer1", SMotor.Direction.Direct, 0);
 
-        DMotor[] dl = {motor};
-        SMotor[] sl = {};
+        DMotor[] dl = {};
+        SMotor[] sl = {pincer1};
         Sensor[] snl = {};
         Color[] clr = {/*color*/};
         Distance[] dsl = {};
@@ -35,12 +32,13 @@ public class Test extends Part
     }
     public void start()
     {
-        start_step("color");
+        //start_step("");
     }
     protected void next_step()
     {
         switch (move_type)
         {
+            /*
             case "color" :
                 switch (step % 2)
                 {
@@ -53,8 +51,14 @@ public class Test extends Part
                         break;
                 }
                 break;
+                */
+             
             case "test" :
-                motor.move(1.0);
+                switch (step)
+                {
+                    case 0 :
+                        pincer1.move(0.5, 0.1);
+                }
         }
         this.telemetry.addData("Step", step);
         step++;
