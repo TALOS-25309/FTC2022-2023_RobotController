@@ -61,6 +61,8 @@ public class Pincer extends Part
                         axis2.move(0.0);
                         pincer1.move(-0.3, 0.5);
                         pincer2.move(-0.3, 0.5);
+                        this.delay(1);
+                        this.change_move_type("release");
                         move_finish = true;
                         break;
                 }
