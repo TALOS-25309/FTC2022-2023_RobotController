@@ -25,9 +25,9 @@ public class Linear extends Part
         SMotor[] sl = {this.ring};
         Sensor[] snl = {this.bottom, this.low_point, this.high_point};
         Color[] clr = {};
-        Distance[] dst = {};
+        Distance[] dsl = {};
 
-        this.util.init(dl, sl, snl, clr, dst);
+        this.util.init(dl, sl, snl, clr, dsl);
 
         this.step = 0;
         this.telemetry = tel;

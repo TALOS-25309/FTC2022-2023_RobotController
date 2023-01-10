@@ -26,9 +26,9 @@ public class Pincer extends Part
         SMotor[] sl = {this.pincer1, this.pincer2};
         Sensor[] snl = {/*this.bottom, this.up*/};
         Color[] clr = {};
-        Distance[] dst = {};
+        Distance[] dsl = {};
 
-        this.util.init(dl, sl, snl, clr, dst);
+        this.util.init(dl, sl, snl, clr, dsl);
 
         this.step = 0;
         this.telemetry = tel;
