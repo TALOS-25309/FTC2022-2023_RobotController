@@ -52,7 +52,7 @@ public class Linear extends Part
                 switch (step)
                 {
                     case 0:
-                        rope.move(1.0);
+                        rope.move(0.6);
                         low_point.activate();
                         break;
                     case 1:
@@ -66,7 +66,7 @@ public class Linear extends Part
                 switch (step)
                 {
                     case 0 :
-                        rope.move(1.0);
+                        rope.move(0.6);
                         high_point.activate();
                         break;
                     case 1 :
@@ -112,7 +112,7 @@ public class Linear extends Part
                         this.delay(0.1);
                         break;
                     case 1:
-                        rope.move(-0.9);
+                        rope.move(-0.5);
                         bottom.activate();
                         break;
                     case 2 :
@@ -126,7 +126,7 @@ public class Linear extends Part
                     case 0:
                         bottom.set_reverse(false);
                         bottom.activate();
-                        rope.move(0.4);
+                        rope.move(0.3);
                         break;
                     case 1:
                         rope.move(0.0);
