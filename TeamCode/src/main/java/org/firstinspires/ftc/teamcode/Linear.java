@@ -41,7 +41,7 @@ public class Linear extends Part
     //direction : -1, 0, 1
     public void adjust_rope(double direction)
     {
-        rope.move(direction * 0.1);
+        rope.move(direction * 0.2);
     }
 
     protected void next_step()
