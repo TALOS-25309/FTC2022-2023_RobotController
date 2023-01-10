@@ -30,12 +30,15 @@ public abstract class Part {
         move_finish = false;
         this.next_step();
     }
+
     protected abstract void next_step();
 
     public void update(){
-        util.update();
-        if(util.finish()){
-            this.next_step();
+        if(!this.move_finish){
+            util.update();
+            if(util.finish()){
+                this.next_step();
+            }
         }
     }
 }

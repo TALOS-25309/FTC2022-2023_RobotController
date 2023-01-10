@@ -71,12 +71,13 @@ public class TeleOpMode extends OpMode {
             wheel_part.move(0.0,  Wheel.Direction.Forward);
         }
         */
+        double a = gamepad1.right_trigger;
         if(linear_part.move_finish) {
             if (gamepad2.y) {
                 linear_part.start_step("simple_stack_cup");
-            } else if (gamepad1.x) {
+            } else if (gamepad2.x) {
                 linear_part.start_step("go_low");
-            } else if (gamepad1.b) {
+            } else if (gamepad2.b) {
                 linear_part.start_step("go_high");
             }
         }
@@ -89,6 +90,16 @@ public class TeleOpMode extends OpMode {
                     pincer_part.start_step("release");
                 }
             }
+        }
+
+        if(gamepad2.dpad_up){
+            this.pincer_part.adjust_axis(1);
+        }
+        else if(gamepad2.dpad_down){
+            this.pincer_part.adjust_axis(-1);
+        }
+        else{
+            this.pincer_part.adjust_axis(0);
         }
         //wheel_part.update();
         linear_part.update();
