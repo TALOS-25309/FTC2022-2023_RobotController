@@ -72,7 +72,7 @@ public class TeleOpMode extends OpMode {
         }
         */
         if(linear_part.move_finish) {
-            if (gamepad1.y) {
+            if (gamepad2.y) {
                 linear_part.start_step("simple_stack_cup");
             } else if (gamepad1.x) {
                 linear_part.start_step("go_low");
@@ -82,7 +82,7 @@ public class TeleOpMode extends OpMode {
         }
 
         if(pincer_part.move_finish) {
-            if (gamepad1.a) {
+            if (gamepad2.a) {
                 if (!pincer_up) {
                     pincer_part.start_step("pick_up");
                 } else {
