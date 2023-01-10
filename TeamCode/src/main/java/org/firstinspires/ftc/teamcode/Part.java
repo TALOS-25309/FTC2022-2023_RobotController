@@ -34,11 +34,9 @@ public abstract class Part {
     protected abstract void next_step();
 
     public void update(){
-        if(!this.move_finish){
-            util.update();
-            if(util.finish()){
-                this.next_step();
-            }
+        util.update();
+        if(util.finish()){
+            this.next_step();
         }
     }
 }
