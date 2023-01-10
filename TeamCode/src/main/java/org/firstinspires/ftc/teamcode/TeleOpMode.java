@@ -101,6 +101,17 @@ public class TeleOpMode extends OpMode {
         else{
             this.pincer_part.adjust_axis(0);
         }
+
+        if(gamepad2.right_trigger > 0.1) {
+            this.linear_part.adjust_rope(gamepad2.right_trigger);
+        }
+        else if(gamepad2.left_trigger > 0.1) {
+            this.linear_part.adjust_rope(-gamepad2.left_trigger);
+        }
+        else {
+            this.linear_part.adjust_rope(0);
+        }
+
         //wheel_part.update();
         linear_part.update();
     }
