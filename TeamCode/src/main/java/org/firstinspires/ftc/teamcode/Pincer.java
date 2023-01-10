@@ -38,8 +38,8 @@ public class Pincer extends Part
     //power = 1, -1, 0
     public void adjust_axis(double direction){
         this.move_finish = true;
-        this.axis1.move(direction * 0.2);
-        this.axis2.move(direction * 0.2);
+        this.axis1.move(direction * 0.1);
+        this.axis2.move(direction * 0.1);
     }
 
     public void start()
