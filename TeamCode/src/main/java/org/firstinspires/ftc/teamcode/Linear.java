@@ -11,7 +11,7 @@ public class Linear extends Part
     private Sensor bottom = new Sensor();
     private Sensor low_point = new Sensor();
     private Sensor high_point = new Sensor();
-    private int direction;
+    private int cnt = 0;
 
     public void init(HardwareMap hwm, Telemetry tel)
     {
@@ -20,8 +20,6 @@ public class Linear extends Part
         this.bottom.init(hwm, tel, "bottom", true);
         this.low_point.init(hwm, tel, "low", true);
         this.high_point.init(hwm, tel, "high", true);
-
-        direction = -1;
 
         DMotor[] dl = {this.rope};
         SMotor[] sl = {this.ring};
@@ -48,8 +46,7 @@ public class Linear extends Part
                 switch (step)
                 {
                     case 0:
-                        this.direction  = -this.direction;
-                        rope.move(0.5 * this.direction);
+                        rope.move(0.4);
                         low_point.activate();
                         break;
                     case 1:
@@ -63,8 +60,7 @@ public class Linear extends Part
                 switch (step)
                 {
                     case 0 :
-                        this.direction = -this.direction;
-                        rope.move(0.5 * this.direction);
+                        rope.move(0.4);
                         high_point.activate();
                         break;
                     case 1 :
@@ -106,11 +102,14 @@ public class Linear extends Part
                 switch (step)
                 {
                     case 0 :
-                        rope.move(-0.3 * this.direction);
                         ring.move(-1, 0.5);
+                        this.delay(0.1);
+                        break;
+                    case 1:
+                        rope.move(-0.35);
                         bottom.activate();
                         break;
-                    case 1 :
+                    case 2 :
                         this.change_move_type("reset");
                         break;
                 }
@@ -121,11 +120,12 @@ public class Linear extends Part
                     case 0:
                         bottom.set_reverse(false);
                         bottom.activate();
+                        rope.move(0.3);
                         break;
                     case 1:
                         rope.move(0.0);
                         bottom.set_reverse(true);
-                        //this.change_move_type("redefine");
+                        this.change_move_type("redefine");
                         move_finish = true;
                         break;
                 }
@@ -134,10 +134,13 @@ public class Linear extends Part
             case "redefine":
                 switch (step){
                     case 0:
-                        String mode[] = {"go_high", "go_low", "simple_stack_cup"};
-                        this.change_move_type(mode[(int)(Math.random() * 100000) % 3]);
-                        this.delay(1);
-                        move_finish = true;
+                        //String mode[] = {"go_high", "go_low", "simple_stack_cup"};
+                        //this.change_move_type(mode[(int)(Math.random() * 100000) % 3]);
+                        this.change_move_type("go_high");
+                        this.delay(0.1);
+                        this.cnt++;
+                        this.telemetry.addData("Cnt", this.cnt);
+                        //move_finish = true;
                         break;
                 }
         }

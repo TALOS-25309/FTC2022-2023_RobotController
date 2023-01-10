@@ -22,7 +22,7 @@ public class Pincer extends Part
         //this.bottom.init(hwm, tel, "bottom", true);
         //this.up.init(hwm, tel, "up", true);
 
-        DMotor[] dl = {/*axis1, axis2*/};
+        DMotor[] dl = {axis1, axis2};
         SMotor[] sl = {this.pincer1, this.pincer2};
         Sensor[] snl = {/*this.bottom, this.up*/};
         Color[] clr = {};
@@ -52,8 +52,8 @@ public class Pincer extends Part
                         pincer2.move(0.3, 0.5);
                         break;
                     case 1 :
-                        axis1.move(0.1);
-                        axis2.move(0.1);
+                        axis1.move(0.3, 0.4);
+                        axis2.move(0.3, 0.4);
                         //up.activate();
                         break;
                     case 2 :
@@ -70,13 +70,13 @@ public class Pincer extends Part
                 switch (step)
                 {
                     case 0 :
-                        axis1.move(0.1, -1);
-                        axis2.move(0.1, -1);
+                        axis1.move(0.3, -0.4);
+                        axis2.move(0.3, -0.4);
                         //bottom.activate();
                         break;
                     case 1 :
-                        axis1.move(0, 0);
-                        axis2.move(0, 0);
+                        axis1.move(0.0);
+                        axis2.move(0.0);
                         move_finish = true;
                         break;
                 }
