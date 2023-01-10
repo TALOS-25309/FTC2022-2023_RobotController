@@ -15,7 +15,7 @@ public class Color {
     private boolean finish;
     private int parking_pos;
     private double accuracy = 0.2; // accuracy >= 0
-    private double distance_limit = 30; // 100 > distance_limit > 0, unit = mm
+    private double distance_limit = 30; // 100 > distance_limit > 10, unit = mm
 
     public void init(HardwareMap hardwaremap, Telemetry telemetry, String name)
     {
