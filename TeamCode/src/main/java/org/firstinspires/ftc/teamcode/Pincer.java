@@ -37,7 +37,6 @@ public class Pincer extends Part
 
     //power = 1, -1, 0
     public void adjust_axis(double direction){
-        this.move_finish = true;
         this.axis1.move(direction * 0.05);
         this.axis2.move(direction * 0.05);
     }
@@ -64,8 +63,6 @@ public class Pincer extends Part
                         //up.activate();
                         break;
                     case 2 :
-                        axis1.move(0.0);
-                        axis2.move(0.0);
                         pincer1.move(-0.1, 0.5);
                         pincer2.move(-0.1, 0.5);
                         this.delay(1);
@@ -84,9 +81,7 @@ public class Pincer extends Part
                         //bottom.activate();
                         break;
                     case 1 :
-                        axis1.move(0.0);
-                        axis2.move(0.0);
-                        //move_finish = true;
+                        move_finish = true;
                         break;
                 }
                 break;
