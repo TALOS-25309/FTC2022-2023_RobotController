@@ -10,6 +10,7 @@ public class AutoOpMode extends OpMode
 {
     private Pincer pincer_part = new Pincer();
     private Linear linear_part = new Linear();
+    private boolean linear_run = true;
 
     @Override
     public void init()
@@ -29,7 +30,9 @@ public class AutoOpMode extends OpMode
     public void loop()
     {
         pincer_part.update();
-        if(pincer_part.move_finish){
+        linear_part.update();
+        if(pincer_part.move_finish && linear_run){
+            linear_run = false;
             linear_part.start_step("go_high");
         }
     }

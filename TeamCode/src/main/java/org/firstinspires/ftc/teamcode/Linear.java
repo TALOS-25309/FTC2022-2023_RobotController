@@ -15,7 +15,7 @@ public class Linear extends Part
 
     public void init(HardwareMap hwm, Telemetry tel)
     {
-        this.rope.init(hwm, tel, "rope", DMotor.Direction.Direct);
+        this.rope.init(hwm, tel, "rope", DMotor.Direction.Reverse);
         this.ring.init(hwm, tel, "ring", SMotor.Direction.Reverse, 0);
         this.bottom.init(hwm, tel, "bottom", true);
         this.low_point.init(hwm, tel, "low", true);
@@ -52,7 +52,7 @@ public class Linear extends Part
                 switch (step)
                 {
                     case 0:
-                        rope.move(0.4);
+                        rope.move(1.0);
                         low_point.activate();
                         break;
                     case 1:
@@ -66,7 +66,7 @@ public class Linear extends Part
                 switch (step)
                 {
                     case 0 :
-                        rope.move(0.4);
+                        rope.move(1.0);
                         high_point.activate();
                         break;
                     case 1 :
@@ -112,7 +112,7 @@ public class Linear extends Part
                         this.delay(0.1);
                         break;
                     case 1:
-                        rope.move(-0.35);
+                        rope.move(-0.9);
                         bottom.activate();
                         break;
                     case 2 :
@@ -126,12 +126,12 @@ public class Linear extends Part
                     case 0:
                         bottom.set_reverse(false);
                         bottom.activate();
-                        rope.move(0.3);
+                        rope.move(0.4);
                         break;
                     case 1:
                         rope.move(0.0);
                         bottom.set_reverse(true);
-                        this.change_move_type("redefine");
+                        //this.change_move_type("redefine");
                         move_finish = true;
                         break;
                 }
