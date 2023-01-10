@@ -15,10 +15,10 @@ public class Pincer extends Part
 
     public void init(HardwareMap hwm, Telemetry tel)
     {
-        this.pincer1.init(hwm, tel, "pincer1", SMotor.Direction.Direct, 0.2);
-        this.pincer2.init(hwm, tel, "pincer2", SMotor.Direction.Reverse, 0.2);
-        this.axis1.init(hwm, tel, "axis1", DMotor.Direction.Direct);
-        this.axis2.init(hwm, tel, "axis2", DMotor.Direction.Direct);
+        this.pincer1.init(hwm, tel, "pincer1", SMotor.Direction.Direct, 0.35);
+        this.pincer2.init(hwm, tel, "pincer2", SMotor.Direction.Reverse, 0.35);
+        this.axis1.init(hwm, tel, "axis1", DMotor.Direction.Reverse);
+        this.axis2.init(hwm, tel, "axis2", DMotor.Direction.Reverse);
         //this.bottom.init(hwm, tel, "bottom", true);
         //this.up.init(hwm, tel, "up", true);
 
@@ -55,8 +55,8 @@ public class Pincer extends Part
                 switch (step)
                 {
                     case 0 :
-                        pincer1.move(0.3, 0.5);
-                        pincer2.move(0.3, 0.5);
+                        pincer1.move(0.2, 0.5);
+                        pincer2.move(0.2, 0.5);
                         break;
                     case 1 :
                         axis1.move(0.3, 0.4);
@@ -66,8 +66,8 @@ public class Pincer extends Part
                     case 2 :
                         axis1.move(0.0);
                         axis2.move(0.0);
-                        pincer1.move(-0.3, 0.5);
-                        pincer2.move(-0.3, 0.5);
+                        pincer1.move(-0.2, 0.5);
+                        pincer2.move(-0.2, 0.5);
                         this.delay(1);
                         this.change_move_type("release");
                         move_finish = true;
