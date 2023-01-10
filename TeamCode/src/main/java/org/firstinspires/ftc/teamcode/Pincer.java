@@ -58,14 +58,14 @@ public class Pincer extends Part
                         pincer2.move(0.1, 0.5);
                         break;
                     case 1 :
-                        axis1.move(0.15, 0.25);
-                        axis2.move(0.15, 0.25);
+                        axis1.move(0.15, 0.27);
+                        axis2.move(0.15, 0.27);
                         //up.activate();
                         break;
                     case 2 :
                         pincer1.move(-0.1, 0.5);
                         pincer2.move(-0.1, 0.5);
-                        this.delay(1);
+                        this.delay(0.5);
                         this.change_move_type("release");
                         move_finish = true;
                         break;
@@ -76,8 +76,8 @@ public class Pincer extends Part
                 switch (step)
                 {
                     case 0 :
-                        axis1.move(0.15, -0.25);
-                        axis2.move(0.15, -0.25);
+                        axis1.move(0.15, -0.27);
+                        axis2.move(0.15, -0.27);
                         //bottom.activate();
                         break;
                     case 1 :
