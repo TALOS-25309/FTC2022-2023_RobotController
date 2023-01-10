@@ -18,7 +18,7 @@ public class TeleOpMode extends OpMode {
     public void init()
     {
         //wheel_part.init(hardwareMap, telemetry);
-        linear_part.init(hardwareMap, telemetry);
+        //linear_part.init(hardwareMap, telemetry);
         pincer_part.init(hardwareMap, telemetry);
 
         slow_rate = 1.0;
@@ -29,7 +29,7 @@ public class TeleOpMode extends OpMode {
     public void start()
     {
         //wheel_part.start();
-        linear_part.start();
+        //linear_part.start();
         pincer_part.start();
     }
 
@@ -37,7 +37,7 @@ public class TeleOpMode extends OpMode {
     public void loop()
     {
         //wheel_part.update();
-        linear_part.update();
+        //linear_part.update();
         pincer_part.update();
         /*
         if(gamepad1.left_trigger>0.7 || gamepad1.right_trigger)
@@ -71,6 +71,7 @@ public class TeleOpMode extends OpMode {
             wheel_part.move(0.0,  Wheel.Direction.Forward);
         }
         */
+        /*
         double a = gamepad1.right_trigger;
         if(linear_part.move_finish) {
             if (gamepad2.y) {
@@ -81,6 +82,8 @@ public class TeleOpMode extends OpMode {
                 linear_part.start_step("go_high");
             }
         }
+
+         */
 
         if(pincer_part.move_finish) {
             if (gamepad2.a) {
@@ -102,6 +105,7 @@ public class TeleOpMode extends OpMode {
             this.pincer_part.adjust_axis(0);
         }
 
+        /*
         if(gamepad2.right_trigger > 0.1) {
             this.linear_part.adjust_rope(gamepad2.right_trigger);
         }
@@ -111,8 +115,6 @@ public class TeleOpMode extends OpMode {
         else {
             this.linear_part.adjust_rope(0);
         }
-
-        //wheel_part.update();
-        linear_part.update();
+         */
     }
 }
