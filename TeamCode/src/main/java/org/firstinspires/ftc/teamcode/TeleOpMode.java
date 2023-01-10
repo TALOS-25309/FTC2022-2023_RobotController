@@ -11,6 +11,7 @@ public class TeleOpMode extends OpMode {
     private Linear linear_part = new Linear();
     private Pincer pincer_part = new Pincer();
 
+    private double slow_rate;
     private boolean pincer_up;
 
     @Override
@@ -20,6 +21,7 @@ public class TeleOpMode extends OpMode {
         linear_part.init(hardwareMap, telemetry);
         pincer_part.init(hardwareMap, telemetry);
 
+        slow_rate = 1.0;
         pincer_up = false;
     }
 
@@ -38,23 +40,32 @@ public class TeleOpMode extends OpMode {
         linear_part.update();
         pincer_part.update();
         /*
+        if(gamepad1.left_trigger>0.7 || gamepad1.right_trigger)
+        {
+            slow_rate = 0.3;
+        }
+        else
+        {
+            slow_rate = 1.0;
+        }
+
         if(gamepad1.dpad_up) {
-            wheel_part.move(0.5, Wheel.Direction.Forward);
+            wheel_part.move(0.5*slow_rate, Wheel.Direction.Forward);
         }
         else if(gamepad1.dpad_down) {
-            wheel_part.move(0.5, Wheel.Direction.Backward);
+            wheel_part.move(0.5*slow_rate, Wheel.Direction.Backward);
         }
         else if(gamepad1.dpad_right) {
-            wheel_part.move(0.5, Wheel.Direction.Right);
+            wheel_part.move(0.5*slow_rate, Wheel.Direction.Right);
         }
         else if(gamepad1.dpad_left) {
-            wheel_part.move(0.5, Wheel.Direction.Left);
+            wheel_part.move(0.5*slow_rate, Wheel.Direction.Left);
         }
         else if(gamepad1.left_bumper){
-            wheel_part.move(0.5, Wheel.Direction.TurnLeft);
+            wheel_part.move(0.5*slow_rate, Wheel.Direction.TurnLeft);
         }
         else if(gamepad1.right_bumper){
-            wheel_part.move(0.5, Wheel.Direction.TurnRight);
+            wheel_part.move(0.5*slow_rate, Wheel.Direction.TurnRight);
         }
         else {
             wheel_part.move(0.0,  Wheel.Direction.Forward);
