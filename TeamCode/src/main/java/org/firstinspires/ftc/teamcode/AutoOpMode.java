@@ -53,7 +53,6 @@ public class AutoOpMode extends OpMode
     private void procedure_run(){
         switch (this.step){
             case 0:
-
                 break;
             case 1:
 

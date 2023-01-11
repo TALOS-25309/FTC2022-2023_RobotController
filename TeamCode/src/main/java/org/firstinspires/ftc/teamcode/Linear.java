@@ -80,10 +80,8 @@ public class Linear extends Part
                 {
                     case 0 :
                         ring.move(1, 1.0);
-                        //rope.move(0.00041);
                         break;
                     case 1:
-                        //rope.move(0);
                         this.change_move_type("down");
                         break;
                 }

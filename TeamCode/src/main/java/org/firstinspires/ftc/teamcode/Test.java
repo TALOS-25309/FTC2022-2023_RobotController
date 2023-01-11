@@ -29,7 +29,6 @@ public class Test extends Part
 
         util.init(dl, sl, snl, clr, dsl);
         this.step = 0;
-        move_finish = true;
     }
     public void start()
     {
