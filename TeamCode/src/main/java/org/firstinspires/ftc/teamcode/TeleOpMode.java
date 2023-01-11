@@ -3,9 +3,9 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-@TeleOp(name = "Tele_Op", group = "")
+@TeleOp(name = "TeleOp", group = "")
 public class TeleOpMode extends OpMode {
-    //private Wheel wheel_part = new Wheel();
+    private Wheel wheel_part = new Wheel();
     private Linear linear_part = new Linear();
     private Pincer pincer_part = new Pincer();
 
@@ -15,7 +15,7 @@ public class TeleOpMode extends OpMode {
     @Override
     public void init()
     {
-        //wheel_part.init(hardwareMap, telemetry);
+        wheel_part.init(hardwareMap, telemetry);
         linear_part.init(hardwareMap, telemetry);
         pincer_part.init(hardwareMap, telemetry);
     }
@@ -23,7 +23,7 @@ public class TeleOpMode extends OpMode {
     @Override
     public void start()
     {
-        //wheel_part.start();
+        wheel_part.start();
         linear_part.start();
         pincer_part.start();
     }
@@ -31,12 +31,12 @@ public class TeleOpMode extends OpMode {
     @Override
     public void loop()
     {
-        //wheel_part.update();
+        wheel_part.update();
         linear_part.update();
         pincer_part.update();
-        /*
+        //*
         //Wheel Part
-        if(gamepad1.left_trigger>0.7 || gamepad1.right_trigger)
+        if(gamepad1.left_trigger > 0.7 || gamepad1.right_trigger > 0.7)
         {
             slow_rate = 0.3;
         }

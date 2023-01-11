@@ -5,13 +5,13 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
 
-@Autonomous(name = "Auto_Op", group = "")
+@Autonomous(name = "AutoOp", group = "")
 public class AutoOpMode extends OpMode
 {
     //Debug Reason
     public static final boolean using_wheel = false;
-    public static final boolean using_linear = false;
-    public static final boolean using_pincer = false;
+    public static final boolean using_linear = true;
+    public static final boolean using_pincer = true;
 
     private Pincer pincer_part = new Pincer();
     private Linear linear_part = new Linear();
