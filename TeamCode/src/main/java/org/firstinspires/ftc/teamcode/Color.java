@@ -14,7 +14,7 @@ public class Color {
     private Telemetry telemetry;
     private boolean finish;
     private int parking_pos;
-    private double accuracy = 0.2; // accuracy >= 0
+    private double accuracy = 0.0; // accuracy >= 0
     private double distance_limit = 30; // 100 > distance_limit > 10, unit = mm
 
     public void init(HardwareMap hardwaremap, Telemetry telemetry, String name)
@@ -43,7 +43,7 @@ public class Color {
             telemetry.addData("Distance", this.distance_sensor.getDistance(DistanceUnit.METER));
              */
             if(this.distance_sensor.getDistance(DistanceUnit.MM) < 55){
-                int r = this.color_sensor.red();
+                int r = this.color_sensor.red() * 2;
                 int g = this.color_sensor.green();
                 int b = this.color_sensor.blue();
                 if(this.maximum(r, g, b)){

@@ -53,9 +53,12 @@ public class AutoOpMode extends OpMode
     private void procedure_run(){
         switch (this.step){
             case 0:
+                this.telemetry.addData("Procedure", "0");
+                this.wheel_part.start_step("detect signal");
                 break;
             case 1:
-
+                this.telemetry.addData("Procedure", "1");
+                this.wheel_part.start_step("go parking place");
                 break;
             case 2:
 

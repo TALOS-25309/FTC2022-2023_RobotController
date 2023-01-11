@@ -111,7 +111,7 @@ public class Linear extends Part
                         this.delay(0.1);
                         break;
                     case 1:
-                        rope.move(-0.05);
+                        rope.move(-0.4);
                         bottom.activate();
                         break;
                     case 2 :
