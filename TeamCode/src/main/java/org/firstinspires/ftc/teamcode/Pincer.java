@@ -75,7 +75,7 @@ public class Pincer extends Part
                         axis2.move(-0.5);
                         this.sensor.activate(150.0, Distance.ActivateMode.Lower);
                         break;
-                    case 1:
+                    case 1 :
                         axis1.move(0);
                         axis2.move(0);
                         this.finish_step();

@@ -70,7 +70,7 @@ public class TeleOpMode extends OpMode {
 
         //Linear
         //*
-        if(linear_part.finish()) {
+        if(linear_part.finish() && pincer_part.finish()) {
             if (gamepad2.y) {
                 pincer_part.start_step("release");
                 linear_part.start_step("simple_stack_cup");
