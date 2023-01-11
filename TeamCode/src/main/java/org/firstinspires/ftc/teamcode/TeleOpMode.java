@@ -11,6 +11,7 @@ public class TeleOpMode extends OpMode {
 
     private double slow_rate;
     private boolean adjusting = false;
+    private boolean stop = false;
 
     @Override
     public void init()
@@ -35,40 +36,52 @@ public class TeleOpMode extends OpMode {
         linear_part.update();
         pincer_part.update();
         //*
-        if(!adjusting) {
-            //Wheel Part
-            if(gamepad1.left_trigger > 0.7 || gamepad1.right_trigger > 0.7)
-            {
-                slow_rate = 0.3;
-            }
-            else
-            {
-                slow_rate = 1.0;
-            }
 
-            if(gamepad1.dpad_up) {
-                wheel_part.move(0.5*slow_rate, Wheel.Direction.Forward);
-            }
-            else if(gamepad1.dpad_down) {
-                wheel_part.move(0.5*slow_rate, Wheel.Direction.Backward);
-            }
-            else if(gamepad1.dpad_right) {
-                wheel_part.move(0.5*slow_rate, Wheel.Direction.Right);
-            }
-            else if(gamepad1.dpad_left) {
-                wheel_part.move(0.5*slow_rate, Wheel.Direction.Left);
-            }
-            else if(gamepad1.left_bumper){
-                wheel_part.move(0.5*slow_rate, Wheel.Direction.TurnLeft);
-            }
-            else if(gamepad1.right_bumper){
-                wheel_part.move(0.5*slow_rate, Wheel.Direction.TurnRight);
-            }
-            else {
-                wheel_part.move(0.0,  Wheel.Direction.Forward);
-            }
-            //*/
+        if(gamepad1.left_bumper&&gamepad1.right_bumper&&(gamepad1.left_trigger>0.9)&&(gamepad1.right_trigger>0.9)){
+            this.stop = true;
+        }
+        if(gamepad2.left_bumper&&gamepad2.right_bumper&&(gamepad2.left_trigger>0.9)&&(gamepad2.right_trigger>0.9)){
+            this.stop = true;
+        }
+        if(this.stop){
+            wheel_part.move(0.0,  Wheel.Direction.Forward);
+            this.linear_part.adjust_rope(0);
 
+        }
+
+        //Wheel Part
+        if(gamepad1.left_trigger > 0.7 || gamepad1.right_trigger > 0.7)
+        {
+            slow_rate = 0.3;
+        }
+        else
+        {
+            slow_rate = 1.0;
+        }
+
+        if(gamepad1.dpad_up) {
+            wheel_part.move(0.5*slow_rate, Wheel.Direction.Forward);
+        }
+        else if(gamepad1.dpad_down) {
+            wheel_part.move(0.5*slow_rate, Wheel.Direction.Backward);
+        }
+        else if(gamepad1.dpad_right) {
+            wheel_part.move(0.5*slow_rate, Wheel.Direction.Right);
+        }
+        else if(gamepad1.dpad_left) {
+            wheel_part.move(0.5*slow_rate, Wheel.Direction.Left);
+        }
+        else if(gamepad1.left_bumper){
+            wheel_part.move(0.5*slow_rate, Wheel.Direction.TurnLeft);
+        }
+        else if(gamepad1.right_bumper){
+            wheel_part.move(0.5*slow_rate, Wheel.Direction.TurnRight);
+        }
+        else {
+            wheel_part.move(0.0,  Wheel.Direction.Forward);
+        }
+        //*/
+        if(!adjusting){
             //Linear
             //*
             if(linear_part.finish() && pincer_part.finish()) {
