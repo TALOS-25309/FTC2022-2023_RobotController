@@ -12,6 +12,8 @@ public class Pincer extends Part
     private DMotor axis2 = new DMotor();
     private Distance sensor = new Distance();
 
+    private boolean up_status = false;
+
     public void init(HardwareMap hwm, Telemetry tel)
     {
         this.pincer1.init(hwm, tel, "pincer1", SMotor.Direction.Direct, 0.4);
@@ -31,6 +33,7 @@ public class Pincer extends Part
         this.step = 0;
         this.telemetry = tel;
         this.move_type = "";
+        this.up_status = false;
         this.finish_step();
     }
 
@@ -45,6 +48,10 @@ public class Pincer extends Part
 
     }
 
+    public boolean is_up(){
+        return this.up_status;
+    }
+
     protected void next_step()
     {
         switch (move_type)
@@ -53,6 +60,7 @@ public class Pincer extends Part
                 switch (step)
                 {
                     case 0 :
+                        this.up_status = true;
                         pincer1.move(0.1, 0.5);
                         pincer2.move(0.1, 0.5);
                         break;
@@ -75,6 +83,7 @@ public class Pincer extends Part
                 switch (step)
                 {
                     case 0:
+                        this.up_status = false;
                         this.delay(1);
                         break;
 
