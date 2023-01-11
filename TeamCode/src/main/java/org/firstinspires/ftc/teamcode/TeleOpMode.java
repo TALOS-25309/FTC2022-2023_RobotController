@@ -46,7 +46,7 @@ public class TeleOpMode extends OpMode {
         if(this.stop){
             wheel_part.move(0.0,  Wheel.Direction.Forward);
             this.linear_part.adjust_rope(0);
-
+            this.pincer_part.adjust_axis(0);
         }
 
         //Wheel Part
