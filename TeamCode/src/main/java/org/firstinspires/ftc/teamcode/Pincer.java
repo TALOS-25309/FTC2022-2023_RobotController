@@ -17,8 +17,8 @@ public class Pincer extends Part
     {
         this.pincer1.init(hwm, tel, "pincer1", SMotor.Direction.Direct, 0.35);
         this.pincer2.init(hwm, tel, "pincer2", SMotor.Direction.Reverse, 0.35);
-        this.axis1.init(hwm, tel, "axis1", DMotor.Direction.Reverse);
-        this.axis2.init(hwm, tel, "axis2", DMotor.Direction.Reverse);
+        this.axis1.init(hwm, tel, "axis1", DMotor.Direction.Direct);
+        this.axis2.init(hwm, tel, "axis2", DMotor.Direction.Direct);
         //this.bottom.init(hwm, tel, "bottom", true);
         //this.up.init(hwm, tel, "up", true);
 
