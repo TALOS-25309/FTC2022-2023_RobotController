@@ -10,7 +10,6 @@ public class TeleOpMode extends OpMode {
     private Pincer pincer_part = new Pincer();
 
     private double slow_rate;
-    private boolean pincer_up;
     private boolean adjusting = false;
 
     @Override
