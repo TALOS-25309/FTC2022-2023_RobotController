@@ -6,13 +6,13 @@ public abstract class Part {
     protected RobotUtility util = new RobotUtility();
     protected int step;
     protected String move_type = "";
-    protected boolean move_finish = true;
     protected Telemetry telemetry;
+    private boolean move_finish = true;
 
     protected void change_move_type(String move_type){
         this.move_type = move_type;
         this.step = -1;
-        move_finish = false;
+        this.move_finish = false;
     }
 
     protected void delay(double delay){
@@ -27,7 +27,7 @@ public abstract class Part {
     public void start_step(String move_type){
         this.move_type = move_type;
         this.step = 0;
-        move_finish = false;
+        this.move_finish = false;
         this.next_step();
     }
 
@@ -38,5 +38,13 @@ public abstract class Part {
         if(util.finish()){
             this.next_step();
         }
+    }
+
+    protected void finish_step(){
+        this.move_finish = true;
+    }
+
+    public boolean finish(){
+        return this.move_finish;
     }
 }

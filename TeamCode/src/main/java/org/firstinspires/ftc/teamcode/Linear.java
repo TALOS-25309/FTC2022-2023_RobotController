@@ -31,7 +31,6 @@ public class Linear extends Part
 
         this.step = 0;
         this.telemetry = tel;
-        this.move_finish = true;
     }
 
     public void start()
@@ -99,7 +98,7 @@ public class Linear extends Part
                     case 1:
                         ring.move(-1,1.0);
                         //this.change_move_type("redefine");
-                        move_finish = true;
+                        this.finish_step();
                         break;
                 }
                 break;
@@ -132,7 +131,7 @@ public class Linear extends Part
                         rope.move(0.0);
                         bottom.set_reverse(true);
                         //this.change_move_type("redefine");
-                        move_finish = true;
+                        this.finish_step();
                         break;
                 }
                 break;

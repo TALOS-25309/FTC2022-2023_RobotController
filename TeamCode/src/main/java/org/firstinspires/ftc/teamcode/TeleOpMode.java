@@ -5,9 +5,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
 @TeleOp(name = "Tele_Op", group = "")
 public class TeleOpMode extends OpMode {
-
-
-    private Wheel wheel_part = new Wheel();
+    //private Wheel wheel_part = new Wheel();
     private Linear linear_part = new Linear();
     private Pincer pincer_part = new Pincer();
 
@@ -21,7 +19,7 @@ public class TeleOpMode extends OpMode {
         linear_part.init(hardwareMap, telemetry);
         pincer_part.init(hardwareMap, telemetry);
 
-        slow_rate = 1.0;
+        //slow_rate = 1.0;
         pincer_up = false;
     }
 
@@ -40,6 +38,7 @@ public class TeleOpMode extends OpMode {
         linear_part.update();
         pincer_part.update();
         /*
+        //Wheel Part
         if(gamepad1.left_trigger>0.7 || gamepad1.right_trigger)
         {
             slow_rate = 0.3;
@@ -70,10 +69,11 @@ public class TeleOpMode extends OpMode {
         else {
             wheel_part.move(0.0,  Wheel.Direction.Forward);
         }
-        */
-        /*
-        double a = gamepad1.right_trigger;
-        if(linear_part.move_finish) {
+        //*/
+
+        //Linear
+        //*
+        if(linear_part.finish()) {
             if (gamepad2.y) {
                 linear_part.start_step("simple_stack_cup");
             } else if (gamepad2.x) {
@@ -82,11 +82,11 @@ public class TeleOpMode extends OpMode {
                 linear_part.start_step("go_high");
             }
         }
+        //*/
 
-         */
-
-        if(pincer_part.move_finish) {
+        if(pincer_part.finish()) {
             if (gamepad2.a) {
+                telemetry.addData("debug", "Call Gamepad A");
                 if (!pincer_up) {
                     pincer_part.start_step("pick_up");
                 } else {
@@ -95,26 +95,32 @@ public class TeleOpMode extends OpMode {
             }
         }
 
-        if(gamepad2.dpad_up){
-            this.pincer_part.adjust_axis(1);
+        //adjust
+        //*
+        if(pincer_part.finish()){
+            if(gamepad2.dpad_up){
+                this.pincer_part.adjust_axis(1);
+            }
+            else if(gamepad2.dpad_down){
+                this.pincer_part.adjust_axis(-1);
+            }
+            else{
+                this.pincer_part.adjust_axis(0);
+            }
         }
-        else if(gamepad2.dpad_down){
-            this.pincer_part.adjust_axis(-1);
+        //*/
+        //*
+        if(linear_part.finish()){
+            if(gamepad2.right_trigger > 0.1) {
+                this.linear_part.adjust_rope(gamepad2.right_trigger);
+            }
+            else if(gamepad2.left_trigger > 0.1) {
+                this.linear_part.adjust_rope(-gamepad2.left_trigger);
+            }
+            else {
+                this.linear_part.adjust_rope(0);
+            }
         }
-        else{
-            this.pincer_part.adjust_axis(0);
-        }
-
-
-        if(gamepad2.right_trigger > 0.1) {
-            this.linear_part.adjust_rope(gamepad2.right_trigger);
-        }
-        else if(gamepad2.left_trigger > 0.1) {
-            this.linear_part.adjust_rope(-gamepad2.left_trigger);
-        }
-        else {
-            this.linear_part.adjust_rope(0);
-        }
-
+        //*/
     }
 }
