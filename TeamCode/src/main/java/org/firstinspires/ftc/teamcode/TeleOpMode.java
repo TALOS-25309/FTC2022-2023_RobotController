@@ -107,10 +107,19 @@ public class TeleOpMode extends OpMode {
             wheel_part.init(hardwareMap, telemetry);
             linear_part.init(hardwareMap, telemetry);
             pincer_part.init(hardwareMap, telemetry);
+
+            wheel_part.update();
+            linear_part.update();
+            pincer_part.update();
+
+            gamepad1.rumble(500);
+            gamepad2.rumble(500);
         }
         if(this.stop){
             if(gamepad1.left_stick_button && gamepad1.right_stick_button){
                 this.stop = false;
+                gamepad1.rumble(200);
+                gamepad2.rumble(200);
             }
         }
 
