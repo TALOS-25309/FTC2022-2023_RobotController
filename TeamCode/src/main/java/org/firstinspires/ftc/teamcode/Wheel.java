@@ -49,6 +49,8 @@ public class Wheel extends Part {
 
         this.step = 0;
         this.telemetry = tel;
+        this.move_type = "";
+        this.finish_step();
     }
 
     public void start(){

@@ -31,6 +31,8 @@ public class Linear extends Part
 
         this.step = 0;
         this.telemetry = tel;
+        this.move_type = "";
+        this.finish_step();
     }
 
     public void start()
@@ -109,7 +111,7 @@ public class Linear extends Part
                         this.delay(0.1);
                         break;
                     case 1:
-                        rope.move(-0.4);
+                        rope.move(-0.05);
                         bottom.activate();
                         break;
                     case 2 :

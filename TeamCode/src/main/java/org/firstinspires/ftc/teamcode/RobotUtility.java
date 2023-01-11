@@ -57,7 +57,7 @@ public class RobotUtility {
                 return false;
             }
         }
-        for(int i=0; i<this.clr_list.length; i++){
+        for(int i=0; i<this.dis_list.length; i++){
             if(!dis_list[i].finish()){
                 return false;
             }

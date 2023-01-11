@@ -36,8 +36,6 @@ public class Distance
 
     public void update()
     {
-        this.telemetry.addData("Distance Sensor", this.get_distance(DistanceUnit.MM));
-
         if(!this.finish()){
             switch (this.activate_mode){
                 case Equal:

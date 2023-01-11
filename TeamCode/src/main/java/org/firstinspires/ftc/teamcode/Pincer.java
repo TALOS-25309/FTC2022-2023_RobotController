@@ -14,8 +14,8 @@ public class Pincer extends Part
 
     public void init(HardwareMap hwm, Telemetry tel)
     {
-        this.pincer1.init(hwm, tel, "pincer1", SMotor.Direction.Direct, 0.35);
-        this.pincer2.init(hwm, tel, "pincer2", SMotor.Direction.Reverse, 0.35);
+        this.pincer1.init(hwm, tel, "pincer1", SMotor.Direction.Direct, 0.4);
+        this.pincer2.init(hwm, tel, "pincer2", SMotor.Direction.Reverse, 0.4);
         this.axis1.init(hwm, tel, "axis1", DMotor.Direction.Direct);
         this.axis2.init(hwm, tel, "axis2", DMotor.Direction.Direct);
         this.sensor.init(hwm, tel, "sensor");
@@ -30,6 +30,8 @@ public class Pincer extends Part
 
         this.step = 0;
         this.telemetry = tel;
+        this.move_type = "";
+        this.finish_step();
     }
 
     //power = 1, -1, 0
@@ -51,17 +53,19 @@ public class Pincer extends Part
                 switch (step)
                 {
                     case 0 :
-                        pincer1.move(0.15, 0.5);
-                        pincer2.move(0.15, 0.5);
+                        pincer1.move(0.1, 0.5);
+                        pincer2.move(0.1, 0.5);
                         break;
                     case 1 :
                         axis1.move(0.6, 0.8);
                         axis2.move(0.6, 0.8);
                         break;
                     case 2 :
-                        pincer1.move(-0.15, 0.5);
-                        pincer2.move(-0.15, 0.5);
+                        pincer1.move(-0.1, 0.5);
+                        pincer2.move(-0.1, 0.5);
                         this.delay(0.2);
+                        break;
+                    case 3:
                         this.finish_step();
                         break;
                 }
@@ -70,15 +74,31 @@ public class Pincer extends Part
             case "release" :
                 switch (step)
                 {
-                    case 0 :
+                    case 0:
+                        this.delay(1);
+                        break;
+
+                    case 1:
+                        pincer1.move(0.1, 0.5);
+                        pincer2.move(0.1, 0.5);
+                        break;
+
+                    case 2 :
                         axis1.move(-0.5);
                         axis2.move(-0.5);
                         this.sensor.activate(150.0, Distance.ActivateMode.Lower);
                         break;
-                    case 1 :
+
+                    case 3 :
                         axis1.move(0);
                         axis2.move(0);
+                        pincer1.move(-0.1, 0.5);
+                        pincer2.move(-0.1, 0.5);
+                        break;
+
+                    case 4:
                         this.finish_step();
+                        break;
                 }
                 break;
         }
