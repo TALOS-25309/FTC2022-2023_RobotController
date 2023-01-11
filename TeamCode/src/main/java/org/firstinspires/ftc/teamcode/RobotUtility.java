@@ -64,4 +64,10 @@ public class RobotUtility {
         }
         return true;
     }
+
+    public void emergency_stop(){
+        for(int i=0; i<this.dm_list.length; i++){
+            this.dm_list[i].move(0);
+        }
+    }
 }

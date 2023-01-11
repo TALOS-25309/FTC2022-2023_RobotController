@@ -40,6 +40,10 @@ public abstract class Part {
         }
     }
 
+    public void emergency_stop(){
+        util.emergency_stop();
+    }
+
     protected void finish_step(){
         this.move_finish = true;
     }

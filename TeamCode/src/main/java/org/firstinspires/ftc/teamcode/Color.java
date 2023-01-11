@@ -19,7 +19,9 @@ public class Color {
 
     public void init(HardwareMap hardwaremap, Telemetry telemetry, String name)
     {
-        color_sensor = hardwaremap.get(ColorSensor.class, name);
+        if(this.color_sensor == null){
+            color_sensor = hardwaremap.get(ColorSensor.class, name);
+        }
         distance_sensor = hardwaremap.get(DistanceSensor.class, name);
         this.telemetry = telemetry;
         this.finish = true;
