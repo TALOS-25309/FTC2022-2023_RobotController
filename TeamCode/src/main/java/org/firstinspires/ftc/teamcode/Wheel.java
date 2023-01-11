@@ -34,10 +34,10 @@ public class Wheel extends Part {
     private DMotor back_right = new DMotor();
 
     public void init(HardwareMap hwm, Telemetry tel){
-        this.front_left.init(hwm, tel, "front_left", DMotor.Direction.Direct);
-        this.front_right.init(hwm, tel, "front_right", DMotor.Direction.Reverse);
-        this.back_left.init(hwm, tel, "back_left", DMotor.Direction.Direct);
-        this.back_right.init(hwm, tel, "back_right", DMotor.Direction.Reverse);
+        this.front_left.init(hwm, tel, "front left", DMotor.Direction.Direct);
+        this.front_right.init(hwm, tel, "front right", DMotor.Direction.Reverse);
+        this.back_left.init(hwm, tel, "back left", DMotor.Direction.Direct);
+        this.back_right.init(hwm, tel, "back right", DMotor.Direction.Reverse);
 
         DMotor[] dl = {this.front_left, this.front_right, this.back_left, this.back_right};
         this.util = new RobotUtility();
