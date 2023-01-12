@@ -28,7 +28,7 @@ public class Test extends Part
 
         this.telemetry = tel;
 
-        util.init(dl, sl, snl, clr, dsl);
+        util.init(dl, sl, snl, clr, dsl, null);
         this.step = 0;
     }
     public void start()

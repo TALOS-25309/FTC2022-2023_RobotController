@@ -10,13 +10,13 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class TestOpMode extends OpMode
 {
     private Test test = new Test();
-    private Gyro gyro = new Gyro();
+    private Gyro imu = new Gyro();
 
     @Override
     public void init()
     {
         test.init(hardwareMap, telemetry);
-        gyro.init(hardwareMap, telemetry, "gyro");
+        imu.init(hardwareMap, telemetry, "gyro");
 
         //imu = hardwareMap.get(BNO055IMU.class, "imu");
         //BNO055IMU.Parameters params = new BNO055IMU.Parameters();
@@ -34,6 +34,6 @@ public class TestOpMode extends OpMode
     {
         test.update();
         telemetry.update();
-        this.gyro.update();
+        this.imu.update();
     }
 }

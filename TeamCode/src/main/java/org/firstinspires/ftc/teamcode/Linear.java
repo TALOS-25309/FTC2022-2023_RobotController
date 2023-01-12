@@ -27,7 +27,7 @@ public class Linear extends Part
         Color[] clr = {};
         Distance[] dsl = {};
 
-        this.util.init(dl, sl, snl, clr, dsl);
+        this.util.init(dl, sl, snl, clr, dsl, null);
 
         this.step = 0;
         this.telemetry = tel;
@@ -115,6 +115,8 @@ public class Linear extends Part
                         bottom.activate();
                         break;
                     case 2 :
+                        rope.move(0);
+                        this.delay(0.5);
                         this.change_move_type("reset");
                         break;
                 }

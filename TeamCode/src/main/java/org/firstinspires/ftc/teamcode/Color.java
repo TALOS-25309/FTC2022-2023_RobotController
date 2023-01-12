@@ -34,7 +34,6 @@ public class Color {
 
     public void update()
     {
-        this.telemetry.addData("update", "ddd");
         if(!this.finish){
             ///*
             //LOG

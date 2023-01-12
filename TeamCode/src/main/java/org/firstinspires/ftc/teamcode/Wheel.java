@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class Wheel extends Part {
     public enum Direction {
@@ -10,18 +11,20 @@ public class Wheel extends Part {
         Backward(new DirectionData(-1,-1,-1, -1)),
         Left(new DirectionData(-1,1,1,-1)),
         Right(new DirectionData(1,-1,-1,1)),
-        TurnLeft(new DirectionData(-1,1,-1,1)),
-        TurnRight(new DirectionData(1,-1,1,-1));
+        //드라이버의 제안 (회전 속도는 느리게)
+        TurnLeft(new DirectionData(-0.5,0.5,-0.5,0.5)),
+        TurnRight(new DirectionData(0.5,-0.5,0.5,-0.5));
 
         private final DirectionData value;
         Direction(DirectionData i) {this.value = i;}
         DirectionData get_value() {return this.value;}
 
+        //Reverse -> 모든 기본 speed를 음수로 설정 (집게 부분을 앞으로 설정)
         public static class DirectionData{
-            private double front_left_speed = 0.43;
-            private double front_right_speed = 0.43;
-            private double back_left_speed = 0.5;
-            private double back_right_speed = 0.5;
+            private double front_left_speed = 0.43 * 2;
+            private double front_right_speed = 0.43 * 2;
+            private double back_left_speed = 0.5 * 2;
+            private double back_right_speed = 0.5 * 2;
 
             public double front_left, front_right, back_left, back_right;
             public DirectionData(double front_left, double front_right, double back_left, double back_right){
@@ -38,8 +41,9 @@ public class Wheel extends Part {
     private DMotor back_left = new DMotor();
     private DMotor back_right = new DMotor();
     private Color color = new Color();
+    private Gyro imu;
 
-    public void init(HardwareMap hwm, Telemetry tel){
+    public void init(HardwareMap hwm, Telemetry tel, Gyro imu){
         this.front_left.init(hwm, tel, "front left", DMotor.Direction.Reverse);
         this.front_right.init(hwm, tel, "front right", DMotor.Direction.Direct);
         this.back_left.init(hwm, tel, "back left", DMotor.Direction.Reverse);
@@ -52,10 +56,11 @@ public class Wheel extends Part {
         SMotor[] sm = {};
         Color[] clr = {this.color};
         Distance[] dsl = {};
-        this.util.init(dl, sm, sen, clr, dsl);
+        this.util.init(dl, sm, sen, clr, dsl, this.imu);
 
         this.step = 0;
         this.telemetry = tel;
+        this.imu = imu;
         this.move_type = "";
         this.finish_step();
     }
@@ -121,6 +126,26 @@ public class Wheel extends Part {
                         this.delay(1);
                         this.move(0, Direction.Forward);
                         this.finish_step();
+                        break;
+                }
+                break;
+
+            case "rotate":
+                switch(step){
+                    case 0:
+                        this.move(0.1, Direction.TurnLeft);
+                        this.imu.activate(90, Direction.TurnLeft);
+                        break;
+                    case 1:
+                        this.move(0.0, Direction.TurnLeft);
+                        break;
+                    case 2:
+                        this.move(0.1, Direction.TurnRight);
+                        this.imu.activate(-90, Direction.TurnRight);
+                        this.finish_step();
+                        break;
+                    case 3:
+                        this.move(0.0, Direction.TurnRight);
                         break;
                 }
                 break;

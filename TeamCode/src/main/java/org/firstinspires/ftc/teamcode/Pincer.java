@@ -28,7 +28,7 @@ public class Pincer extends Part
         Color[] clr = {};
         Distance[] dsl = {this.sensor};
 
-        this.util.init(dl, sl, snl, clr, dsl);
+        this.util.init(dl, sl, snl, clr, dsl, null);
 
         this.step = 0;
         this.telemetry = tel;
@@ -99,12 +99,14 @@ public class Pincer extends Part
                         this.sensor.activate(150.0, Distance.ActivateMode.Lower);
                         break;
 
+                        //TODO : 이거 너무 내려감
                     case 3 :
                         axis1.move(0.5);
                         axis2.move(0.5);
                         this.sensor.activate(150.0, Distance.ActivateMode.Upper);
                         break;
 
+                        //TODO : 이거 너무 올라감 (해결 필요)
                     case 4 :
                         axis1.move(0);
                         axis2.move(0);

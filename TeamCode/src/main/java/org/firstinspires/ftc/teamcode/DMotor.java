@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class DMotor
 {
@@ -18,8 +19,11 @@ public class DMotor
         private double tpr;
         private double i_position;
         private double angle;
+        private double target_degree;
+        private Gyro imu;
         private Telemetry telemetry;
-        private boolean finish;
+        private boolean finish = true;
+        private String mode = "";
 
         public void init(HardwareMap hardwaremap, Telemetry telemetry, String name, Direction direction)
         {
@@ -33,15 +37,25 @@ public class DMotor
         public void update()
         {
                 if(!this.finish()){
-                        if((angle>0)&&(get_position()-(i_position+angle) > 0))
-                        {
-                                motor.setPower(0.0);
-                                this.finish = true;
-                        }
-                        else if((angle<0)&&(get_position()-(i_position+angle) < 0))
-                        {
-                                motor.setPower(0.0);
-                                this.finish = true;
+                        switch (mode){
+                                case "distance":
+                                        if((angle>0)&&(get_position()-(i_position+angle) > 0))
+                                        {
+                                                motor.setPower(0.0);
+                                                this.finish = true;
+                                        }
+                                        else if((angle<0)&&(get_position()-(i_position+angle) < 0))
+                                        {
+                                                motor.setPower(0.0);
+                                                this.finish = true;
+                                        }
+                                        break;
+                                case "degree":
+                                        if(Math.abs(this.target_degree - this.imu.get_rotation(AngleUnit.DEGREES)) < 1){
+                                                motor.setPower(0.0);
+                                                this.finish = true;
+                                        }
+                                        break;
                         }
                 }
         }
@@ -56,6 +70,7 @@ public class DMotor
                 i_position = get_position();
                 this.angle = angle*dir;
                 this.finish = false;
+                this.mode = "distance";
                 if(this.angle > 0)
                 {
                         motor.setPower(speed);
@@ -68,6 +83,7 @@ public class DMotor
 
         public void move(double speed)
         {
+                this.finish = true;
                 motor.setPower(speed*dir);
         }
 

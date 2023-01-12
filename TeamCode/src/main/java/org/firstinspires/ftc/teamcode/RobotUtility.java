@@ -9,13 +9,15 @@ public class RobotUtility {
     private Sensor[] sen_list;
     private Color[] clr_list;
     private Distance[] dis_list;
+    private Gyro imu = null;
 
-    public void init(DMotor[] dm_list, SMotor[] sm_list, Sensor[] sen_list, Color[] clr_list, Distance[] dis_list){
+    public void init(DMotor[] dm_list, SMotor[] sm_list, Sensor[] sen_list, Color[] clr_list, Distance[] dis_list, Gyro imu){
         this.dm_list = dm_list;
         this.sm_list = sm_list;
         this.sen_list = sen_list;
         this.clr_list = clr_list;
         this.dis_list = dis_list;
+        this.imu = imu;
     }
 
     public void update(){
@@ -61,6 +63,10 @@ public class RobotUtility {
             if(!dis_list[i].finish()){
                 return false;
             }
+        }
+        if(this.imu != null){
+            if(!this.imu.finish())
+                return false;
         }
         return true;
     }

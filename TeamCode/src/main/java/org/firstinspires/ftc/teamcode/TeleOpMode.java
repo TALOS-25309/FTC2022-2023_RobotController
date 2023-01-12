@@ -2,13 +2,14 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.hardware.IMU;
 
 @TeleOp(name = "TeleOp", group = "")
 public class TeleOpMode extends OpMode {
     private Wheel wheel_part = new Wheel();
     private Linear linear_part = new Linear();
     private Pincer pincer_part = new Pincer();
-    private Gyro gyro = new Gyro();
+    private Gyro imu = new Gyro();
 
     private double slow_rate;
     private boolean adjusting = false;
@@ -17,10 +18,10 @@ public class TeleOpMode extends OpMode {
     @Override
     public void init()
     {
-        wheel_part.init(hardwareMap, telemetry);
+        imu.init(hardwareMap, telemetry, "imu");
+        wheel_part.init(hardwareMap, telemetry, this.imu);
         linear_part.init(hardwareMap, telemetry);
         pincer_part.init(hardwareMap, telemetry);
-        gyro.init(hardwareMap, telemetry, "gyro");
     }
 
     @Override
@@ -30,7 +31,7 @@ public class TeleOpMode extends OpMode {
         wheel_part.update();
         linear_part.update();
         pincer_part.update();
-        gyro.update();
+        imu.update();
 
         //Wheel Part
         if(gamepad1.left_trigger > 0.7 || gamepad1.right_trigger > 0.7)
@@ -66,7 +67,7 @@ public class TeleOpMode extends OpMode {
 
         if(!adjusting){
             //Linear
-            if(linear_part.finish() && pincer_part.finish() && pincer_part.is_up()) {
+            if(linear_part.finish() && pincer_part.finish()) {
                 if (gamepad2.x) {
                     linear_part.start_step("simple_stack_cup");
                     //pincer_part.start_step("release");
@@ -89,13 +90,13 @@ public class TeleOpMode extends OpMode {
 
         //Emergency Stop
         if((gamepad1.left_bumper && gamepad1.right_bumper && (gamepad1.left_trigger>0.9) && (gamepad1.right_trigger>0.9))
-        || (gamepad2.left_bumper && gamepad2.right_bumper && (gamepad2.left_trigger>0.9) && (gamepad2.right_trigger>0.9))){
+                || (gamepad2.left_bumper && gamepad2.right_bumper && (gamepad2.left_trigger>0.9) && (gamepad2.right_trigger>0.9))){
             this.stop = true;
             wheel_part.emergency_stop();
             linear_part.emergency_stop();
             pincer_part.emergency_stop();
 
-            wheel_part.init(hardwareMap, telemetry);
+            wheel_part.init(hardwareMap, telemetry, this.imu);
             linear_part.init(hardwareMap, telemetry);
             pincer_part.init(hardwareMap, telemetry);
 
