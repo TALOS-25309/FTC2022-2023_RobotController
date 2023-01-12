@@ -15,7 +15,8 @@ public class Color {
     private boolean finish;
     private int parking_pos;
     private double accuracy = 0.3; // accuracy >= 0
-    private double distance_limit = 30; // 100 > distance_limit > 10, unit = mm
+    private double distance_limit = 10; // 100 > distance_limit > 1, unit = mm
+    private long finish_time;
 
     public void init(HardwareMap hardwaremap, Telemetry telemetry, String name)
     {
@@ -42,7 +43,7 @@ public class Color {
             telemetry.addData("Blue", this.color_sensor.blue());
             telemetry.addData("Distance", this.distance_sensor.getDistance(DistanceUnit.MM));
             //*/
-            if(this.distance_sensor.getDistance(DistanceUnit.MM) < 13){
+            if(this.distance_sensor.getDistance(DistanceUnit.MM) <= distance_limit){
                 double r = this.color_sensor.red() * 1.73;
                 double g = this.color_sensor.green();
                 double b = this.color_sensor.blue() * 1.23;
@@ -58,12 +59,17 @@ public class Color {
                 telemetry.addData("Parking Point", this.parking_pos);
                 this.finish = true;
             }
+            else if(System.currentTimeMillis() > this.finish_time){
+                telemetry.addData("Parking Point", "Not Founded");
+                this.finish = true;
+            }
         }
     }
 
     //색을 식별할 수 있는 위치가 되면 finish = true & 그때의 색을 판단
-    public void detect_color() {
+    public void detect_color(double duration) {
         this.finish = false;
+        this.finish_time = System.currentTimeMillis() + (long)(duration * 1000);
     }
 
     //판단한 색에 따라 숫자 출력
