@@ -49,18 +49,27 @@ public class Color {
                 else if(this.maximum(b, r, g)){
                     this.parking_pos = 3;
                 }
-                /*
-                //LOG
-                telemetry.addData("Red", r);
-                telemetry.addData("Green", g);
-                telemetry.addData("Blue", b);
-                telemetry.addData("Distance", this.distance_sensor.getDistance(DistanceUnit.MM));
-                //*/
-                telemetry.addData("Parking Point", this.parking_pos);
-                this.finish = true;
+                else {
+                    this.parking_pos = 0;
+                }
+
+                if(this.parking_pos != 0){
+                    /*
+                    //LOG
+                    telemetry.addData("Red", r);
+                    telemetry.addData("Green", g);
+                    telemetry.addData("Blue", b);
+                    telemetry.addData("Distance", this.distance_sensor.getDistance(DistanceUnit.MM));
+                    //*/
+                    telemetry.addData("Parking Point", this.parking_pos);
+                    this.finish = true;
+                }
+                else{
+                    telemetry.addData("Parking Point", "Not Found");
+                }
             }
             else if(System.currentTimeMillis() > this.finish_time){
-                telemetry.addData("Parking Point", "Not Founded");
+                telemetry.addData("Parking Point", "Not Found");
                 this.finish = true;
             }
         }
