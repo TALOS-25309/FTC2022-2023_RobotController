@@ -74,7 +74,8 @@ public class Pincer extends Part
                         this.delay(0.2);
                         break;
                     case 3:
-                        this.finish_step();
+                        //this.finish_step();
+                        this.change_move_type("release");
                         break;
                 }
                 break;
@@ -84,7 +85,7 @@ public class Pincer extends Part
                 {
                     case 0:
                         this.up_status = false;
-                        this.delay(1);
+                        //this.delay(1);
                         break;
 
                     case 1:
