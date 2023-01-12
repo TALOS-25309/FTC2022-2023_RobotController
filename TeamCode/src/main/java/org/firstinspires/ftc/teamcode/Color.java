@@ -34,6 +34,7 @@ public class Color {
 
     public void update()
     {
+        this.telemetry.addData("update", "ddd");
         if(!this.finish){
             /*
             //LOG
@@ -41,9 +42,9 @@ public class Color {
             telemetry.addData("Green", this.color_sensor.green());
             telemetry.addData("Blue", this.color_sensor.blue());
             telemetry.addData("Distance", this.distance_sensor.getDistance(DistanceUnit.METER));
-             */
-            if(this.distance_sensor.getDistance(DistanceUnit.MM) < 55){
-                int r = this.color_sensor.red() * 2;
+             //*/
+            if(this.distance_sensor.getDistance(DistanceUnit.MM) < 2){
+                int r = this.color_sensor.red();
                 int g = this.color_sensor.green();
                 int b = this.color_sensor.blue();
                 if(this.maximum(r, g, b)){

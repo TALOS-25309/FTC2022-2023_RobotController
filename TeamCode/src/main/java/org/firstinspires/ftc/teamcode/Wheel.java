@@ -8,8 +8,8 @@ public class Wheel extends Part {
     public enum Direction {
         Forward(new DirectionData(1,1,1,1)),
         Backward(new DirectionData(-1,-1,-1, -1)),
-        Right(new DirectionData(-1,1,1,-1)),
-        Left(new DirectionData(1,-1,-1,1)),
+        Left(new DirectionData(-1,1,1,-1)),
+        Right(new DirectionData(1,-1,-1,1)),
         TurnLeft(new DirectionData(-1,1,-1,1)),
         TurnRight(new DirectionData(1,-1,1,-1));
 
@@ -18,10 +18,10 @@ public class Wheel extends Part {
         DirectionData get_value() {return this.value;}
 
         public static class DirectionData{
-            private double front_left_speed = 1;
-            private double front_right_speed = 1;
-            private double back_left_speed = 1;
-            private double back_right_speed = 1;
+            private double front_left_speed = 0.43;
+            private double front_right_speed = 0.43;
+            private double back_left_speed = 0.5;
+            private double back_right_speed = 0.5;
 
             public double front_left, front_right, back_left, back_right;
             public DirectionData(double front_left, double front_right, double back_left, double back_right){
@@ -84,11 +84,12 @@ public class Wheel extends Part {
             case "detect signal":
                 switch (step){
                     case 0:
-                        this.move(0.1, Direction.Forward);
+                        this.move(0.03, Direction.Forward);
                         this.color.detect_color();
                         break;
                     case 1:
                         this.move(0, Direction.Forward);
+                        this.delay(2);
                         this.finish_step();
                         break;
                 }
@@ -99,21 +100,25 @@ public class Wheel extends Part {
                     case 0:
                         switch (this.color.get_parking_position()){
                             case 0:
-                                this.move(0.1, Direction.Backward);
+                                this.move(0.03, Direction.Backward);
+                                telemetry.addData("Parking", "Fail");
                                 break;
                             case 1:
-                                this.move(0.1, Direction.Left);
+                                this.move(0.03, Direction.Left);
+                                telemetry.addData("Parking", "1");
                                 break;
                             case 2:
                                 this.move(0, Direction.Forward);
+                                telemetry.addData("Parking", "2");
                                 break;
                             case 3:
-                                this.move(0.1, Direction.Right);
+                                this.move(0.03, Direction.Right);
+                                telemetry.addData("Parking", "3");
                                 break;
                         }
                         break;
                     case 1:
-                        this.delay(0.5);
+                        this.delay(1);
                         this.move(0, Direction.Forward);
                         this.finish_step();
                         break;

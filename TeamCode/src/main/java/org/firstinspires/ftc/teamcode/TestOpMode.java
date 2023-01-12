@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.bosch.BNO055IMU;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
@@ -12,6 +13,10 @@ public class TestOpMode extends OpMode
     public void init()
     {
         test.init(hardwareMap, telemetry);
+
+        //imu = hardwareMap.get(BNO055IMU.class, "imu");
+        //BNO055IMU.Parameters params = new BNO055IMU.Parameters();
+        //imu.initialize(params);
     }
 
     @Override
@@ -24,5 +29,6 @@ public class TestOpMode extends OpMode
     public void loop()
     {
         test.update();
+        telemetry.update();
     }
 }

@@ -99,13 +99,19 @@ public class Pincer extends Part
                         break;
 
                     case 3 :
+                        axis1.move(0.5);
+                        axis2.move(0.5);
+                        this.sensor.activate(150.0, Distance.ActivateMode.Upper);
+                        break;
+
+                    case 4 :
                         axis1.move(0);
                         axis2.move(0);
                         pincer1.move(-0.1, 0.5);
                         pincer2.move(-0.1, 0.5);
                         break;
 
-                    case 4:
+                    case 5:
                         this.finish_step();
                         break;
                 }

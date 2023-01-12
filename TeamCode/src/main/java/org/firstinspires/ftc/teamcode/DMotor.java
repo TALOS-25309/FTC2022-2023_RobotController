@@ -32,7 +32,6 @@ public class DMotor
         }
         public void update()
         {
-                this.telemetry.addData("Tlqkf", "dhodkseho");
                 if(!this.finish()){
                         if((angle>0)&&(get_position()-(i_position+angle) > 0))
                         {
