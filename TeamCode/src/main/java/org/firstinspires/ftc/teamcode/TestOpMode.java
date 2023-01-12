@@ -34,6 +34,6 @@ public class TestOpMode extends OpMode
     {
         test.update();
         telemetry.update();
-        telemetry.addData("angle", gyro.get_rotation(AngleUnit.DEGREES));
+        this.gyro.update();
     }
 }
