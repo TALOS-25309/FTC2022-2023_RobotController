@@ -36,13 +36,6 @@ public class Color {
     public void update()
     {
         if(!this.finish){
-            /*
-            //LOG
-            telemetry.addData("Red", this.color_sensor.red());
-            telemetry.addData("Green", this.color_sensor.green());
-            telemetry.addData("Blue", this.color_sensor.blue());
-            telemetry.addData("Distance", this.distance_sensor.getDistance(DistanceUnit.MM));
-            //*/
             if(this.distance_sensor.getDistance(DistanceUnit.MM) <= distance_limit){
                 double r = this.color_sensor.red() * 1.73;
                 double g = this.color_sensor.green();
@@ -56,6 +49,13 @@ public class Color {
                 else if(this.maximum(b, r, g)){
                     this.parking_pos = 3;
                 }
+                /*
+                //LOG
+                telemetry.addData("Red", r);
+                telemetry.addData("Green", g);
+                telemetry.addData("Blue", b);
+                telemetry.addData("Distance", this.distance_sensor.getDistance(DistanceUnit.MM));
+                //*/
                 telemetry.addData("Parking Point", this.parking_pos);
                 this.finish = true;
             }

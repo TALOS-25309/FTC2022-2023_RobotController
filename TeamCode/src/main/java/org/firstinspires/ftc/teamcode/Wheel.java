@@ -97,7 +97,7 @@ public class Wheel extends Part {
                 switch (step){
                     case 0:
                         this.move(0.3, 1, Direction.Forward);
-                        this.color.detect_color();
+                        this.color.detect_color(5);
                         break;
                     case 1:
                         this.move_stop();

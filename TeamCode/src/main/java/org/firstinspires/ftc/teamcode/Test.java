@@ -43,7 +43,7 @@ public class Test extends Part
                 switch (step % 2)
                 {
                     case 0:
-                        color.detect_color();
+                        color.detect_color(10);
                         break;
                     case 1:
                         telemetry.addData("Parking Place", color.get_parking_position());
