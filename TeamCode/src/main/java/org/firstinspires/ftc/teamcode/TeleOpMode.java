@@ -8,6 +8,7 @@ public class TeleOpMode extends OpMode {
     private Wheel wheel_part = new Wheel();
     private Linear linear_part = new Linear();
     private Pincer pincer_part = new Pincer();
+    private Gyro gyro = new Gyro();
 
     private double slow_rate;
     private boolean adjusting = false;
@@ -19,6 +20,7 @@ public class TeleOpMode extends OpMode {
         wheel_part.init(hardwareMap, telemetry);
         linear_part.init(hardwareMap, telemetry);
         pincer_part.init(hardwareMap, telemetry);
+        gyro.init(hardwareMap, telemetry, "gyro");
     }
 
     @Override
@@ -28,6 +30,7 @@ public class TeleOpMode extends OpMode {
         wheel_part.update();
         linear_part.update();
         pincer_part.update();
+        gyro.update();
 
         //Wheel Part
         if(gamepad1.left_trigger > 0.7 || gamepad1.right_trigger > 0.7)

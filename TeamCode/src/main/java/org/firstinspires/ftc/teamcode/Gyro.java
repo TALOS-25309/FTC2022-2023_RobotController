@@ -26,7 +26,7 @@ public class Gyro {
 
     public void update()
     {
-
+        telemetry.addData("gyro", get_rotation(AngleUnit.DEGREES));
     }
 
     public double get_rotation(AngleUnit angleunit)
