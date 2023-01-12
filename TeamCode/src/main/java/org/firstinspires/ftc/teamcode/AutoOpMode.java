@@ -9,7 +9,7 @@ import org.firstinspires.ftc.robotcore.external.Telemetry;
 public class AutoOpMode extends OpMode
 {
     //Debug Reason
-    public static final boolean using_wheel = false;
+    public static final boolean using_wheel = true;
     public static final boolean using_linear = true;
     public static final boolean using_pincer = true;
     public static final boolean using_IMU = true;
@@ -56,18 +56,25 @@ public class AutoOpMode extends OpMode
 
     private void procedure_run(){
         switch (this.step){
-            /*
             case 0:
-                this.telemetry.addData("Procedure", "0");
+                this.telemetry.addData("Wheel Procedure", "detect signal");
                 this.wheel_part.start_step("detect signal");
                 break;
             case 1:
-                this.telemetry.addData("Procedure", "1");
-                this.wheel_part.start_step("go parking place");
+                this.telemetry.addData("Wheel Procedure", "first rotate");
+                this.wheel_part.start_step("first rotate");
                 break;
-                */
-            case 0:
-                this.wheel_part.start_step("rotate");
+            case 2:
+                this.telemetry.addData("Wheel Procedure", "second rotate");
+                this.wheel_part.start_step("second rotate");
+                break;
+            case 3:
+                this.telemetry.addData("Wheel Procedure", "back to home");
+                this.wheel_part.start_step("back to home");
+                break;
+            case 4:
+                this.telemetry.addData("Wheel Procedure", "go parking place");
+                this.wheel_part.start_step("go parking place");
                 break;
         }
         this.step++;

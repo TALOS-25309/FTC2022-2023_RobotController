@@ -27,7 +27,7 @@ public class Linear extends Part
         Color[] clr = {};
         Distance[] dsl = {};
 
-        this.util.init(dl, sl, snl, clr, dsl, null);
+        this.util.init(dl, sl, snl, clr, dsl, null, this.telemetry);
 
         this.step = 0;
         this.telemetry = tel;

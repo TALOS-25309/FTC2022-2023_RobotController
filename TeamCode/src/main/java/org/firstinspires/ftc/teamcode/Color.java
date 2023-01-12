@@ -28,24 +28,24 @@ public class Color {
         this.parking_pos = 0;
     }
 
-    private boolean maximum(int target, int other1, int other2){
+    private boolean maximum(double target, double other1, double other2){
         return target > other1 * (accuracy + 1) && target > other2 * (accuracy + 1);
     }
 
     public void update()
     {
         if(!this.finish){
-            ///*
+            /*
             //LOG
             telemetry.addData("Red", this.color_sensor.red());
             telemetry.addData("Green", this.color_sensor.green());
             telemetry.addData("Blue", this.color_sensor.blue());
             telemetry.addData("Distance", this.distance_sensor.getDistance(DistanceUnit.MM));
             //*/
-            if(this.distance_sensor.getDistance(DistanceUnit.MM) < 20){
-                int r = this.color_sensor.red();
-                int g = this.color_sensor.green();
-                int b = this.color_sensor.blue();
+            if(this.distance_sensor.getDistance(DistanceUnit.MM) < 13){
+                double r = this.color_sensor.red() * 1.73;
+                double g = this.color_sensor.green();
+                double b = this.color_sensor.blue() * 1.23;
                 if(this.maximum(r, g, b)){
                     this.parking_pos = 1;
                 }
@@ -55,6 +55,7 @@ public class Color {
                 else if(this.maximum(b, r, g)){
                     this.parking_pos = 3;
                 }
+                telemetry.addData("Parking Point", this.parking_pos);
                 this.finish = true;
             }
         }

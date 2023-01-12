@@ -56,7 +56,7 @@ public class Wheel extends Part {
         SMotor[] sm = {};
         Color[] clr = {this.color};
         Distance[] dsl = {};
-        this.util.init(dl, sm, sen, clr, dsl, this.imu);
+        this.util.init(dl, sm, sen, clr, dsl, imu, tel);
 
         this.step = 0;
         this.telemetry = tel;
@@ -83,18 +83,78 @@ public class Wheel extends Part {
         this.back_right.move(speed * dir.get_value().back_right);
     }
 
+    public void move_stop(){
+        this.front_left.move(0);
+        this.front_right.move(0);
+        this.back_left.move(0);
+        this.back_right.move(0);
+    }
+
     protected void next_step(){
         switch (move_type)
         {
             case "detect signal":
                 switch (step){
                     case 0:
-                        this.move(0.03, Direction.Forward);
+                        this.move(0.3, 1, Direction.Forward);
                         this.color.detect_color();
                         break;
                     case 1:
-                        this.move(0, Direction.Forward);
-                        this.delay(2);
+                        this.move_stop();
+                        this.delay(1);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "first rotate":
+                switch(step){
+                    case 0:
+                        this.move(0.1, Direction.TurnLeft);
+                        this.imu.activate(90, Direction.TurnLeft);
+                        break;
+                    case 1:
+                        this.move_stop();
+                        this.delay(0.3);
+                        this.move(0.05, Direction.TurnRight);
+                        this.imu.correction();
+                        break;
+                    case 2:
+                        this.move_stop();
+                        this.delay(1);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "second rotate":
+                switch(step){
+                    case 0:
+                        this.move(0.1, Direction.TurnRight);
+                        this.imu.activate(-90, Direction.TurnRight);
+                        break;
+                    case 1:
+                        this.move_stop();
+                        this.delay(0.3);
+                        this.move(0.05, Direction.TurnLeft);
+                        this.imu.correction();
+                        break;
+                    case 2:
+                        this.move_stop();
+                        this.delay(1);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "back to home":
+                switch (step){
+                    case 0:
+                        this.move(0.3, 0.5, Direction.Backward);
+                        break;
+                    case 1:
+                        this.move_stop();
+                        this.delay(1);
                         this.finish_step();
                         break;
                 }
@@ -105,47 +165,27 @@ public class Wheel extends Part {
                     case 0:
                         switch (this.color.get_parking_position()){
                             case 0:
-                                this.move(0.03, Direction.Backward);
+                                this.move(0.3, 0.3, Direction.Backward);
                                 telemetry.addData("Parking", "Fail");
                                 break;
                             case 1:
-                                this.move(0.03, Direction.Left);
+                                this.move(0.3, 0.3, Direction.Left);
                                 telemetry.addData("Parking", "1");
                                 break;
                             case 2:
-                                this.move(0, Direction.Forward);
+                                this.move_stop();
                                 telemetry.addData("Parking", "2");
                                 break;
                             case 3:
-                                this.move(0.03, Direction.Right);
+                                this.move(0.3, 0.3, Direction.Right);
                                 telemetry.addData("Parking", "3");
                                 break;
                         }
                         break;
                     case 1:
+                        this.move_stop();
                         this.delay(1);
-                        this.move(0, Direction.Forward);
                         this.finish_step();
-                        break;
-                }
-                break;
-
-            case "rotate":
-                switch(step){
-                    case 0:
-                        this.move(0.1, Direction.TurnLeft);
-                        this.imu.activate(90, Direction.TurnLeft);
-                        break;
-                    case 1:
-                        this.move(0.0, Direction.TurnLeft);
-                        break;
-                    case 2:
-                        this.move(0.1, Direction.TurnRight);
-                        this.imu.activate(-90, Direction.TurnRight);
-                        this.finish_step();
-                        break;
-                    case 3:
-                        this.move(0.0, Direction.TurnRight);
                         break;
                 }
                 break;

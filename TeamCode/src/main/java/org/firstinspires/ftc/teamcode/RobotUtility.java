@@ -3,6 +3,8 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.ColorRangeSensor;
 import com.qualcomm.robotcore.hardware.ColorSensor;
 
+import org.firstinspires.ftc.robotcore.external.Telemetry;
+
 public class RobotUtility {
     private DMotor[] dm_list;
     private SMotor[] sm_list;
@@ -10,14 +12,16 @@ public class RobotUtility {
     private Color[] clr_list;
     private Distance[] dis_list;
     private Gyro imu = null;
+    private Telemetry telemetry;
 
-    public void init(DMotor[] dm_list, SMotor[] sm_list, Sensor[] sen_list, Color[] clr_list, Distance[] dis_list, Gyro imu){
+    public void init(DMotor[] dm_list, SMotor[] sm_list, Sensor[] sen_list, Color[] clr_list, Distance[] dis_list, Gyro imu, Telemetry tel){
         this.dm_list = dm_list;
         this.sm_list = sm_list;
         this.sen_list = sen_list;
         this.clr_list = clr_list;
         this.dis_list = dis_list;
         this.imu = imu;
+        this.telemetry = tel;
     }
 
     public void update(){
@@ -65,6 +69,7 @@ public class RobotUtility {
             }
         }
         if(this.imu != null){
+            this.telemetry.addData("IMU Checking", "GOOD");
             if(!this.imu.finish())
                 return false;
         }
