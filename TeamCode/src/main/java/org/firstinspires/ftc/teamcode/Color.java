@@ -36,14 +36,14 @@ public class Color {
     {
         this.telemetry.addData("update", "ddd");
         if(!this.finish){
-            /*
+            ///*
             //LOG
             telemetry.addData("Red", this.color_sensor.red());
             telemetry.addData("Green", this.color_sensor.green());
             telemetry.addData("Blue", this.color_sensor.blue());
-            telemetry.addData("Distance", this.distance_sensor.getDistance(DistanceUnit.METER));
-             //*/
-            if(this.distance_sensor.getDistance(DistanceUnit.MM) < 2){
+            telemetry.addData("Distance", this.distance_sensor.getDistance(DistanceUnit.MM));
+            //*/
+            if(this.distance_sensor.getDistance(DistanceUnit.MM) < 20){
                 int r = this.color_sensor.red();
                 int g = this.color_sensor.green();
                 int b = this.color_sensor.blue();
