@@ -1,18 +1,22 @@
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.bosch.BNO055IMU;
+import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import org.firstinspires.ftc.robotcore.external.Telemetry;
 
 @Autonomous(name = "Test_Op", group = "")
 public class TestOpMode extends OpMode
 {
     private Test test = new Test();
+    private Gyro gyro = new Gyro();
 
     @Override
     public void init()
     {
         test.init(hardwareMap, telemetry);
+        gyro.init(hardwareMap, telemetry, "gyro");
 
         //imu = hardwareMap.get(BNO055IMU.class, "imu");
         //BNO055IMU.Parameters params = new BNO055IMU.Parameters();
@@ -30,5 +34,6 @@ public class TestOpMode extends OpMode
     {
         test.update();
         telemetry.update();
+        telemetry.addData("angle", gyro.get_rotation(AngleUnit.DEGREES));
     }
 }
