@@ -111,7 +111,7 @@ public class TeleOpMode extends OpMode {
             gamepad2.rumble(500);
         }
         else if(this.stop){
-            if(gamepad1.left_stick_button && gamepad1.right_stick_button){
+            if((gamepad1.left_stick_button && gamepad1.right_stick_button) || (gamepad2.left_stick_button && gamepad2.right_stick_button)){
                 this.stop = false;
                 gamepad1.rumble(200);
                 gamepad2.rumble(200);
