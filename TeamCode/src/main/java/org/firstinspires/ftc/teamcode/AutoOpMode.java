@@ -57,25 +57,36 @@ public class AutoOpMode extends OpMode
     private void procedure_run(){
         String move_type = "";
         switch (this.step){
+            /*
             case 0:
-                move_type = "pincer";
+                move_type = "pincer down";
                 break;
             case 1:
+                move_type = "pincer up";
+                break;
+             */
+            case 2:
                 move_type = "signal detection";
                 break;
-            case 2:
+            case 3:
                 move_type = "first rotation";
                 break;
-            case 3:
-                move_type = "high junction";
-                break;
             case 4:
-                move_type = "second rotation";
+                move_type = "junction range";
                 break;
             case 5:
-                move_type = "parking site";
+                move_type = "high junction";
                 break;
             case 6:
+                move_type = "end junction";
+                break;
+            case 7:
+                move_type = "second rotation";
+                break;
+            case 8:
+                move_type = "parking site";
+                break;
+            case 9:
                 move_type = "parking";
                 break;
         }

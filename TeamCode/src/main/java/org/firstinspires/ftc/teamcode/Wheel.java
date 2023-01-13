@@ -7,24 +7,22 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class Wheel extends Part {
     public enum Direction {
-        Forward(new DirectionData(1,1,1,1)),
-        Backward(new DirectionData(-1,-1,-1, -1)),
-        Left(new DirectionData(-1,1,1,-1)),
-        Right(new DirectionData(1,-1,-1,1)),
-        //드라이버의 제안 (회전 속도는 느리게)
-        TurnLeft(new DirectionData(-0.5,0.5,-0.5,0.5)),
-        TurnRight(new DirectionData(0.5,-0.5,0.5,-0.5));
+        Forward(new DirectionData(0.75,0.75,0.75,0.75)),
+        Backward(new DirectionData(-0.75,-0.75,-0.75, -0.75)),
+        Left(new DirectionData(-0.5,0.5,0.5,-0.5)),
+        Right(new DirectionData(0.5,-0.5,-0.5,0.5)),
+        TurnLeft(new DirectionData(-0.25,0.25,-0.25,0.25)),
+        TurnRight(new DirectionData(0.25,-0.25,0.25,-0.25));
 
         private final DirectionData value;
         Direction(DirectionData i) {this.value = i;}
         DirectionData get_value() {return this.value;}
 
-        //Reverse -> 모든 기본 speed를 음수로 설정 (집게 부분을 앞으로 설정)
         public static class DirectionData{
-            private double front_left_speed = 0.43 * 2;
-            private double front_right_speed = 0.43 * 2;
-            private double back_left_speed = 0.5 * 2;
-            private double back_right_speed = 0.5 * 2;
+            private double front_left_speed = 0.88;
+            private double front_right_speed = 0.88;
+            private double back_left_speed = 1.0;
+            private double back_right_speed = 1.0;
 
             public double front_left, front_right, back_left, back_right;
             public DirectionData(double front_left, double front_right, double back_left, double back_right){
@@ -96,12 +94,12 @@ public class Wheel extends Part {
             case "signal detection":
                 switch (step){
                     case 0:
-                        this.move(0.3, 1, Direction.Forward);
-                        this.color.detect_color(5);
+                        this.move(0.5, 0.77, Direction.Forward);
+                        this.color.detect_color(3);
                         break;
                     case 1:
                         this.move_stop();
-                        this.delay(1);
+                        this.delay(0.5);
                         this.finish_step();
                         break;
                 }
@@ -110,8 +108,54 @@ public class Wheel extends Part {
             case "first rotation":
                 switch(step){
                     case 0:
+                        this.move(0.2, Direction.TurnRight);
+                        this.imu.activate(-45, Direction.TurnRight);
+                        break;
+                    case 1:
+                        this.move_stop();
+                        this.delay(0.3);
                         this.move(0.1, Direction.TurnLeft);
-                        this.imu.activate(90, Direction.TurnLeft);
+                        this.imu.correction();
+                        break;
+                    case 2:
+                        this.move_stop();
+                        this.delay(0.3);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "junction range":
+                switch(step){
+                    case 0:
+                        this.move(0.1, 0.05, Direction.Forward);
+                        break;
+                    case 1:
+                        this.move_stop();
+                        this.delay(0.3);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "end junction":
+                switch(step){
+                    case 0:
+                        this.move(0.1, 0.05, Direction.Backward);
+                        break;
+                    case 1:
+                        this.move_stop();
+                        this.delay(0.3);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "second rotation":
+                switch(step){
+                    case 0:
+                        this.move(0.2, Direction.TurnLeft);
+                        this.imu.activate(45, Direction.TurnLeft);
                         break;
                     case 1:
                         this.move_stop();
@@ -121,27 +165,7 @@ public class Wheel extends Part {
                         break;
                     case 2:
                         this.move_stop();
-                        this.delay(1);
-                        this.finish_step();
-                        break;
-                }
-                break;
-
-            case "second rotation":
-                switch(step){
-                    case 0:
-                        this.move(0.1, Direction.TurnRight);
-                        this.imu.activate(-90, Direction.TurnRight);
-                        break;
-                    case 1:
-                        this.move_stop();
                         this.delay(0.3);
-                        this.move(0.05, Direction.TurnLeft);
-                        this.imu.correction();
-                        break;
-                    case 2:
-                        this.move_stop();
-                        this.delay(1);
                         this.finish_step();
                         break;
                 }
@@ -150,11 +174,11 @@ public class Wheel extends Part {
             case "parking site":
                 switch (step){
                     case 0:
-                        this.move(0.3, 0.5, Direction.Backward);
+                        this.move(0.3, 0.01, Direction.Backward);
                         break;
                     case 1:
                         this.move_stop();
-                        this.delay(1);
+                        this.delay(0.3);
                         this.finish_step();
                         break;
                 }
@@ -165,11 +189,11 @@ public class Wheel extends Part {
                     case 0:
                         switch (this.color.get_parking_position()){
                             case 0:
-                                this.move(0.3, 0.3, Direction.Backward);
+                                this.move(0.3, 0.4, Direction.Backward);
                                 telemetry.addData("Parking", "Fail");
                                 break;
                             case 1:
-                                this.move(0.3, 0.3, Direction.Left);
+                                this.move(0.3, 0.4, Direction.Left);
                                 telemetry.addData("Parking", "1");
                                 break;
                             case 2:
@@ -177,14 +201,13 @@ public class Wheel extends Part {
                                 telemetry.addData("Parking", "2");
                                 break;
                             case 3:
-                                this.move(0.3, 0.3, Direction.Right);
+                                this.move(0.3, 0.4, Direction.Right);
                                 telemetry.addData("Parking", "3");
                                 break;
                         }
                         break;
                     case 1:
                         this.move_stop();
-                        this.delay(1);
                         this.finish_step();
                         break;
                 }

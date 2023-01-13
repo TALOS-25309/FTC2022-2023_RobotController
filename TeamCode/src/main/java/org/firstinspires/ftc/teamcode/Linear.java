@@ -12,6 +12,7 @@ public class Linear extends Part
     private Sensor low_point = new Sensor();
     private Sensor high_point = new Sensor();
     private int cnt = 0;
+    private boolean down = true;
 
     public void init(HardwareMap hwm, Telemetry tel)
     {
@@ -50,30 +51,42 @@ public class Linear extends Part
         switch (move_type)
         {
             case "middle junction" :
-                switch (step)
-                {
-                    case 0:
-                        rope.move(1);
-                        low_point.activate();
-                        break;
-                    case 1:
-                        rope.move(0.0);
-                        this.change_move_type("stack");
-                        break;
+                if(this.down){
+                    switch (step)
+                    {
+                        case 0:
+                            rope.move(1);
+                            low_point.activate();
+                            break;
+                        case 1:
+                            rope.move(0.0);
+                            this.down = false;
+                            this.finish_step();
+                            break;
+                    }
+                }
+                else {
+                    this.change_move_type("stack");
                 }
                 break;
 
             case "high junction" :
-                switch (step)
-                {
-                    case 0 :
-                        rope.move(1);
-                        high_point.activate();
-                        break;
-                    case 1 :
-                        rope.move(0.0);
-                        this.change_move_type("stack");
-                        break;
+                if(this.down){
+                    switch (step)
+                    {
+                        case 0 :
+                            rope.move(1);
+                            high_point.activate();
+                            break;
+                        case 1 :
+                            rope.move(0.0);
+                            this.down = false;
+                            this.finish_step();
+                            break;
+                    }
+                }
+                else {
+                    this.change_move_type("stack");
                 }
                 break;
 
@@ -81,7 +94,7 @@ public class Linear extends Part
                 switch (step)
                 {
                     case 0 :
-                        ring.move(1, 1.0);
+                        ring.move(1, 1.5);
                         break;
                     case 1:
                         this.change_move_type("down");
@@ -93,10 +106,10 @@ public class Linear extends Part
                 switch (step)
                 {
                     case 0 :
-                        ring.move(1, 1.0);
+                        ring.move(1, 1.5);
                         break;
                     case 1:
-                        ring.move(-1,1.0);
+                        ring.move(-1,1.5);
                         //this.change_move_type("redefine");
                         this.finish_step();
                         break;
@@ -107,11 +120,10 @@ public class Linear extends Part
                 switch (step)
                 {
                     case 0 :
-                        ring.move(-1, 0.6);
-                        this.delay(0.1);
+                        ring.move(-1, 0.2);
                         break;
                     case 1:
-                        rope.move(-0.4);
+                        rope.move(-0.08);
                         bottom.activate();
                         break;
                     case 2 :
@@ -125,6 +137,7 @@ public class Linear extends Part
             case "reset":
                 switch(step){
                     case 0:
+                        this.delay(0.5);
                         bottom.set_reverse(false);
                         bottom.activate();
                         rope.move(0.4);
@@ -133,6 +146,7 @@ public class Linear extends Part
                         rope.move(0.0);
                         bottom.set_reverse(true);
                         //this.change_move_type("redefine");
+                        this.down = true;
                         this.finish_step();
                         break;
                 }

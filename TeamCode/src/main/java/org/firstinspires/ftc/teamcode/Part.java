@@ -45,6 +45,7 @@ public abstract class Part {
     }
 
     protected void finish_step(){
+        this.move_type = "";
         this.move_finish = true;
     }
 

@@ -3,6 +3,7 @@ package org.firstinspires.ftc.teamcode;
 import com.qualcomm.robotcore.hardware.HardwareMap;
 
 import org.firstinspires.ftc.robotcore.external.Telemetry;
+import org.firstinspires.ftc.robotcore.external.navigation.DistanceUnit;
 
 public class Pincer extends Part
 {
@@ -11,8 +12,6 @@ public class Pincer extends Part
     private DMotor axis1 = new DMotor();
     private DMotor axis2 = new DMotor();
     private Distance sensor = new Distance();
-
-    private boolean ground = false;
 
     public void init(HardwareMap hwm, Telemetry tel)
     {
@@ -47,16 +46,22 @@ public class Pincer extends Part
 
     }
 
+    private double distance = 150;
+
+    private boolean ground(){
+        return this.sensor.get_distance(DistanceUnit.MM) <= distance;
+    }
+
     protected void next_step()
     {
         switch (move_type)
         {
             case "ground junction":
-                if(this.ground){
-                    this.change_move_type("ground_down");
+                if(this.ground()){
+                    this.change_move_type("ground up");
                 }
                 else {
-                    this.change_move_type("ground_up");
+                    this.change_move_type("ground down");
                 }
                 break;
 
@@ -64,15 +69,17 @@ public class Pincer extends Part
                 switch (step)
                 {
                     case 0 :
-                        this.ground = true;
                         pincer1.move(0.12, 0.5);
                         pincer2.move(0.12, 0.5);
                         break;
                     case 1 :
-                        axis1.move(0.6, 0.1);
-                        axis2.move(0.6, 0.1);
+                        axis1.move(0.6);
+                        axis2.move(0.6);
+                        this.sensor.activate(distance, Distance.ActivateMode.Upper);
                         break;
                     case 2:
+                        axis1.move(0.0);
+                        axis2.move(0.0);
                         this.finish_step();
                         break;
                 }
@@ -82,62 +89,62 @@ public class Pincer extends Part
                 switch (step)
                 {
                     case 0 :
-                        this.ground = false;
                         pincer1.move(-0.12, 0.5);
                         pincer2.move(-0.12, 0.5);
                         break;
                     case 1 :
-                        axis1.move(0.6, -0.1);
-                        axis2.move(0.6, -0.1);
-                        break;
-                    case 2:
-                        this.finish_step();
+                        this.change_move_type("pincer down");
                         break;
                 }
                 break;
 
             case "pincer" :
-                if(!this.ground) {
-                    switch (step)
-                    {
-                        case 0 :
-                            pincer1.move(0.12, 0.5);
-                            pincer2.move(0.12, 0.5);
-                            break;
-                        case 1 :
-                            axis1.move(0.6, 0.8);
-                            axis2.move(0.6, 0.8);
-                            break;
-                        case 2:
-                            pincer1.move(-0.12, 0.5);
-                            pincer2.move(-0.12, 0.5);
-                            this.change_move_type("release");
-                            break;
-                    }
-                    break;
+                if(this.ground()){
+                    this.change_move_type("pincer up");
                 }
-
-            case "release" :
-                if(!this.ground) {
-                    switch (step)
-                    {
-                        case 0 :
-                            axis1.move(-0.5);
-                            axis2.move(-0.5);
-                            this.sensor.activate(150.0, Distance.ActivateMode.Lower);
-                            break;
-
-                        case 1 :
-                            axis1.move(0);
-                            axis2.move(0);
-                            break;
-
-                        case 2:
-                            this.finish_step();
-                            break;
-                    }
-                    break;
+                else{
+                    this.change_move_type("pincer down");
                 }
+                break;
+
+            case "pincer up":
+                switch (step)
+                {
+                    case 0 :
+                        pincer1.move(0.12, 0.5);
+                        pincer2.move(0.12, 0.5);
+                        break;
+                    case 1 :
+                        axis1.move(0.6, 0.75);
+                        axis2.move(0.6, 0.75);
+                        break;
+                    case 2:
+                        pincer1.move(-0.12, 0.5);
+                        pincer2.move(-0.12, 0.5);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "pincer down" :
+                switch (step)
+                {
+                    case 0 :
+                        axis1.move(-0.5);
+                        axis2.move(-0.5);
+                        this.sensor.activate(distance, Distance.ActivateMode.Lower);
+                        break;
+
+                    case 1 :
+                        axis1.move(0);
+                        axis2.move(0);
+                        break;
+
+                    case 2:
+                        this.finish_step();
+                        break;
+                }
+                break;
 
             default:
                 this.finish_step();

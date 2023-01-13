@@ -44,22 +44,22 @@ public class TeleOpMode extends OpMode {
         }
 
         if(gamepad1.dpad_up) {
-            wheel_part.move(0.5*slow_rate, Wheel.Direction.Forward);
+            wheel_part.move(slow_rate, Wheel.Direction.Forward);
         }
         else if(gamepad1.dpad_down) {
-            wheel_part.move(0.5*slow_rate, Wheel.Direction.Backward);
+            wheel_part.move(slow_rate, Wheel.Direction.Backward);
         }
         else if(gamepad1.dpad_right) {
-            wheel_part.move(0.5*slow_rate, Wheel.Direction.Right);
+            wheel_part.move(slow_rate, Wheel.Direction.Right);
         }
         else if(gamepad1.dpad_left) {
-            wheel_part.move(0.5*slow_rate, Wheel.Direction.Left);
+            wheel_part.move(slow_rate, Wheel.Direction.Left);
         }
         else if(gamepad1.left_bumper){
-            wheel_part.move(0.5*slow_rate, Wheel.Direction.TurnLeft);
+            wheel_part.move(slow_rate, Wheel.Direction.TurnLeft);
         }
         else if(gamepad1.right_bumper){
-            wheel_part.move(0.5*slow_rate, Wheel.Direction.TurnRight);
+            wheel_part.move(slow_rate, Wheel.Direction.TurnRight);
         }
         else {
             wheel_part.move(0.0,  Wheel.Direction.Forward);
