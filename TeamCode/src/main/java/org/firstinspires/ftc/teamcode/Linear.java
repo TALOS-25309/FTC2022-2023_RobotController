@@ -150,6 +150,10 @@ public class Linear extends Part
                         //move_finish = true;
                         break;
                 }
+
+            default:
+                this.finish_step();
+                break;
         }
         step++;
     }

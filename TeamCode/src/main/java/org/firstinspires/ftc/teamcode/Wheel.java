@@ -189,6 +189,10 @@ public class Wheel extends Part {
                         break;
                 }
                 break;
+
+            default:
+                this.finish_step();
+                break;
         }
         this.step++;
     }
