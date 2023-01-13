@@ -69,7 +69,6 @@ public class RobotUtility {
             }
         }
         if(this.imu != null){
-            this.telemetry.addData("IMU Checking", "GOOD");
             if(!this.imu.finish())
                 return false;
         }

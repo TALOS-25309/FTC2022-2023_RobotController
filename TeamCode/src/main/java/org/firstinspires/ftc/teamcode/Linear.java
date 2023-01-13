@@ -22,6 +22,8 @@ public class Linear extends Part
         this.low_point.init(hwm, tel, "low", true);
         this.high_point.init(hwm, tel, "high", true);
 
+        this.high_point.set_emergency_sensor();
+
         DMotor[] dl = {this.rope};
         SMotor[] sl = {this.ring};
         Sensor[] snl = {this.bottom, this.low_point, this.high_point};

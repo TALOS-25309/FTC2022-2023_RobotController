@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.hardware.IMU;
 
+
 @TeleOp(name = "TeleOp", group = "")
 public class TeleOpMode extends OpMode {
     private Wheel wheel_part = new Wheel();
@@ -36,7 +37,7 @@ public class TeleOpMode extends OpMode {
         //Wheel Part
         if(gamepad1.left_trigger > 0.7 || gamepad1.right_trigger > 0.7)
         {
-            slow_rate = 0.3;
+            slow_rate = 0.5;
         }
         else
         {
@@ -70,13 +71,10 @@ public class TeleOpMode extends OpMode {
             if(linear_part.finish() && pincer_part.finish()) {
                 if (gamepad2.x) {
                     linear_part.start_step("low junction");
-                    //pincer_part.start_step("release");
                 } else if (gamepad2.y) {
                     linear_part.start_step("middle junction");
-                    //pincer_part.start_step("release");
                 } else if (gamepad2.b) {
                     linear_part.start_step("high junction");
-                    //pincer_part.start_step("release");
                 }
             }
 
@@ -94,21 +92,7 @@ public class TeleOpMode extends OpMode {
         //Emergency Stop
         if((gamepad1.left_bumper && gamepad1.right_bumper && (gamepad1.left_trigger>0.9) && (gamepad1.right_trigger>0.9))
                 || (gamepad2.left_bumper && gamepad2.right_bumper && (gamepad2.left_trigger>0.9) && (gamepad2.right_trigger>0.9))){
-            this.stop = true;
-            wheel_part.emergency_stop();
-            linear_part.emergency_stop();
-            pincer_part.emergency_stop();
-
-            wheel_part.init(hardwareMap, telemetry, this.imu);
-            linear_part.init(hardwareMap, telemetry);
-            pincer_part.init(hardwareMap, telemetry);
-
-            wheel_part.update();
-            linear_part.update();
-            pincer_part.update();
-
-            gamepad1.rumble(500);
-            gamepad2.rumble(500);
+            this.emergency();
         }
         else if(this.stop){
             if((gamepad1.left_stick_button && gamepad1.right_stick_button) || (gamepad2.left_stick_button && gamepad2.right_stick_button)){
@@ -151,5 +135,23 @@ public class TeleOpMode extends OpMode {
                 }
             }
         }
+    }
+
+    public void emergency(){
+        this.stop = true;
+        wheel_part.emergency_stop();
+        linear_part.emergency_stop();
+        pincer_part.emergency_stop();
+
+        wheel_part.init(hardwareMap, telemetry, this.imu);
+        linear_part.init(hardwareMap, telemetry);
+        pincer_part.init(hardwareMap, telemetry);
+
+        wheel_part.update();
+        linear_part.update();
+        pincer_part.update();
+
+        gamepad1.rumble(500);
+        gamepad2.rumble(500);
     }
 }

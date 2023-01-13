@@ -1,0 +1,93 @@
+case "first rotation":
+                switch(step){
+                    case 0:
+                        this.move(0.25, Direction.TurnRight);
+                        this.imu.activate(-45, Direction.TurnRight);
+                        break;
+                    case 1:
+                        this.move_stop();
+                        this.delay(0.3);
+                        this.move(0.2, Direction.TurnLeft);
+                        this.imu.correction();
+                        break;
+                    case 2:
+                        this.move_stop();
+                        this.delay(0.3);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "junction range":
+                switch(step){
+                    case 0:
+                        this.move(0.2, 0.1, Direction.Forward);
+                        break;
+                    case 1:
+                        this.delay(0.3);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "end junction":
+                switch(step){
+                    case 0:
+                        this.delay(2);
+                        this.move(0.2, 0.1, Direction.Backward);
+                        break;
+                    case 1:
+                        this.delay(0.3);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "second rotation":
+                switch(step){
+                    case 0:
+                        this.move(0.25, Direction.TurnLeft);
+                        this.imu.activate(45, Direction.TurnLeft);
+                        break;
+                    case 1:
+                        this.move_stop();
+                        this.delay(0.3);
+                        this.move(0.2, Direction.TurnRight);
+                        this.imu.correction();
+                        break;
+                    case 2:
+                        this.move_stop();
+                        this.delay(0.3);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+			case "parking":
+                switch (step){
+                    case 0:
+                        switch (this.color.get_parking_position()){
+                            case 0:
+                                this.move(0.4, 0.7, Direction.Backward);
+                                telemetry.addData("Parking", "Fail");
+                                break;
+                            case 1:
+                                this.move(0.7, 0.7, Direction.Left);
+                                telemetry.addData("Parking", "1");
+                                break;
+                            case 2:
+                                this.move_stop();
+                                telemetry.addData("Parking", "2");
+                                break;
+                            case 3:
+                                this.move(0.4, 0.7, Direction.Right);
+                                telemetry.addData("Parking", "3");
+                                break;
+                        }
+                        break;
+                    case 1:
+                        this.move_stop();
+                        this.finish_step();
+                        break;
+                }
+                break;

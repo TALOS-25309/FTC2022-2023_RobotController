@@ -7,8 +7,8 @@ import org.firstinspires.ftc.robotcore.external.navigation.AngleUnit;
 
 public class Wheel extends Part {
     public enum Direction {
-        Forward(new DirectionData(0.75,0.75,0.75,0.75)),
-        Backward(new DirectionData(-0.75,-0.75,-0.75, -0.75)),
+        Forward(new DirectionData(0.65,0.65,0.65,0.65)),
+        Backward(new DirectionData(-0.65,-0.65,-0.65, -0.65)),
         Left(new DirectionData(-0.5,0.5,0.5,-0.5)),
         Right(new DirectionData(0.5,-0.5,-0.5,0.5)),
         TurnLeft(new DirectionData(-0.25,0.25,-0.25,0.25)),
@@ -19,9 +19,9 @@ public class Wheel extends Part {
         DirectionData get_value() {return this.value;}
 
         public static class DirectionData{
-            private double front_left_speed = 0.88;
-            private double front_right_speed = 0.88;
-            private double back_left_speed = 1.0;
+            private double front_left_speed = 1.0 - 0.1 - 0.05;
+            private double front_right_speed = 1.0- 0.1;
+            private double back_left_speed = 1.0 - 0.05;
             private double back_right_speed = 1.0;
 
             public double front_left, front_right, back_left, back_right;
@@ -94,121 +94,206 @@ public class Wheel extends Part {
             case "signal detection":
                 switch (step){
                     case 0:
-                        this.move(0.5, 0.77, Direction.Forward);
+                        this.move(0.15, 0.8, Direction.Forward);
                         this.color.detect_color(3);
                         break;
                     case 1:
-                        this.move_stop();
-                        this.delay(0.5);
-                        this.finish_step();
-                        break;
-                }
-                break;
-
-            case "first rotation":
-                switch(step){
-                    case 0:
-                        this.move(0.2, Direction.TurnRight);
-                        this.imu.activate(-45, Direction.TurnRight);
-                        break;
-                    case 1:
-                        this.move_stop();
-                        this.delay(0.3);
-                        this.move(0.1, Direction.TurnLeft);
-                        this.imu.correction();
+                        this.delay(1);
+                        this.move(0.15, 0.15, Direction.Backward);
                         break;
                     case 2:
-                        this.move_stop();
-                        this.delay(0.3);
+                        this.delay(1);
                         this.finish_step();
                         break;
                 }
                 break;
 
-            case "junction range":
-                switch(step){
+            case "rotation left":
+                switch(this.color.get_parking_position()){
                     case 0:
-                        this.move(0.1, 0.05, Direction.Forward);
+                        telemetry.addData("Parking", "Fail");
+                        switch (step){
+                            case 0:
+                                this.move(0.1, Direction.TurnRight);
+                                this.imu.activate(-90, Direction.TurnRight);
+                                break;
+                            case 1:
+                                this.move_stop();
+                                this.delay(0.3);
+                                this.move(0.05, Direction.TurnLeft);
+                                this.imu.correction();
+                                break;
+                            case 2:
+                                this.move_stop();
+                                this.delay(0.3);
+                                this.finish_step();
+                                break;
+                        }
                         break;
                     case 1:
-                        this.move_stop();
-                        this.delay(0.3);
-                        this.finish_step();
-                        break;
-                }
-                break;
-
-            case "end junction":
-                switch(step){
-                    case 0:
-                        this.move(0.1, 0.05, Direction.Backward);
-                        break;
-                    case 1:
-                        this.move_stop();
-                        this.delay(0.3);
-                        this.finish_step();
-                        break;
-                }
-                break;
-
-            case "second rotation":
-                switch(step){
-                    case 0:
-                        this.move(0.2, Direction.TurnLeft);
-                        this.imu.activate(45, Direction.TurnLeft);
-                        break;
-                    case 1:
-                        this.move_stop();
-                        this.delay(0.3);
-                        this.move(0.05, Direction.TurnRight);
-                        this.imu.correction();
+                        telemetry.addData("Parking", "1");
+                        switch (step){
+                            case 0:
+                                this.move(0.1, Direction.TurnLeft);
+                                this.imu.activate(90, Direction.TurnLeft);
+                                break;
+                            case 1:
+                                this.move_stop();
+                                this.delay(0.3);
+                                this.move(0.05, Direction.TurnRight);
+                                this.imu.correction();
+                                break;
+                            case 2:
+                                this.move_stop();
+                                this.delay(0.3);
+                                this.finish_step();
+                                break;
+                        }
                         break;
                     case 2:
-                        this.move_stop();
-                        this.delay(0.3);
-                        this.finish_step();
+                        telemetry.addData("Parking", "2");
+                        switch (step){
+                            case 0:
+                                this.move(0.1, Direction.TurnRight);
+                                this.imu.activate(-90, Direction.TurnRight);
+                                break;
+                            case 1:
+                                this.move_stop();
+                                this.delay(0.3);
+                                this.move(0.05, Direction.TurnLeft);
+                                this.imu.correction();
+                                break;
+                            case 2:
+                                this.move_stop();
+                                this.delay(0.3);
+                                this.finish_step();
+                                break;
+                        }
+                        break;
+                    case 3:
+                        telemetry.addData("Parking", "3");
+                        switch (step){
+                            case 0:
+                                this.move(0.1, Direction.TurnRight);
+                                this.imu.activate(-90, Direction.TurnRight);
+                                break;
+                            case 1:
+                                this.move_stop();
+                                this.delay(0.3);
+                                this.move(0.05, Direction.TurnLeft);
+                                this.imu.correction();
+                                break;
+                            case 2:
+                                this.move_stop();
+                                this.delay(0.3);
+                                this.finish_step();
+                                break;
+                        }
                         break;
                 }
                 break;
 
             case "parking site":
-                switch (step){
-                    case 0:
-                        this.move(0.3, 0.01, Direction.Backward);
-                        break;
-                    case 1:
-                        this.move_stop();
-                        this.delay(0.3);
-                        this.finish_step();
-                        break;
-                }
-                break;
+               if(this.color.get_parking_position() != 2){
+                   switch (step){
+                       case 0:
+                           this.move(0.1, 0.6, Direction.Forward);
+                           break;
+                       case 1:
+                           this.move_stop();
+                           this.delay(0.3);
+                           this.finish_step();
+                           break;
+                   }
+               }
+               else{
+                   this.move_stop();
+                   this.delay(0.3);
+                   this.finish_step();
+               }
+               break;
 
-            case "parking":
-                switch (step){
+            case "rotation right":
+                switch(this.color.get_parking_position()){
                     case 0:
-                        switch (this.color.get_parking_position()){
+                        telemetry.addData("Parking", "Fail");
+                        switch (step){
                             case 0:
-                                this.move(0.3, 0.4, Direction.Backward);
-                                telemetry.addData("Parking", "Fail");
+                                this.move(0.1, Direction.TurnLeft);
+                                this.imu.activate(90, Direction.TurnLeft);
                                 break;
                             case 1:
-                                this.move(0.3, 0.4, Direction.Left);
-                                telemetry.addData("Parking", "1");
+                                this.move_stop();
+                                this.delay(0.3);
+                                this.move(0.05, Direction.TurnRight);
+                                this.imu.correction();
                                 break;
                             case 2:
                                 this.move_stop();
-                                telemetry.addData("Parking", "2");
-                                break;
-                            case 3:
-                                this.move(0.3, 0.4, Direction.Right);
-                                telemetry.addData("Parking", "3");
+                                this.delay(0.3);
+                                this.finish_step();
                                 break;
                         }
                         break;
                     case 1:
-                        this.move_stop();
-                        this.finish_step();
+                        telemetry.addData("Parking", "1");
+                        switch (step){
+                            case 0:
+                                this.move(0.1, Direction.TurnLeft);
+                                this.imu.activate(90, Direction.TurnLeft);
+                                break;
+                            case 1:
+                                this.move_stop();
+                                this.delay(0.3);
+                                this.move(0.05, Direction.TurnRight);
+                                this.imu.correction();
+                                break;
+                            case 2:
+                                this.move_stop();
+                                this.delay(0.3);
+                                this.finish_step();
+                                break;
+                        }
+                        break;
+                    case 2:
+                        telemetry.addData("Parking", "2");
+                        switch (step){
+                            case 0:
+                                this.move(0.1, Direction.TurnLeft);
+                                this.imu.activate(90, Direction.TurnLeft);
+                                break;
+                            case 1:
+                                this.move_stop();
+                                this.delay(0.3);
+                                this.move(0.05, Direction.TurnRight);
+                                this.imu.correction();
+                                break;
+                            case 2:
+                                this.move_stop();
+                                this.delay(0.3);
+                                this.finish_step();
+                                break;
+                        }
+                        break;
+                    case 3:
+                        telemetry.addData("Parking", "3");
+                        switch (step){
+                            case 0:
+                                this.move(0.1, Direction.TurnRight);
+                                this.imu.activate(-90, Direction.TurnRight);
+                                break;
+                            case 1:
+                                this.move_stop();
+                                this.delay(0.3);
+                                this.move(0.05, Direction.TurnLeft);
+                                this.imu.correction();
+                                break;
+                            case 2:
+                                this.move_stop();
+                                this.delay(0.3);
+                                this.finish_step();
+                                break;
+                        }
                         break;
                 }
                 break;
