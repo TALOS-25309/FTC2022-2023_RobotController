@@ -69,13 +69,13 @@ public class TeleOpMode extends OpMode {
             //Linear
             if(linear_part.finish() && pincer_part.finish()) {
                 if (gamepad2.x) {
-                    linear_part.start_step("simple_stack_cup");
+                    linear_part.start_step("low junction");
                     //pincer_part.start_step("release");
                 } else if (gamepad2.y) {
-                    linear_part.start_step("go_low");
+                    linear_part.start_step("middle junction");
                     //pincer_part.start_step("release");
                 } else if (gamepad2.b) {
-                    linear_part.start_step("go_high");
+                    linear_part.start_step("high junction");
                     //pincer_part.start_step("release");
                 }
             }
@@ -83,7 +83,7 @@ public class TeleOpMode extends OpMode {
             //Pincer
             if(pincer_part.finish()) {
                 if (gamepad2.a) {
-                    pincer_part.start_step("pick_up");
+                    pincer_part.start_step("pincer");
                 }
             }
         }

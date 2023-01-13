@@ -49,7 +49,7 @@ public class Linear extends Part
     {
         switch (move_type)
         {
-            case "go_low" :
+            case "middle junction" :
                 switch (step)
                 {
                     case 0:
@@ -58,12 +58,12 @@ public class Linear extends Part
                         break;
                     case 1:
                         rope.move(0.0);
-                        this.change_move_type("stack_cup");
+                        this.change_move_type("stack");
                         break;
                 }
                 break;
 
-            case "go_high" :
+            case "high junction" :
                 switch (step)
                 {
                     case 0 :
@@ -72,12 +72,12 @@ public class Linear extends Part
                         break;
                     case 1 :
                         rope.move(0.0);
-                        this.change_move_type("stack_cup");
+                        this.change_move_type("stack");
                         break;
                 }
                 break;
 
-            case "stack_cup" :
+            case "stack" :
                 switch (step)
                 {
                     case 0 :
@@ -89,7 +89,7 @@ public class Linear extends Part
                 }
                 break;
 
-            case "simple_stack_cup" :
+            case "low junction" :
                 switch (step)
                 {
                     case 0 :

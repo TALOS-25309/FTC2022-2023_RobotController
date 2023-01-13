@@ -93,7 +93,7 @@ public class Wheel extends Part {
     protected void next_step(){
         switch (move_type)
         {
-            case "detect signal":
+            case "signal detection":
                 switch (step){
                     case 0:
                         this.move(0.3, 1, Direction.Forward);
@@ -107,7 +107,7 @@ public class Wheel extends Part {
                 }
                 break;
 
-            case "first rotate":
+            case "first rotation":
                 switch(step){
                     case 0:
                         this.move(0.1, Direction.TurnLeft);
@@ -127,7 +127,7 @@ public class Wheel extends Part {
                 }
                 break;
 
-            case "second rotate":
+            case "second rotation":
                 switch(step){
                     case 0:
                         this.move(0.1, Direction.TurnRight);
@@ -147,7 +147,7 @@ public class Wheel extends Part {
                 }
                 break;
 
-            case "back to home":
+            case "parking site":
                 switch (step){
                     case 0:
                         this.move(0.3, 0.5, Direction.Backward);
@@ -160,7 +160,7 @@ public class Wheel extends Part {
                 }
                 break;
 
-            case "go parking place":
+            case "parking":
                 switch (step){
                     case 0:
                         switch (this.color.get_parking_position()){

@@ -55,29 +55,35 @@ public class AutoOpMode extends OpMode
     }
 
     private void procedure_run(){
+        String move_type = "";
         switch (this.step){
             case 0:
-                this.telemetry.addData("Wheel Procedure", "detect signal");
-                this.wheel_part.start_step("detect signal");
+                move_type = "pincer";
                 break;
             case 1:
-                this.telemetry.addData("Wheel Procedure", "first rotate");
-                this.wheel_part.start_step("first rotate");
+                move_type = "signal detection";
                 break;
             case 2:
-                this.telemetry.addData("Wheel Procedure", "second rotate");
-                this.wheel_part.start_step("second rotate");
+                move_type = "first rotation";
                 break;
             case 3:
-                this.telemetry.addData("Wheel Procedure", "back to home");
-                this.wheel_part.start_step("back to home");
+                move_type = "high junction";
                 break;
             case 4:
-                this.telemetry.addData("Wheel Procedure", "go parking place");
-                this.wheel_part.start_step("go parking place");
+                move_type = "second rotation";
+                break;
+            case 5:
+                move_type = "parking site";
+                break;
+            case 6:
+                move_type = "parking";
                 break;
         }
         this.step++;
+        this.telemetry.addData("Auto Step " + String.valueOf(this.step), move_type);
+        this.wheel_part.start_step(move_type);
+        this.linear_part.start_step(move_type);
+        this.pincer_part.start_step(move_type);
     }
 
     private boolean procedure_finish(){
