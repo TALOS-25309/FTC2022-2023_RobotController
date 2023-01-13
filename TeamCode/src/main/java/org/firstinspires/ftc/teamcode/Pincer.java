@@ -12,6 +12,8 @@ public class Pincer extends Part
     private DMotor axis2 = new DMotor();
     private Distance sensor = new Distance();
 
+    private boolean ground = false;
+
     public void init(HardwareMap hwm, Telemetry tel)
     {
         this.pincer1.init(hwm, tel, "pincer1", SMotor.Direction.Direct, 0.38);
@@ -49,44 +51,93 @@ public class Pincer extends Part
     {
         switch (move_type)
         {
-            case "pincer" :
+            case "ground junction":
+                if(this.ground){
+                    this.change_move_type("ground_down");
+                }
+                else {
+                    this.change_move_type("ground_up");
+                }
+                break;
+
+            case "ground up":
                 switch (step)
                 {
                     case 0 :
+                        this.ground = true;
                         pincer1.move(0.12, 0.5);
                         pincer2.move(0.12, 0.5);
                         break;
                     case 1 :
-                        axis1.move(0.6, 0.8);
-                        axis2.move(0.6, 0.8);
+                        axis1.move(0.6, 0.1);
+                        axis2.move(0.6, 0.1);
                         break;
-                    case 2:
-                        pincer1.move(-0.12, 0.5);
-                        pincer2.move(-0.12, 0.5);
-                        this.change_move_type("release");
-                        break;
-                }
-                break;
-
-            case "release" :
-                switch (step)
-                {
-                    case 0 :
-                        axis1.move(-0.5);
-                        axis2.move(-0.5);
-                        this.sensor.activate(150.0, Distance.ActivateMode.Lower);
-                        break;
-
-                    case 1 :
-                        axis1.move(0);
-                        axis2.move(0);
-                        break;
-
                     case 2:
                         this.finish_step();
                         break;
                 }
                 break;
+
+            case "ground down":
+                switch (step)
+                {
+                    case 0 :
+                        this.ground = false;
+                        pincer1.move(-0.12, 0.5);
+                        pincer2.move(-0.12, 0.5);
+                        break;
+                    case 1 :
+                        axis1.move(0.6, -0.1);
+                        axis2.move(0.6, -0.1);
+                        break;
+                    case 2:
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "pincer" :
+                if(!this.ground) {
+                    switch (step)
+                    {
+                        case 0 :
+                            pincer1.move(0.12, 0.5);
+                            pincer2.move(0.12, 0.5);
+                            break;
+                        case 1 :
+                            axis1.move(0.6, 0.8);
+                            axis2.move(0.6, 0.8);
+                            break;
+                        case 2:
+                            pincer1.move(-0.12, 0.5);
+                            pincer2.move(-0.12, 0.5);
+                            this.change_move_type("release");
+                            break;
+                    }
+                    break;
+                }
+
+            case "release" :
+                if(!this.ground) {
+                    switch (step)
+                    {
+                        case 0 :
+                            axis1.move(-0.5);
+                            axis2.move(-0.5);
+                            this.sensor.activate(150.0, Distance.ActivateMode.Lower);
+                            break;
+
+                        case 1 :
+                            axis1.move(0);
+                            axis2.move(0);
+                            break;
+
+                        case 2:
+                            this.finish_step();
+                            break;
+                    }
+                    break;
+                }
 
             default:
                 this.finish_step();

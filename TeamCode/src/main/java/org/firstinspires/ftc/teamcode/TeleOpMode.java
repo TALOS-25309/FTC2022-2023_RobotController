@@ -85,6 +85,9 @@ public class TeleOpMode extends OpMode {
                 if (gamepad2.a) {
                     pincer_part.start_step("pincer");
                 }
+                if (gamepad1.a){
+                    pincer_part.start_step("ground junction");
+                }
             }
         }
 
