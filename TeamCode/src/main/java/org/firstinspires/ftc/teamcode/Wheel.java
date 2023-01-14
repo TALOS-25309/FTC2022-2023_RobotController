@@ -19,9 +19,9 @@ public class Wheel extends Part {
         DirectionData get_value() {return this.value;}
 
         public static class DirectionData{
-            private double front_left_speed = 1.0 - 0.1 - 0.05;
-            private double front_right_speed = 1.0- 0.1;
-            private double back_left_speed = 1.0 - 0.05;
+            private double front_left_speed = 1.0;
+            private double front_right_speed = 1.0;
+            private double back_left_speed = 1.0;
             private double back_right_speed = 1.0;
 
             public double front_left, front_right, back_left, back_right;
@@ -89,6 +89,7 @@ public class Wheel extends Part {
     }
 
     protected void next_step(){
+        this.telemetry.addData("Next Step", move_type);
         switch (move_type)
         {
             case "signal detection":
@@ -99,7 +100,7 @@ public class Wheel extends Part {
                         break;
                     case 1:
                         this.delay(1);
-                        this.move(0.15, 0.15, Direction.Backward);
+                        this.move(0.15, 0.14, Direction.Backward);
                         break;
                     case 2:
                         this.delay(1);
@@ -194,24 +195,24 @@ public class Wheel extends Part {
                 break;
 
             case "parking site":
-               if(this.color.get_parking_position() != 2){
-                   switch (step){
-                       case 0:
-                           this.move(0.1, 0.6, Direction.Forward);
-                           break;
-                       case 1:
-                           this.move_stop();
-                           this.delay(0.3);
-                           this.finish_step();
-                           break;
-                   }
-               }
-               else{
-                   this.move_stop();
-                   this.delay(0.3);
-                   this.finish_step();
-               }
-               break;
+                if(this.color.get_parking_position() != 2){
+                    switch (step){
+                        case 0:
+                            this.move(0.1, 0.6, Direction.Forward);
+                            break;
+                        case 1:
+                            this.move_stop();
+                            this.delay(0.3);
+                            this.finish_step();
+                            break;
+                    }
+                }
+                else{
+                    this.move_stop();
+                    this.delay(0.3);
+                    this.finish_step();
+                }
+                break;
 
             case "rotation right":
                 switch(this.color.get_parking_position()){

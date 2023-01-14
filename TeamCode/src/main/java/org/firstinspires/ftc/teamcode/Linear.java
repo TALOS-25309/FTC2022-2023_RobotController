@@ -16,7 +16,7 @@ public class Linear extends Part
 
     public void init(HardwareMap hwm, Telemetry tel)
     {
-        this.rope.init(hwm, tel, "rope", DMotor.Direction.Direct);
+        this.rope.init(hwm, tel, "rope", DMotor.Direction.Reverse);
         this.ring.init(hwm, tel, "ring", SMotor.Direction.Reverse, 0);
         this.bottom.init(hwm, tel, "bottom", true);
         this.low_point.init(hwm, tel, "low", true);
@@ -57,7 +57,7 @@ public class Linear extends Part
                     switch (step)
                     {
                         case 0:
-                            rope.move(1);
+                            rope.move(0.8);
                             low_point.activate();
                             break;
                         case 1:
@@ -77,7 +77,7 @@ public class Linear extends Part
                     switch (step)
                     {
                         case 0 :
-                            rope.move(1);
+                            rope.move(0.8);
                             high_point.activate();
                             break;
                         case 1 :
@@ -122,10 +122,10 @@ public class Linear extends Part
                 switch (step)
                 {
                     case 0 :
-                        ring.move(-1, 0.2);
+                        ring.move(-1, 0.5);
                         break;
                     case 1:
-                        rope.move(-0.08);
+                        rope.move(-0.1);
                         bottom.activate();
                         break;
                     case 2 :
@@ -142,7 +142,7 @@ public class Linear extends Part
                         this.delay(0.5);
                         bottom.set_reverse(false);
                         bottom.activate();
-                        rope.move(0.4);
+                        rope.move(0.3);
                         break;
                     case 1:
                         rope.move(0.0);
