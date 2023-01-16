@@ -4,7 +4,7 @@
 ### Developed by 2023 KROS Programming Team
 
 ## Class Diagram (Outline)
-![Class Diagram]([Public] Class Diagram - Outline (Dark).png){: width="100%" height="100%"}
+![title]([Public] Class Diagram - Outline (Dark).png){: width="100%" height="100%"}
 
 Copyright by 2023 KROS of KSA
 
