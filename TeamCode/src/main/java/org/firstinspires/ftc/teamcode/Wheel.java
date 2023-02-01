@@ -109,7 +109,7 @@ public class Wheel extends Part {
                 }
                 break;
 
-            case "rotation left":
+            case "rotation":
                 switch(this.color.get_parking_position()){
                     case 0:
                         telemetry.addData("Parking", "Fail");
@@ -214,7 +214,7 @@ public class Wheel extends Part {
                 }
                 break;
 
-            case "rotation right":
+            case "rotation otherwise":
                 switch(this.color.get_parking_position()){
                     case 0:
                         telemetry.addData("Parking", "Fail");
