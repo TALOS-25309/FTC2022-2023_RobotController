@@ -8,20 +8,25 @@ public abstract class Part {
     protected String move_type = "";
     protected Telemetry telemetry;
     private boolean move_finish = true;
+    private long delay_time = 0;
 
     protected void change_move_type(String move_type){
         this.move_type = move_type;
         this.step = -1;
         this.move_finish = false;
+        this.delay_time = 0;
     }
 
     protected void delay(double delay){
+        /*
         long time = (long)(delay * 1000);
         try{
             Thread.sleep(time);
         }catch(InterruptedException e){
             e.printStackTrace();
         }
+        */
+        delay_time = System.currentTimeMillis() + (long)(1000 * delay);
     }
 
     public void start_step(String move_type){
@@ -35,7 +40,7 @@ public abstract class Part {
 
     public void update(){
         util.update();
-        if(util.finish()){
+        if(util.finish() && System.currentTimeMillis() > this.delay_time){
             this.next_step();
         }
     }

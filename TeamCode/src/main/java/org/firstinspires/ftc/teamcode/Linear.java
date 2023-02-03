@@ -35,6 +35,7 @@ public class Linear extends Part
         this.step = 0;
         this.telemetry = tel;
         this.move_type = "";
+        this.down = true;
         this.finish_step();
     }
 
@@ -53,11 +54,12 @@ public class Linear extends Part
         switch (move_type)
         {
             case "middle junction" :
+
                 if(this.down){
                     switch (step)
                     {
                         case 0:
-                            rope.move(0.8);
+                            rope.move(0.9);
                             low_point.activate();
                             break;
                         case 1:
@@ -77,7 +79,7 @@ public class Linear extends Part
                     switch (step)
                     {
                         case 0 :
-                            rope.move(0.8);
+                            rope.move(0.9);
                             high_point.activate();
                             break;
                         case 1 :
@@ -125,7 +127,7 @@ public class Linear extends Part
                         ring.move(-1, 0.5);
                         break;
                     case 1:
-                        rope.move(-0.1);
+                        rope.move(-0.15);
                         bottom.activate();
                         break;
                     case 2 :
@@ -162,7 +164,6 @@ public class Linear extends Part
                         this.change_move_type("go_high");
                         this.delay(0.1);
                         this.cnt++;
-                        this.telemetry.addData("Cnt", this.cnt);
                         //move_finish = true;
                         break;
                 }

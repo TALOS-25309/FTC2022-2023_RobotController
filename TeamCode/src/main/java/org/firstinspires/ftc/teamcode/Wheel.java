@@ -89,7 +89,6 @@ public class Wheel extends Part {
     }
 
     protected void next_step(){
-        this.telemetry.addData("Next Step", move_type);
         switch (move_type)
         {
             case "signal detection":
@@ -295,6 +294,170 @@ public class Wheel extends Part {
                                 this.finish_step();
                                 break;
                         }
+                        break;
+                }
+                break;
+
+            case "sub go junction":
+                switch (step){
+                    case 0:
+                        this.move(0.25, 0.62, Direction.Forward);
+                        break;
+                    case 1:
+                        this.delay(1);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "sub go to junction (accurate)":
+                switch (step){
+                    case 0:
+                        this.move(0.1, 0.1, Direction.Forward);
+                        break;
+                    case 1:
+                        this.delay(0.1);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "sub go back junction (accurate)":
+                switch (step){
+                    case 0:
+                        this.move(0.1, 0.1, Direction.Backward);
+                        break;
+                    case 1:
+                        this.delay(0.1);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "sub rotate left":
+                switch (step){
+                    case 0:
+                        this.move(0.15, Direction.TurnLeft);
+                        this.imu.activate(45, Direction.TurnLeft);
+                        break;
+                    case 1:
+                        this.move_stop();
+                        this.delay(0.3);
+                        this.move(0.1, Direction.TurnRight);
+                        this.imu.correction();
+                        break;
+                    case 2:
+                        this.move_stop();
+                        this.delay(0.3);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "sub rotate right":
+                switch (step){
+                    case 0:
+                        this.move(0.15, Direction.TurnRight);
+                        this.imu.activate(-45, Direction.TurnRight);
+                        break;
+                    case 1:
+                        this.move_stop();
+                        this.delay(0.3);
+                        this.move(0.1, Direction.TurnLeft);
+                        this.imu.correction();
+                        break;
+                    case 2:
+                        this.move_stop();
+                        this.delay(0.3);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "sub go home":
+                switch (step){
+                    case 0:
+                        this.move(0.25, 0.65, Direction.Backward);
+                        break;
+                    case 1:
+                        this.delay(1);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "sub rotate home left":
+                switch (step){
+                    case 0:
+                        this.move(0.15, Direction.TurnLeft);
+                        this.imu.activate(90, Direction.TurnLeft);
+                        break;
+                    case 1:
+                        this.move_stop();
+                        this.delay(0.3);
+                        this.move(0.1, Direction.TurnRight);
+                        this.imu.correction();
+                        break;
+                    case 2:
+                        this.move_stop();
+                        this.delay(0.3);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "sub rotate home right":
+                switch (step){
+                    case 0:
+                        this.move(0.15, Direction.TurnRight);
+                        this.imu.activate(-90, Direction.TurnRight);
+                        break;
+                    case 1:
+                        this.move_stop();
+                        this.delay(0.3);
+                        this.move(0.1, Direction.TurnLeft);
+                        this.imu.correction();
+                        break;
+                    case 2:
+                        this.move_stop();
+                        this.delay(0.3);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "sub go parking":
+                switch (step){
+                    case 0:
+                        this.move(0.25, 0.62, Direction.Forward);
+                        break;
+                    case 1:
+                        this.delay(1);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "sub go left parking":
+                switch (step){
+                    case 0:
+                        this.move(0.25, 0.65, Direction.Left);
+                        break;
+                    case 1:
+                        this.delay(1);
+                        this.finish_step();
+                        break;
+                }
+                break;
+
+            case "sub go right parking":
+                switch (step){
+                    case 0:
+                        this.move(0.3, 0.7, Direction.Right);
+                        break;
+                    case 1:
+                        this.delay(1);
+                        this.finish_step();
                         break;
                 }
                 break;

@@ -86,6 +86,10 @@ public class Color {
         return this.parking_pos; //0 = 식별 실패, 1 = 1번 위치, 2 = 2번 위치, 3 = 3번 위치
     }
 
+    public double get_distance(){
+        return this.distance_sensor.getDistance(DistanceUnit.CM);
+    }
+
     public boolean finish()
     {
         return this.finish;

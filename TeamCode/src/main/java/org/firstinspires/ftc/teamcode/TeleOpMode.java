@@ -11,6 +11,7 @@ public class TeleOpMode extends OpMode {
     private Linear linear_part = new Linear();
     private Pincer pincer_part = new Pincer();
     private Gyro imu = new Gyro();
+    private Color color = new Color();
 
     private double slow_rate;
     private boolean adjusting = false;
@@ -23,6 +24,7 @@ public class TeleOpMode extends OpMode {
         wheel_part.init(hardwareMap, telemetry, this.imu);
         linear_part.init(hardwareMap, telemetry);
         pincer_part.init(hardwareMap, telemetry);
+        color.init(hardwareMap, telemetry, "color");
     }
 
     @Override
@@ -34,14 +36,18 @@ public class TeleOpMode extends OpMode {
         pincer_part.update();
         imu.update();
 
+        //Distance
+        double distance = color.get_distance();
+        telemetry.addData("Curr Distance", distance);
+
         //Wheel Part
         if(gamepad1.left_trigger > 0.7 || gamepad1.right_trigger > 0.7)
         {
-            slow_rate = 0.5;
+            slow_rate = 0.3;
         }
         else
         {
-            slow_rate = 1.0;
+            slow_rate = 0.6;
         }
 
         if(gamepad1.dpad_up) {
@@ -123,6 +129,9 @@ public class TeleOpMode extends OpMode {
                     this.pincer_part.adjust_axis(-1);
                 } else {
                     this.pincer_part.adjust_axis(0);
+                }
+                if (gamepad2.a) {
+                    pincer_part.start_step("grab");
                 }
             }
             if (linear_part.finish()) {

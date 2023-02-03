@@ -12,6 +12,7 @@ public class Pincer extends Part
     private DMotor axis1 = new DMotor();
     private DMotor axis2 = new DMotor();
     private Distance sensor = new Distance();
+    private boolean open;
 
     public void init(HardwareMap hwm, Telemetry tel)
     {
@@ -32,6 +33,7 @@ public class Pincer extends Part
         this.step = 0;
         this.telemetry = tel;
         this.move_type = "";
+        this.open = true;
         this.finish_step();
     }
 
@@ -73,6 +75,7 @@ public class Pincer extends Part
                         pincer2.move(0.12, 0.5);
                         break;
                     case 1 :
+                        this.open = false;
                         axis1.move(0.6);
                         axis2.move(0.6);
                         this.sensor.activate(distance, Distance.ActivateMode.Upper);
@@ -93,7 +96,28 @@ public class Pincer extends Part
                         pincer2.move(-0.12, 0.5);
                         break;
                     case 1 :
+                        this.open = true;
                         this.change_move_type("pincer down");
+                        break;
+                }
+                break;
+
+            case "grab":
+                switch(step){
+                    case 0:
+                        if(this.open){
+                            pincer1.move(0.12, 0.5);
+                            pincer2.move(0.12, 0.5);
+                            this.open = false;
+                        }
+                        else{
+                            pincer1.move(-0.12, 0.5);
+                            pincer2.move(-0.12, 0.5);
+                            this.open = true;
+                        }
+                        break;
+                    case 1:
+                        this.finish_step();
                         break;
                 }
                 break;
@@ -115,12 +139,15 @@ public class Pincer extends Part
                         pincer2.move(0.12, 0.5);
                         break;
                     case 1 :
-                        axis1.move(0.6, 0.75);
-                        axis2.move(0.6, 0.75);
+                        axis1.move(1, 0.7);
+                        axis2.move(1, 0.7);
+                        this.open = false;
                         break;
                     case 2:
                         pincer1.move(-0.12, 0.5);
                         pincer2.move(-0.12, 0.5);
+                    case 3:
+                        this.open = true;
                         this.finish_step();
                         break;
                 }
@@ -130,8 +157,8 @@ public class Pincer extends Part
                 switch (step)
                 {
                     case 0 :
-                        axis1.move(-0.5);
-                        axis2.move(-0.5);
+                        axis1.move(-0.4);
+                        axis2.move(-0.4);
                         this.sensor.activate(distance, Distance.ActivateMode.Lower);
                         break;
 
@@ -151,5 +178,9 @@ public class Pincer extends Part
                 break;
         }
         this.step++;
+    }
+
+    public double get_distance(){
+        return this.sensor.get_distance(DistanceUnit.MM);
     }
 }
