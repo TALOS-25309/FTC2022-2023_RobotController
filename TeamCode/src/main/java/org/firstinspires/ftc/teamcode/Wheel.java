@@ -41,6 +41,9 @@ public class Wheel extends Part {
     private Color color = new Color();
     private Gyro imu;
 
+    private double left_move = 0.16;
+    private double right_move = 0.14;
+
     public void init(HardwareMap hwm, Telemetry tel, Gyro imu){
         this.front_left.init(hwm, tel, "front left", DMotor.Direction.Reverse);
         this.front_right.init(hwm, tel, "front right", DMotor.Direction.Direct);
@@ -99,10 +102,8 @@ public class Wheel extends Part {
                         break;
                     case 1:
                         this.delay(1);
-                        this.move(0.15, 0.14, Direction.Backward);
                         break;
                     case 2:
-                        this.delay(1);
                         this.finish_step();
                         break;
                 }
@@ -114,18 +115,28 @@ public class Wheel extends Part {
                         telemetry.addData("Parking", "Fail");
                         switch (step){
                             case 0:
+                                this.move(0.15, right_move, Direction.Backward);
+                                break;
+                            case 1:
+                                this.delay(1);
+                                break;
+                            case 2:
                                 this.move(0.1, Direction.TurnRight);
                                 this.imu.activate(-90, Direction.TurnRight);
                                 break;
-                            case 1:
+                            case 3:
                                 this.move_stop();
                                 this.delay(0.3);
+                                break;
+                            case 4:
                                 this.move(0.05, Direction.TurnLeft);
                                 this.imu.correction();
                                 break;
-                            case 2:
+                            case 5:
                                 this.move_stop();
                                 this.delay(0.3);
+                                break;
+                            case 6:
                                 this.finish_step();
                                 break;
                         }
@@ -134,18 +145,28 @@ public class Wheel extends Part {
                         telemetry.addData("Parking", "1");
                         switch (step){
                             case 0:
+                                this.move(0.15, left_move, Direction.Backward);
+                                break;
+                            case 1:
+                                this.delay(1);
+                                break;
+                            case 2:
                                 this.move(0.1, Direction.TurnLeft);
                                 this.imu.activate(90, Direction.TurnLeft);
                                 break;
-                            case 1:
+                            case 3:
                                 this.move_stop();
                                 this.delay(0.3);
+                                break;
+                            case 4:
                                 this.move(0.05, Direction.TurnRight);
                                 this.imu.correction();
                                 break;
-                            case 2:
+                            case 5:
                                 this.move_stop();
                                 this.delay(0.3);
+                                break;
+                            case 6:
                                 this.finish_step();
                                 break;
                         }
@@ -154,18 +175,28 @@ public class Wheel extends Part {
                         telemetry.addData("Parking", "2");
                         switch (step){
                             case 0:
+                                this.move(0.15, right_move, Direction.Backward);
+                                break;
+                            case 1:
+                                this.delay(1);
+                                break;
+                            case 2:
                                 this.move(0.1, Direction.TurnRight);
                                 this.imu.activate(-90, Direction.TurnRight);
                                 break;
-                            case 1:
+                            case 3:
                                 this.move_stop();
                                 this.delay(0.3);
+                                break;
+                            case 4:
                                 this.move(0.05, Direction.TurnLeft);
                                 this.imu.correction();
                                 break;
-                            case 2:
+                            case 5:
                                 this.move_stop();
                                 this.delay(0.3);
+                                break;
+                            case 6:
                                 this.finish_step();
                                 break;
                         }
@@ -174,18 +205,28 @@ public class Wheel extends Part {
                         telemetry.addData("Parking", "3");
                         switch (step){
                             case 0:
+                                this.move(0.15, right_move, Direction.Backward);
+                                break;
+                            case 1:
+                                this.delay(1);
+                                break;
+                            case 2:
                                 this.move(0.1, Direction.TurnRight);
                                 this.imu.activate(-90, Direction.TurnRight);
                                 break;
-                            case 1:
+                            case 3:
                                 this.move_stop();
                                 this.delay(0.3);
+                                break;
+                            case 4:
                                 this.move(0.05, Direction.TurnLeft);
                                 this.imu.correction();
                                 break;
-                            case 2:
+                            case 5:
                                 this.move_stop();
                                 this.delay(0.3);
+                                break;
+                            case 6:
                                 this.finish_step();
                                 break;
                         }
@@ -202,14 +243,22 @@ public class Wheel extends Part {
                         case 1:
                             this.move_stop();
                             this.delay(0.3);
+                            break;
+                        case 2:
                             this.finish_step();
                             break;
                     }
                 }
                 else{
-                    this.move_stop();
-                    this.delay(0.3);
-                    this.finish_step();
+                    switch(step){
+                        case 0:
+                            this.move_stop();
+                            this.delay(0.3);
+                            break;
+                        case 1:
+                            this.finish_step();
+                            break;
+                    }
                 }
                 break;
 
@@ -219,18 +268,28 @@ public class Wheel extends Part {
                         telemetry.addData("Parking", "Fail");
                         switch (step){
                             case 0:
+                                this.move(0.15, left_move, Direction.Backward);
+                                break;
+                            case 1:
+                                this.delay(1);
+                                break;
+                            case 2:
                                 this.move(0.1, Direction.TurnLeft);
                                 this.imu.activate(90, Direction.TurnLeft);
                                 break;
-                            case 1:
+                            case 3:
                                 this.move_stop();
                                 this.delay(0.3);
+                                break;
+                            case 4:
                                 this.move(0.05, Direction.TurnRight);
                                 this.imu.correction();
                                 break;
-                            case 2:
+                            case 5:
                                 this.move_stop();
                                 this.delay(0.3);
+                                break;
+                            case 6:
                                 this.finish_step();
                                 break;
                         }
@@ -239,18 +298,28 @@ public class Wheel extends Part {
                         telemetry.addData("Parking", "1");
                         switch (step){
                             case 0:
+                                this.move(0.15, left_move, Direction.Backward);
+                                break;
+                            case 1:
+                                this.delay(1);
+                                break;
+                            case 2:
                                 this.move(0.1, Direction.TurnLeft);
                                 this.imu.activate(90, Direction.TurnLeft);
                                 break;
-                            case 1:
+                            case 3:
                                 this.move_stop();
                                 this.delay(0.3);
+                                break;
+                            case 4:
                                 this.move(0.05, Direction.TurnRight);
                                 this.imu.correction();
                                 break;
-                            case 2:
+                            case 5:
                                 this.move_stop();
                                 this.delay(0.3);
+                                break;
+                            case 6:
                                 this.finish_step();
                                 break;
                         }
@@ -259,18 +328,28 @@ public class Wheel extends Part {
                         telemetry.addData("Parking", "2");
                         switch (step){
                             case 0:
+                                this.move(0.15, left_move, Direction.Backward);
+                                break;
+                            case 1:
+                                this.delay(1);
+                                break;
+                            case 2:
                                 this.move(0.1, Direction.TurnLeft);
                                 this.imu.activate(90, Direction.TurnLeft);
                                 break;
-                            case 1:
+                            case 3:
                                 this.move_stop();
                                 this.delay(0.3);
+                                break;
+                            case 4:
                                 this.move(0.05, Direction.TurnRight);
                                 this.imu.correction();
                                 break;
-                            case 2:
+                            case 5:
                                 this.move_stop();
                                 this.delay(0.3);
+                                break;
+                            case 6:
                                 this.finish_step();
                                 break;
                         }
@@ -279,18 +358,28 @@ public class Wheel extends Part {
                         telemetry.addData("Parking", "3");
                         switch (step){
                             case 0:
+                                this.move(0.15, right_move, Direction.Backward);
+                                break;
+                            case 1:
+                                this.delay(1);
+                                break;
+                            case 2:
                                 this.move(0.1, Direction.TurnRight);
                                 this.imu.activate(-90, Direction.TurnRight);
                                 break;
-                            case 1:
+                            case 3:
                                 this.move_stop();
                                 this.delay(0.3);
+                                break;
+                            case 4:
                                 this.move(0.05, Direction.TurnLeft);
                                 this.imu.correction();
                                 break;
-                            case 2:
+                            case 5:
                                 this.move_stop();
                                 this.delay(0.3);
+                                break;
+                            case 6:
                                 this.finish_step();
                                 break;
                         }
@@ -305,6 +394,8 @@ public class Wheel extends Part {
                         break;
                     case 1:
                         this.delay(1);
+                        break;
+                    case 2:
                         this.finish_step();
                         break;
                 }
@@ -317,6 +408,8 @@ public class Wheel extends Part {
                         break;
                     case 1:
                         this.delay(0.1);
+                        break;
+                    case 2:
                         this.finish_step();
                         break;
                 }
@@ -329,6 +422,8 @@ public class Wheel extends Part {
                         break;
                     case 1:
                         this.delay(0.1);
+                        break;
+                    case 2:
                         this.finish_step();
                         break;
                 }
@@ -343,12 +438,16 @@ public class Wheel extends Part {
                     case 1:
                         this.move_stop();
                         this.delay(0.3);
+                        break;
+                    case 2:
                         this.move(0.1, Direction.TurnRight);
                         this.imu.correction();
                         break;
-                    case 2:
+                    case 3:
                         this.move_stop();
                         this.delay(0.3);
+                        break;
+                    case 4:
                         this.finish_step();
                         break;
                 }
@@ -363,12 +462,16 @@ public class Wheel extends Part {
                     case 1:
                         this.move_stop();
                         this.delay(0.3);
+                        break;
+                    case 2:
                         this.move(0.1, Direction.TurnLeft);
                         this.imu.correction();
                         break;
-                    case 2:
+                    case 3:
                         this.move_stop();
                         this.delay(0.3);
+                        break;
+                    case 4:
                         this.finish_step();
                         break;
                 }
@@ -381,6 +484,8 @@ public class Wheel extends Part {
                         break;
                     case 1:
                         this.delay(1);
+                        break;
+                    case 2:
                         this.finish_step();
                         break;
                 }
@@ -395,12 +500,16 @@ public class Wheel extends Part {
                     case 1:
                         this.move_stop();
                         this.delay(0.3);
+                        break;
+                    case 2:
                         this.move(0.1, Direction.TurnRight);
                         this.imu.correction();
                         break;
-                    case 2:
+                    case 3:
                         this.move_stop();
                         this.delay(0.3);
+                        break;
+                    case 4:
                         this.finish_step();
                         break;
                 }
@@ -415,12 +524,16 @@ public class Wheel extends Part {
                     case 1:
                         this.move_stop();
                         this.delay(0.3);
+                        break;
+                    case 2:
                         this.move(0.1, Direction.TurnLeft);
                         this.imu.correction();
                         break;
-                    case 2:
+                    case 3:
                         this.move_stop();
                         this.delay(0.3);
+                        break;
+                    case 4:
                         this.finish_step();
                         break;
                 }
@@ -433,6 +546,8 @@ public class Wheel extends Part {
                         break;
                     case 1:
                         this.delay(1);
+                        break;
+                    case 2:
                         this.finish_step();
                         break;
                 }
@@ -445,6 +560,8 @@ public class Wheel extends Part {
                         break;
                     case 1:
                         this.delay(1);
+                        break;
+                    case 2:
                         this.finish_step();
                         break;
                 }
@@ -457,6 +574,8 @@ public class Wheel extends Part {
                         break;
                     case 1:
                         this.delay(1);
+                        break;
+                    case 2:
                         this.finish_step();
                         break;
                 }

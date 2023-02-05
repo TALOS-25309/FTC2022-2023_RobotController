@@ -53,7 +53,7 @@ public class SubAutoOpMode1 extends LinearOpMode
                 this.wheel_part.start_step("sub go junction");
                 break;
             case 1:
-                this.wheel_part.start_step("sub rotate left");
+                this.wheel_part.start_step("sub rotate right");
                 this.linear_part.start_step("middle junction");
                 break;
             case 2:
@@ -67,7 +67,7 @@ public class SubAutoOpMode1 extends LinearOpMode
                 break;
             case 5:
                 this.linear_part.start_step("down");
-                this.wheel_part.start_step("sub rotate right");
+                this.wheel_part.start_step("sub rotate left");
                 break;
             case 6:
                 this.wheel_part.start_step("sub go home");
@@ -76,7 +76,7 @@ public class SubAutoOpMode1 extends LinearOpMode
                 //this.wheel_part.start_step("sub rotate home left");
                 break;
             case 8:
-                this.wheel_part.start_step("sub go left parking");
+                this.wheel_part.start_step("sub go right parking");
                 break;
         }
         this.step++;

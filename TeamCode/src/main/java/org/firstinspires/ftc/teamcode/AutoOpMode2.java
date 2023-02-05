@@ -2,12 +2,9 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
-import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 
-import org.firstinspires.ftc.robotcore.external.Telemetry;
-
-@Autonomous(name = "AutoOp (Left)", group = "")
-public class AutoOpMode extends LinearOpMode
+@Autonomous(name = "AutoOp (Right)", group = "")
+public class AutoOpMode2 extends LinearOpMode
 {
     private Pincer pincer_part = new Pincer();
     private Linear linear_part = new Linear();
@@ -56,7 +53,7 @@ public class AutoOpMode extends LinearOpMode
                 this.wheel_part.start_step("signal detection");
                 break;
             case 1:
-                this.wheel_part.start_step("rotation");
+                this.wheel_part.start_step("rotation otherwise");
                 break;
             case 2:
                 this.wheel_part.start_step("parking site");
