@@ -8,7 +8,7 @@
 
 Copyright by 2023 KROS of KSA
 
-Github : https://github.com/CLiF-1593/FTC2023   
+Github : https://github.com/KSA-KROS/FTC2022-2023_RobotSourceCode    
 Official Instagram : https://www.instagram.com/ksa_kros.ftc/   
 
-These source codes are based on FTC offical robot source codes and libraries.
+These source codes are based on FTC official robot source codes and libraries.
