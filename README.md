@@ -4,8 +4,4 @@
 
 **Developed by 2022 KROS Programming Team**
 
-Website : https://talosftc.com/    
-Github : https://github.com/TALOS-25309  
-Official Instagram : https://www.instagram.com/talosftckorea/     
-
-These source codes are based on FTC official robot source codes and libraries.
+This project is based on FTC official robot source codes and libraries.
