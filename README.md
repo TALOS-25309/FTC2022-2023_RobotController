@@ -1,11 +1,8 @@
 # FTC 2022-2023 Robot Controller
-
-> POWERPLAY
-
 ### For the 2022-2023 Korea Robot Championship (KRC, Regional)
-### Developed by 2022 KROS Programming Team
+> FTC 2022-2023 / POWERPLAY
 
-Copyright by 2022 KROS of KSA
+**Developed by 2022 KROS Programming Team**
 
 Website : https://talosftc.com/    
 Github : https://github.com/TALOS-25309  
